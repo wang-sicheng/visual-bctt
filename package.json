@@ -11,16 +11,22 @@
     "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml",
     "lint": "eslint --ext .js,.vue src",
     "test:unit": "jest --clearCache && vue-cli-service test:unit",
-    "test:ci": "npm run lint && npm run test:unit"
+    "test:ci": "npm run lint && npm run test:unit",
+    "commit": "cz"
   },
   "dependencies": {
+    "@antv/g6": "^4.1.1",
     "axios": "0.18.1",
+    "codemirror": "^5.59.1",
+    "commitizen": "^4.2.2",
     "core-js": "3.6.5",
     "element-ui": "2.13.2",
     "js-cookie": "2.2.0",
+    "jsonlint": "^1.6.3",
     "normalize.css": "7.0.0",
     "nprogress": "0.2.0",
     "path-to-regexp": "2.4.0",
+    "script-loader": "^0.7.2",
     "vue": "2.6.10",
     "vue-router": "3.0.6",
     "vuex": "3.1.0"

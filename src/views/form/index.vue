@@ -1,85 +1,73 @@
 <template>
-  <div class="app-container">
-    <el-form ref="form" :model="form" label-width="120px">
-      <el-form-item label="Activity name">
-        <el-input v-model="form.name" />
-      </el-form-item>
-      <el-form-item label="Activity zone">
-        <el-select v-model="form.region" placeholder="please select your zone">
-          <el-option label="Zone one" value="shanghai" />
-          <el-option label="Zone two" value="beijing" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="Activity time">
-        <el-col :span="11">
-          <el-date-picker v-model="form.date1" type="date" placeholder="Pick a date" style="width: 100%;" />
-        </el-col>
-        <el-col :span="2" class="line">-</el-col>
-        <el-col :span="11">
-          <el-time-picker v-model="form.date2" type="fixed-time" placeholder="Pick a time" style="width: 100%;" />
-        </el-col>
-      </el-form-item>
-      <el-form-item label="Instant delivery">
-        <el-switch v-model="form.delivery" />
-      </el-form-item>
-      <el-form-item label="Activity type">
-        <el-checkbox-group v-model="form.type">
-          <el-checkbox label="Online activities" name="type" />
-          <el-checkbox label="Promotion activities" name="type" />
-          <el-checkbox label="Offline activities" name="type" />
-          <el-checkbox label="Simple brand exposure" name="type" />
-        </el-checkbox-group>
-      </el-form-item>
-      <el-form-item label="Resources">
-        <el-radio-group v-model="form.resource">
-          <el-radio label="Sponsor" />
-          <el-radio label="Venue" />
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="Activity form">
-        <el-input v-model="form.desc" type="textarea" />
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit">Create</el-button>
-        <el-button @click="onCancel">Cancel</el-button>
-      </el-form-item>
-    </el-form>
+  <div class="json-editor">
+    <textarea ref="textarea" />
   </div>
 </template>
 
 <script>
+import CodeMirror from 'codemirror'
+import 'codemirror/addon/lint/lint.css'
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/theme/rubyblue.css'
+require('script-loader!jsonlint')
+import 'codemirror/mode/javascript/javascript'
+import 'codemirror/addon/lint/lint'
+import 'codemirror/addon/lint/json-lint'
+
 export default {
+  name: 'JsonEditor',
+  /* eslint-disable vue/require-prop-types */
+  props: ['value'],
   data() {
     return {
-      form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+      jsonEditor: false
+    }
+  },
+  watch: {
+    value(value) {
+      const editorValue = this.jsonEditor.getValue()
+      if (value !== editorValue) {
+        this.jsonEditor.setValue(JSON.stringify(this.value, null, 2))
       }
     }
   },
+  mounted() {
+    this.jsonEditor = CodeMirror.fromTextArea(this.$refs.textarea, {
+      lineNumbers: true,
+      mode: 'application/json',
+      gutters: ['CodeMirror-lint-markers'],
+      theme: 'rubyblue',
+      lint: true
+    })
+    this.jsonEditor.setValue(JSON.stringify(this.value, null, 2))
+    this.jsonEditor.on('change', cm => {
+      this.$emit('changed', cm.getValue())
+      this.$emit('input', cm.getValue())
+    })
+  },
   methods: {
-    onSubmit() {
-      this.$message('submit!')
-    },
-    onCancel() {
-      this.$message({
-        message: 'cancel!',
-        type: 'warning'
-      })
+    getValue() {
+      return this.jsonEditor.getValue()
     }
   }
 }
 </script>
 
-<style scoped>
-.line{
-  text-align: center;
+<style lang="scss" scoped>
+.json-editor {
+  height: 100%;
+  position: relative;
+  ::v-deep {
+    .CodeMirror {
+      height: auto;
+      min-height: 300px;
+    }
+    .CodeMirror-scroll {
+      min-height: 300px;
+    }
+    .cm-s-rubyblue span.cm-string {
+      color: #F08047;
+    }
+  }
 }
 </style>
-
