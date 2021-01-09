@@ -29,8 +29,8 @@ export default {
           const grid = new G6.Grid()
           const graph = new G6.TreeGraph({
             container: 'mountNode',
-            width: 800, // 图的宽度
-            height: 600,
+            width: 1200, // 图的宽度
+            height: 700,
             linkCenter: true,
             modes: {
               default: [
@@ -47,13 +47,13 @@ export default {
               ]
             },
             defaultNode: {
-              size: 26
+              size: 30
             },
             layout: {
               type: 'dendrogram',
               direction: 'LR',
-              nodeSep: 20,
-              rankSep: 100,
+              nodeSep: 50,
+              rankSep: 160,
               radial: true
             },
             plugins: [minimap, grid]
