@@ -60,26 +60,26 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/visual/table',
     name: 'Visual',
-    meta: { title: '指标可视化', icon: 'el-icon-s-help' },
+    meta: { title: '可视化', icon: 'el-icon-s-help' },
     children: [
       {
         path: 'graph',
         name: 'Graph',
         component: () => import('@/views/graph/index'),
-        meta: { title: '图谱', icon: 'component' }
+        meta: { title: '指标图谱', icon: 'component' }
       },
       {
         path: 'table',
         name: 'Table',
         component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        meta: { title: '交易记录', icon: 'table' }
       }
+      // {
+      //   path: 'tree',
+      //   name: 'Tree',
+      //   component: () => import('@/views/tree/index'),
+      //   meta: { title: 'Tree', icon: 'tree' }
+      // }
     ]
   },
 
@@ -94,16 +94,23 @@ export const constantRoutes = [
         meta: { title: '代码编辑', icon: 'form' }
       }
     ]
-  },
+  }
+]
 
+/**
+ * asyncRoutes
+ * the routes that need to be dynamically loaded based on user roles
+ */
+export const asyncRoutes = [
   {
     path: '/nested',
     component: Layout,
     redirect: '/nested/menu1',
     name: 'Nested',
     meta: {
-      title: 'Nested',
-      icon: 'nested'
+      title: '层级目录',
+      icon: 'nested',
+      roles: ['admin']
     },
     children: [
       {
@@ -150,7 +157,7 @@ export const constantRoutes = [
         path: 'menu2',
         component: () => import('@/views/nested/menu2/index'),
         name: 'Menu2',
-        meta: { title: 'menu2' }
+        meta: { title: 'Menu2' }
       }
     ]
   },

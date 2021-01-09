@@ -47,6 +47,10 @@
         <span style="margin-right:20px;">username: admin</span>
         <span> password: any</span>
       </div>
+      <div class="tips">
+        <span style="margin-right:20px;">username: editor</span>
+        <span> password: any</span>
+      </div>
 
     </el-form>
   </div>
