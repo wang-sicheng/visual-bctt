@@ -32,7 +32,7 @@
       <el-table-column label="到" width="295" align="center">
         <template slot-scope="scope">
           <el-tooltip class="item" effect="dark" placement="top">
-            <div slot="content">0x{{ scope.row.from }}</div>
+            <div slot="content">0x{{ scope.row.to }}</div>
             <router-link :to="{ path: '/address/index', query: { id: scope.row.to }}">
               <el-link type="primary">
                 <span>0x{{ scope.row.to }}</span>
@@ -46,14 +46,8 @@
           💰{{ scope.row.price }}
         </template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="状态" width="100" align="center">
-        <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
-        </template>
-      </el-table-column>
       <el-table-column align="center" prop="created_at" label="交易时间" width="170">
         <template slot-scope="scope">
-          <i class="el-icon-time" />
           <span>{{ scope.row.display_time }}</span>
         </template>
       </el-table-column>
@@ -62,17 +56,13 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
+import { getAddrList } from '@/api/table'
 
 export default {
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        成功: 'success',
-        进行中: 'gray',
-        失败: 'danger'
-      }
-      return statusMap[status]
+  props: {
+    id: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -83,12 +73,14 @@ export default {
   },
   created() {
     this.fetchData()
+    console.log(123, this.id)
   },
   methods: {
     fetchData() {
       this.listLoading = true
-      getList().then(response => {
+      getAddrList().then(response => {
         this.list = response.data.items
+        console.log(this.list)
         this.listLoading = false
       })
     }

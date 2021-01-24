@@ -49,7 +49,7 @@ export const constantRoutes = [
     redirect: '/dashboard',
     children: [{
       path: 'dashboard',
-      name: 'Dashboard',
+      name: '首页',
       component: () => import('@/views/dashboard/index'),
       meta: { title: '首页', icon: 'dashboard' }
     }]
@@ -82,16 +82,43 @@ export const constantRoutes = [
       // }
     ]
   },
-
   {
-    path: '/form',
+    path: '/codemirror',
     component: Layout,
     children: [
       {
         path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: '代码编辑', icon: 'form' }
+        name: 'Codemirror',
+        component: () => import('@/views/codemirror/index'),
+        meta: { title: '智能合约', icon: 'tab' }
+      }
+    ]
+  },
+  {
+    path: '/trade',
+    component: Layout,
+    redirect: '/trade/index',
+    hidden: true,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/trade/index'),
+        name: 'trade',
+        meta: { title: '交易信息', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/address',
+    component: Layout,
+    redirect: '/address/index',
+    hidden: true,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/address/index'),
+        name: 'address',
+        meta: { title: '地址信息', noCache: true }
       }
     ]
   }

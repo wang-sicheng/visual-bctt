@@ -6,7 +6,7 @@
 
 <script>
 import G6 from '@antv/g6'
-import { getParams } from '@/api/params'
+import { getTrace } from '@/api/params'
 
 export default {
   data() {
@@ -18,30 +18,21 @@ export default {
   },
   methods: {
     async initG6() {
-      getParams().then((res) => res.data.items)
+      getTrace().then((res) => res.data.items)
         .then((data) => {
-          const container = document.getElementById('mountNode')
           const minimap = new G6.Minimap({
             size: [100, 100],
             className: 'minimap',
             type: 'delegate'
           })
           const grid = new G6.Grid()
-          const graph = new G6.TreeGraph({
+          const graph = new G6.Graph({
             container: 'mountNode',
-            width: 1320, // 图的宽度
-            height: 730,
+            width: 1000, // 图的宽度
+            height: 500,
             linkCenter: true,
             modes: {
               default: [
-                {
-                  type: 'collapse-expand',
-                  onChange: function onChange(item, collapsed) {
-                    const data = item.get('model').data
-                    data.collapsed = collapsed
-                    return true
-                  }
-                },
                 {
                   type: 'tooltip', // 提示框
                   formatText(model) {
@@ -51,22 +42,36 @@ export default {
                   }
                 },
                 'drag-canvas',
-                'zoom-canvas'
+                'zoom-canvas',
+                'drag-node'
               ]
             },
             defaultNode: {
-              size: 50,
-              style: {
-                'fill': 'rgba(0,0,0,0)',
-                'stroke': 'rgba(0,0,0,0)'
+              type: 'circle',
+              labelCfg: {
+                style: {
+                  // 'fill': 'rgba(0,0,0,0)',
+                  // 'stroke': 'rgba(0,0,0,0)',
+                  fontSize: 14,
+                  background: {
+                    fill: '#ffffff',
+                    stroke: '#9EC9FF',
+                    padding: [2, 2, 2, 2],
+                    radius: 2
+                  }
+                },
+                position: 'bottom'
               }
             },
-            layout: {
-              type: 'dendrogram',
-              direction: 'LR',
-              nodeSep: 50,
-              rankSep: 160,
-              radial: true
+            nodeStateStyles: {
+              // style configurations for hover state
+              hover: {
+                fillOpacity: 0.8
+              },
+              // style configurations for selected state
+              selected: {
+                lineWidth: 5
+              }
             },
             plugins: [minimap, grid]
           })
@@ -80,14 +85,6 @@ export default {
           graph.data(data)
           graph.render()
           graph.fitView()
-
-          if (typeof window !== 'undefined') {
-            window.onresize = () => {
-              if (!graph || graph.get('destroyed')) return
-              if (!container || !container.scrollWidth || !container.scrollHeight) return
-              graph.changeSize(container.scrollWidth, container.scrollHeight)
-            }
-          }
         })
     }
   }

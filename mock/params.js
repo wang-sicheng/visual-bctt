@@ -1,15 +1,29 @@
 const data = {
   'id': '现代服务业',
-  'type': 'ellipse',
+  'type': 'circle',
   'size': [80, 30],
+  style: {
+    'fill': '#f89588',
+    'stroke': 'rgba(0,0,0,0)'
+  },
   'children': [
     {
       'id': '卫生、社保和福利业',
       'type': 'rect',
       'size': [120, 25],
+      style: {
+        'fill': '#f8cb7f',
+        'stroke': 'rgba(0,0,0,0)'
+      },
       'children': [
         {
           'id': '医药企业信用评估',
+          'type': 'ellipse',
+          'size': [120, 25],
+          style: {
+            'fill': '#f9e264	',
+            'stroke': 'rgba(0,0,0,0)'
+          },
           'children': [
             { 'id': '行业环境' },
             { 'id': '企业自身' },
@@ -19,6 +33,12 @@ const data = {
         },
         {
           'id': '政府债务信用评估',
+          'type': 'ellipse',
+          'size': [120, 25],
+          style: {
+            'fill': '#f9e264	',
+            'stroke': 'rgba(0,0,0,0)'
+          },
           'children': [
             { 'id': '经济发展(20%)' },
             { 'id': '财政收支(45%)' },
@@ -32,9 +52,19 @@ const data = {
       'id': '软件和信息技术业',
       'type': 'rect',
       'size': [110, 25],
+      style: {
+        'fill': '#f8cb7f',
+        'stroke': 'rgba(0,0,0,0)'
+      },
       'children': [
         {
           'id': '企业财务因素',
+          'type': 'ellipse',
+          'size': [120, 25],
+          style: {
+            'fill': '#f9e264	',
+            'stroke': 'rgba(0,0,0,0)'
+          },
           'children': [
             { 'id': '偿债能力' },
             { 'id': '资本结构' },
@@ -50,9 +80,19 @@ const data = {
       'id': '金融业',
       'type': 'rect',
       'size': [50, 25],
+      style: {
+        'fill': '#f8cb7f',
+        'stroke': 'rgba(0,0,0,0)'
+      },
       'children': [
         {
           'id': '金融机构信用评级',
+          'type': 'ellipse',
+          'size': [120, 25],
+          style: {
+            'fill': '#f9e264	',
+            'stroke': 'rgba(0,0,0,0)'
+          },
           'children': [
             { 'id': '资本充足率' },
             { 'id': '资产质量' },
@@ -68,9 +108,19 @@ const data = {
       'id': '租赁和商业服务业',
       'type': 'rect',
       'size': [110, 25],
+      style: {
+        'fill': '#f8cb7f',
+        'stroke': 'rgba(0,0,0,0)'
+      },
       'children': [
         {
           'id': '电商信用评估',
+          'type': 'ellipse',
+          'size': [120, 25],
+          style: {
+            'fill': '#f9e264	',
+            'stroke': 'rgba(0,0,0,0)'
+          },
           'children': [
             { 'id': '商家资质(15%)' },
             { 'id': '经营能力(20%)' },
@@ -81,6 +131,12 @@ const data = {
         },
         {
           'id': '物流企业信用评估',
+          'type': 'ellipse',
+          'size': [120, 25],
+          style: {
+            'fill': '#f9e264	',
+            'stroke': 'rgba(0,0,0,0)'
+          },
           'children': [
             { 'id': '第三方公司风险' },
             { 'id': '客户风险' },
@@ -94,9 +150,19 @@ const data = {
       'id': '科研和技术服务业',
       'type': 'rect',
       'size': [110, 25],
+      style: {
+        'fill': '#f8cb7f',
+        'stroke': 'rgba(0,0,0,0)'
+      },
       'children': [
         {
-          'id': '会计事务所信用评估',
+          'id': '会计所信用评估',
+          'type': 'ellipse',
+          'size': [120, 25],
+          style: {
+            'fill': '#f9e264	',
+            'stroke': 'rgba(0,0,0,0)'
+          },
           'children': [
             { 'id': '专业胜任能力' },
             { 'id': '自身获利能力' },
@@ -110,20 +176,36 @@ const data = {
       'id': '房地产业',
       'type': 'rect',
       'size': [60, 25],
+      style: {
+        'fill': '#f8cb7f',
+        'stroke': 'rgba(0,0,0,0)'
+      },
       'children': [
         {
           'id': '融资企业状况',
+          'type': 'ellipse',
+          'size': [120, 25],
+          style: {
+            'fill': '#f9e264	',
+            'stroke': 'rgba(0,0,0,0)'
+          },
           'children': [
-            { 'id': '企业基本素质' },
+            { 'id': '信用状况' },
             { 'id': '盈利能力' },
             { 'id': '成长能力' },
             { 'id': '长期偿债能力' },
             { 'id': '营运能力' },
-            { 'id': '信用状况' }
+            { 'id': '企业基本素质' }
           ]
         },
         {
           'id': '供应链运行状况',
+          'type': 'ellipse',
+          'size': [120, 25],
+          style: {
+            'fill': '#f9e264	',
+            'stroke': 'rgba(0,0,0,0)'
+          },
           'children': [
             { 'id': '行业状况' },
             { 'id': '合作密切程度' }
@@ -131,6 +213,12 @@ const data = {
         },
         {
           'id': '融资项目状况',
+          'type': 'ellipse',
+          'size': [120, 25],
+          style: {
+            'fill': '#f9e264	',
+            'stroke': 'rgba(0,0,0,0)'
+          },
           'children': [
             { 'id': '应收账款特征' }
           ]
@@ -141,9 +229,19 @@ const data = {
       'id': '文化、体育和娱乐业',
       'type': 'rect',
       'size': [120, 25],
+      style: {
+        'fill': '#f8cb7f',
+        'stroke': 'rgba(0,0,0,0)'
+      },
       'children': [
         {
           'id': '旅游企业信用评估',
+          'type': 'ellipse',
+          'size': [120, 25],
+          style: {
+            'fill': '#f9e264	',
+            'stroke': 'rgba(0,0,0,0)'
+          },
           'children': [
             { 'id': '政府监管信息' },
             { 'id': '企业交易信息' },
@@ -156,9 +254,19 @@ const data = {
       'id': '教育行业',
       'type': 'rect',
       'size': [60, 25],
+      style: {
+        'fill': '#f8cb7f',
+        'stroke': 'rgba(0,0,0,0)'
+      },
       'children': [
         {
           'id': '暂无',
+          'type': 'ellipse',
+          'size': [120, 25],
+          style: {
+            'fill': '#f9e264	',
+            'stroke': 'rgba(0,0,0,0)'
+          },
           'children': [
             { 'id': '   ' },
             { 'id': '     ' }
