@@ -44,11 +44,15 @@
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
 
       <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
+        <span style="margin-right:20px;">username: regulator</span>
         <span> password: any</span>
       </div>
       <div class="tips">
-        <span style="margin-right:20px;">username: editor</span>
+        <span style="margin-right:20px;">username: provider</span>
+        <span> password: any</span>
+      </div>
+      <div class="tips">
+        <span style="margin-right:20px;">username: consumer</span>
         <span> password: any</span>
       </div>
 
@@ -78,8 +82,8 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        username: 'regulator',
+        password: '123456'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],

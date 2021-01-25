@@ -43,7 +43,8 @@ export default {
       'name',
       'avatar',
       'roles',
-      'address'
+      'address',
+      'email'
     ])
   },
   created() {
@@ -54,7 +55,7 @@ export default {
       this.user = {
         name: this.name,
         role: this.roles.join(' | '),
-        email: 'admin@admin.com',
+        email: this.email,
         avatar: this.avatar,
         address: this.address
       }

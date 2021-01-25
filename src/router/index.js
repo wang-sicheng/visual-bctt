@@ -56,33 +56,6 @@ export const constantRoutes = [
   },
 
   {
-    path: '/visual',
-    component: Layout,
-    redirect: '/visual/table',
-    name: 'Visual',
-    meta: { title: '可视化', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'graph',
-        name: 'Graph',
-        component: () => import('@/views/graph/index'),
-        meta: { title: '指标图谱', icon: 'component' }
-      },
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: '交易记录', icon: 'table' }
-      }
-      // {
-      //   path: 'tree',
-      //   name: 'Tree',
-      //   component: () => import('@/views/tree/index'),
-      //   meta: { title: 'Tree', icon: 'tree' }
-      // }
-    ]
-  },
-  {
     path: '/codemirror',
     component: Layout,
     children: [
@@ -130,6 +103,33 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   {
+    path: '/visual',
+    component: Layout,
+    redirect: '/visual/table',
+    name: 'Visual',
+    meta: { title: '可视化大盘', icon: 'el-icon-s-help', roles: ['regulator'] },
+    children: [
+      {
+        path: 'graph',
+        name: 'Graph',
+        component: () => import('@/views/graph/index'),
+        meta: { title: '指标图谱', icon: 'component' }
+      },
+      {
+        path: 'table',
+        name: 'Table',
+        component: () => import('@/views/table/index'),
+        meta: { title: '交易记录', icon: 'table' }
+      }
+      // {
+      //   path: 'tree',
+      //   name: 'Tree',
+      //   component: () => import('@/views/tree/index'),
+      //   meta: { title: 'Tree', icon: 'tree' }
+      // }
+    ]
+  },
+  {
     path: '/nested',
     component: Layout,
     redirect: '/nested/menu1',
@@ -137,7 +137,7 @@ export const asyncRoutes = [
     meta: {
       title: '层级目录',
       icon: 'nested',
-      roles: ['admin']
+      roles: ['regulator']
     },
     children: [
       {

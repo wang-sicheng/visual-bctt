@@ -6,11 +6,20 @@
 
 <script>
 import G6 from '@antv/g6'
-import { getTrade } from '@/api/params'
+import { getAddressGraph } from '@/api/graph'
 
 export default {
+  props: {
+    id: {
+      type: String,
+      default: ''
+    }
+  },
   data() {
     return {
+      address: {
+        uid: ''
+      }
     }
   },
   mounted() {
@@ -18,7 +27,8 @@ export default {
   },
   methods: {
     async initG6() {
-      getTrade().then((res) => res.data.items)
+      this.address.uid = this.id
+      getAddressGraph(this.address.uid).then((res) => res.data.items)
         .then((data) => {
           const minimap = new G6.Minimap({
             size: [100, 100],

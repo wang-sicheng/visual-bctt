@@ -5,12 +5,16 @@
     <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
+      <el-link type="info" class="right-menu-item">{{ user.name }}</el-link>
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
+          <el-dropdown-item>
+            {{ user.name }}
+          </el-dropdown-item>
           <router-link to="/">
             <el-dropdown-item>
               个人主页
@@ -38,13 +42,27 @@ export default {
     Breadcrumb,
     Hamburger
   },
+  data() {
+    return {
+      user: {}
+    }
+  },
   computed: {
     ...mapGetters([
       'sidebar',
-      'avatar'
+      'avatar',
+      'name'
     ])
   },
+  created() {
+    this.getUser()
+  },
   methods: {
+    getUser() {
+      this.user = {
+        name: this.name
+      }
+    },
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')
     },
@@ -94,7 +112,7 @@ export default {
       display: inline-block;
       padding: 0 8px;
       height: 100%;
-      font-size: 18px;
+      font-size: 15px;
       color: #5a5e66;
       vertical-align: text-bottom;
 

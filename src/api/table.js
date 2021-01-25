@@ -8,11 +8,11 @@ export function getList(params) {
   })
 }
 
-export function getAddrList(params) {
+export function getAddrList(data) {
   return request({
     url: '/vue-admin-template/table/addressList',
-    method: 'get',
-    params
+    method: 'post',
+    params: { data }
   })
 }
 
@@ -20,7 +20,7 @@ export function getTrade(id) {
   return request({
     url: '/vue-admin-template/table/trade',
     method: 'post',
-    params: { id }
+    id
   })
 }
 
@@ -28,6 +28,6 @@ export function getAddress(id) {
   return request({
     url: '/vue-admin-template/table/address',
     method: 'post',
-    params: { id }
+    id
   })
 }

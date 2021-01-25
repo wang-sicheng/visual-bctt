@@ -1,9 +1,9 @@
 const Mock = require('mockjs')
 
-const data = Mock.mock({
+const tableData = Mock.mock({
   'items|20': [{
     order_no: '@string("1234567890abcdef", 35)',
-    'status|1': ['success', 'pending', 'canceled'],
+    'status|1': ['成功', '进行中', '失败'],
     display_time: '@datetime',
     from: '@string("1234567890abcdef", 31)',
     to: '@string("1234567890abcdef", 31)',
@@ -45,7 +45,7 @@ module.exports = [
     url: '/vue-admin-template/table/list',
     type: 'get',
     response: config => {
-      const items = data.items
+      const items = tableData.items
       return {
         code: 20000,
         data: {
@@ -57,8 +57,20 @@ module.exports = [
   },
   {
     url: '/vue-admin-template/table/addressList',
-    type: 'get',
+    type: 'post',
     response: config => {
+      const id = config.query.data
+      console.log('hahajia', id)
+      addressList.items[0].to = id
+      addressList.items[1].to = id
+      addressList.items[2].to = id
+      addressList.items[3].to = id
+      addressList.items[4].to = id
+      addressList.items[5].to = id
+      addressList.items[6].from = id
+      addressList.items[7].from = id
+      addressList.items[8].from = id
+      addressList.items[9].from = id
       const items = addressList.items
       return {
         code: 20000,

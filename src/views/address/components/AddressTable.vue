@@ -21,11 +21,14 @@
         <template slot-scope="scope">
           <el-tooltip class="item" effect="dark" placement="top">
             <div slot="content">0x{{ scope.row.from }}</div>
-            <router-link :to="{ path: '/address/index', query: { id: scope.row.from }}">
+
+            <router-link v-if="scope.row.from !== id" :to="{ path: '/address/index', query: { id: scope.row.from }}">
               <el-link type="primary">
                 <span>0x{{ scope.row.from }}</span>
               </el-link>
             </router-link>
+            <span v-else>0x{{ scope.row.from }}</span>
+
           </el-tooltip>
         </template>
       </el-table-column>
@@ -33,11 +36,14 @@
         <template slot-scope="scope">
           <el-tooltip class="item" effect="dark" placement="top">
             <div slot="content">0x{{ scope.row.to }}</div>
-            <router-link :to="{ path: '/address/index', query: { id: scope.row.to }}">
+
+            <router-link v-if="scope.row.to !== id" :to="{ path: '/address/index', query: { id: scope.row.to }}">
               <el-link type="primary">
                 <span>0x{{ scope.row.to }}</span>
               </el-link>
             </router-link>
+            <span v-else>0x{{ scope.row.to }}</span>
+
           </el-tooltip>
         </template>
       </el-table-column>
@@ -67,9 +73,15 @@ export default {
   },
   data() {
     return {
+      address: {
+        uid: ''
+      },
       list: null,
       listLoading: true
     }
+  },
+  mounted() {
+    this.address.uid = this.id
   },
   created() {
     this.fetchData()
@@ -78,7 +90,7 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getAddrList().then(response => {
+      getAddrList(this.id).then(response => {
         this.list = response.data.items
         console.log(this.list)
         this.listLoading = false

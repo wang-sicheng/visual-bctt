@@ -3,7 +3,7 @@ const data = {
   'type': 'circle',
   'size': [80, 30],
   style: {
-    'fill': '#f89588',
+    'fill': '#409EFF',
     'stroke': 'rgba(0,0,0,0)'
   },
   'children': [
@@ -12,7 +12,7 @@ const data = {
       'type': 'rect',
       'size': [120, 25],
       style: {
-        'fill': '#f8cb7f',
+        'fill': '#67C23A',
         'stroke': 'rgba(0,0,0,0)'
       },
       'children': [
@@ -53,7 +53,7 @@ const data = {
       'type': 'rect',
       'size': [110, 25],
       style: {
-        'fill': '#f8cb7f',
+        'fill': '#67C23A',
         'stroke': 'rgba(0,0,0,0)'
       },
       'children': [
@@ -81,7 +81,7 @@ const data = {
       'type': 'rect',
       'size': [50, 25],
       style: {
-        'fill': '#f8cb7f',
+        'fill': '#67C23A',
         'stroke': 'rgba(0,0,0,0)'
       },
       'children': [
@@ -109,7 +109,7 @@ const data = {
       'type': 'rect',
       'size': [110, 25],
       style: {
-        'fill': '#f8cb7f',
+        'fill': '#67C23A',
         'stroke': 'rgba(0,0,0,0)'
       },
       'children': [
@@ -151,7 +151,7 @@ const data = {
       'type': 'rect',
       'size': [110, 25],
       style: {
-        'fill': '#f8cb7f',
+        'fill': '#67C23A',
         'stroke': 'rgba(0,0,0,0)'
       },
       'children': [
@@ -177,7 +177,7 @@ const data = {
       'type': 'rect',
       'size': [60, 25],
       style: {
-        'fill': '#f8cb7f',
+        'fill': '#67C23A',
         'stroke': 'rgba(0,0,0,0)'
       },
       'children': [
@@ -230,7 +230,7 @@ const data = {
       'type': 'rect',
       'size': [120, 25],
       style: {
-        'fill': '#f8cb7f',
+        'fill': '#67C23A',
         'stroke': 'rgba(0,0,0,0)'
       },
       'children': [
@@ -255,7 +255,7 @@ const data = {
       'type': 'rect',
       'size': [60, 25],
       style: {
-        'fill': '#f8cb7f',
+        'fill': '#67C23A',
         'stroke': 'rgba(0,0,0,0)'
       },
       'children': [
@@ -264,7 +264,7 @@ const data = {
           'type': 'ellipse',
           'size': [120, 25],
           style: {
-            'fill': '#f9e264	',
+            'fill': '#f9e264',
             'stroke': 'rgba(0,0,0,0)'
           },
           'children': [

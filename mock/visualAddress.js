@@ -57,9 +57,16 @@ const data = {
 
 module.exports = [
   {
-    url: '/vue-admin-template/visual/trade',
-    type: 'get',
+    url: '/vue-admin-template/visual/address',
+    type: 'post',
     response: config => {
+      const id = config.query.data
+      data.nodes[0].id = id
+      data.nodes[0].label = id
+      data.edges[0].source = id
+      data.edges[1].source = id
+      data.edges[2].source = id
+      data.edges[3].source = id
       const items = data
       return {
         code: 20000,

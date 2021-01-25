@@ -42,7 +42,7 @@
         <el-card>
           <el-tabs v-model="activeTab2">
             <el-tab-pane label="地址记录追踪" name="info">
-              <trade-graph />
+              <address-graph :id="id" />
             </el-tab-pane>
           </el-tabs>
         </el-card>
@@ -53,12 +53,12 @@
 
 <script>
 import { getAddress } from '@/api/table'
-import TradeGraph from './components/TradeGraph'
+import AddressGraph from './components/AddressGraph'
 import AddressTable from './components/AddressTable'
 
 export default {
   components: {
-    TradeGraph,
+    AddressGraph,
     AddressTable
   },
   data() {

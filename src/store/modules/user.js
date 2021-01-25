@@ -8,7 +8,8 @@ const getDefaultState = () => {
     name: '',
     avatar: '',
     roles: [],
-    address: ''
+    address: '',
+    email: ''
   }
 }
 
@@ -32,11 +33,14 @@ const mutations = {
   },
   SET_ADDRESS: (state, address) => {
     state.address = address
+  },
+  SET_EMAIL: (state, email) => {
+    state.email = email
   }
 }
 
 const actions = {
-  // user login
+  // 用户登录
   login({ commit }, userInfo) {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
@@ -51,7 +55,7 @@ const actions = {
     })
   },
 
-  // get user info
+  // 获取用户信息
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
@@ -61,7 +65,7 @@ const actions = {
           return reject('Verification failed, please Login again.')
         }
 
-        const { roles, name, avatar, address } = data
+        const { roles, name, avatar, address, email } = data
 
         if (!roles || roles.length <= 0) {
           reject('getInfo: roles must be a non-null array!')
@@ -70,6 +74,7 @@ const actions = {
         commit('SET_ADDRESS', address)
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
+        commit('SET_EMAIL', email)
         resolve(data)
       }).catch(error => {
         reject(error)
@@ -77,7 +82,7 @@ const actions = {
     })
   },
 
-  // user logout
+  // 登出
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
@@ -91,7 +96,7 @@ const actions = {
     })
   },
 
-  // remove token
+  // 删除token
   resetToken({ commit }) {
     return new Promise(resolve => {
       removeToken() // 必须先删除token

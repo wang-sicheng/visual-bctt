@@ -43,7 +43,7 @@
             </el-tab-pane>
 
             <el-tab-pane label="交易追踪" name="trace">
-              <trans-graph />
+              <trade-graph :id="id" />
             </el-tab-pane>
           </el-tabs>
         </el-card>
@@ -55,7 +55,7 @@
 
 <script>
 import { getTrade } from '@/api/table'
-import TransGraph from '@/components/TransGraph'
+import TradeGraph from './components/TradeGraph'
 
 export default {
   filters: {
@@ -69,11 +69,11 @@ export default {
     }
   },
   components: {
-    TransGraph
+    TradeGraph
   },
   data() {
     return {
-      id: '',
+      id: null,
       activeTab: 'info',
       info: null,
       listLoading: true

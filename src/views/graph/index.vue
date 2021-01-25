@@ -6,7 +6,7 @@
 
 <script>
 import G6 from '@antv/g6'
-import { getParams } from '@/api/params'
+import { getParams } from '@/api/graph'
 
 export default {
   data() {
