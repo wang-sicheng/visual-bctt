@@ -23,3 +23,11 @@ export function getAddressGraph(data) {
     params: { data }
   })
 }
+// 获取某个地址的所有信息并画图 mock/trade.js
+export function getNode(params) {
+  return request({
+    url: '/vue-admin-template/visual/node',
+    method: 'get',
+    params
+  })
+}

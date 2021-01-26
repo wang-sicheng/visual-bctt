@@ -61,12 +61,13 @@ module.exports = [
     type: 'post',
     response: config => {
       const id = config.query.data
-      data.nodes[0].id = id
-      data.nodes[0].label = id
-      data.edges[0].source = id
-      data.edges[1].source = id
-      data.edges[2].source = id
-      data.edges[3].source = id
+      const uid = '0x' + id
+      data.nodes[0].id = uid
+      data.nodes[0].label = uid
+      data.edges[0].source = uid
+      data.edges[1].source = uid
+      data.edges[2].source = uid
+      data.edges[3].source = uid
       const items = data
       return {
         code: 20000,

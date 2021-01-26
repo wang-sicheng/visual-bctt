@@ -1,64 +1,29 @@
 <template>
-  <div class="app-container">
-    <div v-if="user">
-      <el-row :gutter="10">
-
-        <el-col :span="6" :xs="24">
-          <user-card :user="user" />
-        </el-col>
-
-        <el-col :span="18" :xs="24">
-          <el-card>
-            <el-tabs v-model="activeTab">
-              <el-tab-pane label="Account" name="account">
-                <account :user="user" />
-              </el-tab-pane>
-            </el-tabs>
-          </el-card>
-        </el-col>
-
-      </el-row>
-    </div>
+  <div class="dashboard-container">
+    <component :is="currentRole" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import UserCard from './components/UserCard'
-import Account from './components/Account'
+import regulatorDashboard from './regulator'
+import normalDashboard from './normal'
 export default {
-  name: 'Profile',
-  components: {
-    UserCard,
-    Account
-  },
+  name: 'Dashboard',
+  components: { regulatorDashboard, normalDashboard },
   data() {
     return {
-      user: {},
-      activeTab: 'account'
+      currentRole: 'regulatorDashboard'
     }
   },
   computed: {
     ...mapGetters([
-      'name',
-      'avatar',
-      'roles',
-      'address',
-      'email'
+      'roles'
     ])
   },
   created() {
-    this.getUser()
-  },
-  methods: {
-    getUser() {
-      this.user = {
-        name: this.name,
-        role: this.roles.join(' | '),
-        email: this.email,
-        avatar: this.avatar,
-        address: this.address
-      }
+    if (!this.roles.includes('regulator')) {
+      this.currentRole = 'normalDashboard'
     }
   }
 }

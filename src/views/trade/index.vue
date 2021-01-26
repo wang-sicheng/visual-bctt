@@ -13,7 +13,11 @@
                   <el-tag :type="info.status | statusFilter">{{ info.status }}</el-tag>
                 </el-form-item>
                 <el-form-item label="所在块">
-                  <div class="value">{{ info.location }}</div>
+                  <router-link :to="{ path: '/block/index', query: { id: info.location }}">
+                    <el-link type="primary">
+                      <div class="valueMatter">{{ info.location }}</div>
+                    </el-link>
+                  </router-link>
                 </el-form-item>
                 <el-form-item label="时间">
                   <div class="value">{{ info.display_time }}</div>
@@ -22,7 +26,7 @@
                 <el-form-item label="从">
                   <router-link :to="{ path: '/address/index', query: { id: info.from }}">
                     <el-link type="primary">
-                      <div class="value">0x{{ info.from }}</div>
+                      <div class="valueMatter">0x{{ info.from }}</div>
                     </el-link>
                   </router-link>
                 </el-form-item>
@@ -30,7 +34,7 @@
                 <el-form-item label="到">
                   <router-link :to="{ path: '/address/index', query: { id: info.to }}">
                     <el-link type="primary">
-                      <div class="value">0x{{ info.to }}</div>
+                      <div class="valueMatter">0x{{ info.to }}</div>
                     </el-link>
                   </router-link>
                 </el-form-item>
@@ -121,5 +125,9 @@ export default {
   .value {
     color: #213654;
     font-weight: 700;
-}
+  }
+  .valueMatter {
+    color: #0566ee;
+    font-weight: 700;
+  }
 </style>

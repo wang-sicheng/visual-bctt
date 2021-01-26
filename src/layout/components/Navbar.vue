@@ -15,11 +15,13 @@
           <el-dropdown-item>
             {{ user.name }}
           </el-dropdown-item>
-          <router-link to="/">
+
+          <router-link to="/profile/index">
             <el-dropdown-item>
               个人主页
             </el-dropdown-item>
           </router-link>
+
           <a target="_blank" href="https://github.com/Jackwensen/visual-bctt">
             <el-dropdown-item>代码仓库</el-dropdown-item>
           </a>

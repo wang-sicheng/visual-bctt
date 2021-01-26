@@ -2,39 +2,39 @@ const Mock = require('mockjs')
 
 const tableData = Mock.mock({
   'items|20': [{
-    order_no: '@string("1234567890abcdef", 35)',
+    order_no: '@string("123456789abcdef", 35)',
     'status|1': ['成功', '进行中', '失败'],
     display_time: '@datetime',
-    from: '@string("1234567890abcdef", 31)',
-    to: '@string("1234567890abcdef", 31)',
+    from: '@string("123456789abcdef", 31)',
+    to: '@string("123456789abcdef", 31)',
     price: '@float(100, 1000, 0, 2)'
   }]
 })
 
 const addressList = Mock.mock({
   'items|10': [{
-    order_no: '@string("1234567890abcdef", 35)',
+    order_no: '@string("123456789abcdef", 35)',
     display_time: '@datetime',
-    from: '@string("1234567890abcdef", 31)',
-    to: '@string("1234567890abcdef", 31)',
+    from: '@string("123456789abcdef", 31)',
+    to: '@string("123456789abcdef", 31)',
     price: '@float(100, 1000, 0, 2)'
   }]
 })
 
 const trade = Mock.mock({
   'items|1': [{
-    location: '@string("1234567890", 1, 8)',
+    location: '@string("1234567890", 1, 2)',
     'status|1': ['成功', '进行中', '失败'],
     display_time: '@datetime',
-    from: '@string("1234567890abcdef", 31)',
-    to: '@string("1234567890abcdef", 31)',
+    from: '@string("123456789abcdef", 31)',
+    to: '@string("123456789abcdef", 31)',
     price: '@float(100, 1000, 0, 2)'
   }]
 })
 
 const address = Mock.mock({
   'items|1': [{
-    total: '@string("1234567890", 0, 6)',
+    total: '@string("123456789", 0, 6)',
     price: '@float(0, 1000, 1, 6)',
     'role|1': ['消费者', '服务提供方', '监管者']
   }]
@@ -60,7 +60,6 @@ module.exports = [
     type: 'post',
     response: config => {
       const id = config.query.data
-      console.log('hahajia', id)
       addressList.items[0].to = id
       addressList.items[1].to = id
       addressList.items[2].to = id

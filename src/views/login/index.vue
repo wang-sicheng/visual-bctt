@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">登录</h3>
       </div>
 
       <el-form-item prop="username">
@@ -44,16 +44,16 @@
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
 
       <div class="tips">
-        <span style="margin-right:20px;">username: regulator</span>
-        <span> password: any</span>
+        <span style="margin-right:20px;">用户名: regulator</span>
+        <span> 密码: any</span>
       </div>
       <div class="tips">
-        <span style="margin-right:20px;">username: provider</span>
-        <span> password: any</span>
+        <span style="margin-right:20px;">用户名: provider </span>
+        <span> 密码: any</span>
       </div>
       <div class="tips">
-        <span style="margin-right:20px;">username: consumer</span>
-        <span> password: any</span>
+        <span style="margin-right:20px;">用户名: consumer</span>
+        <span> 密码: any</span>
       </div>
 
     </el-form>
