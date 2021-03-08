@@ -8,6 +8,7 @@ const trade = require('./visualTrade')
 const address = require('./visualAddress')
 const block = require('./block')
 const node = require('./node')
+const chain = require('./chain')
 
 const mocks = [
   ...user,
@@ -16,7 +17,8 @@ const mocks = [
   ...trade,
   ...address,
   ...block,
-  ...node
+  ...node,
+  ...chain
 ]
 
 // for front mock

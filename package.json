@@ -15,7 +15,7 @@
     "commit": "cz"
   },
   "dependencies": {
-    "@antv/g6": "^4.1.4",
+    "@antv/g6": "^3.8.5",
     "axios": "0.18.1",
     "codemirror": "^5.59.1",
     "commitizen": "^4.2.2",

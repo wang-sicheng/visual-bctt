@@ -31,3 +31,11 @@ export function getNode(params) {
     params
   })
 }
+// 获取链可视化，以及链上信息可视化
+export function getChain(params) {
+  return request({
+    url: '/vue-admin-template/visual/chain',
+    method: 'get',
+    params
+  })
+}

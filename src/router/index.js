@@ -7,22 +7,7 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 /**
- * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
- *
- * hidden: true                   if set true, item will not show in the sidebar(default is false)
- * alwaysShow: true               if set true, will always show the root menu
- *                                if not set alwaysShow, when item has more than one children route,
- *                                it will becomes nested mode, otherwise not show the root menu
- * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
- * name:'router-name'             the name is used by <keep-alive> (must set!!!)
- * meta : {
-    roles: ['admin','editor']    control the page roles (you can set multiple roles)
-    title: 'title'               the name show in sidebar and breadcrumb (recommend set)
-    icon: 'svg-name'/'el-icon-x' the icon show in the sidebar
-    breadcrumb: false            if set false, the item will hidden in breadcrumb(default is true)
-    activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
-  }
  */
 
 /**
@@ -121,6 +106,20 @@ export const constantRoutes = [
         meta: { title: '区块信息', noCache: true }
       }
     ]
+  },
+  {
+    path: '/docs',
+    component: Layout,
+    redirect: '/docs/index',
+    hidden: true,
+    children: [
+      {
+        path: 'index',
+        name: 'docs',
+        component: () => import('@/views/docs/index'),
+        meta: { title: '文档', noCache: true }
+      }
+    ]
   }
 ]
 
@@ -130,9 +129,33 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   {
+    path: '/table',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Table',
+        component: () => import('@/views/table/index'),
+        meta: { title: '全部交易信息', icon: 'table' }
+      }
+    ]
+  },
+  {
+    path: '/chain',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Chain',
+        component: () => import('@/views/chain/index'),
+        meta: { title: '链上信息可视化', icon: 'international' }
+      }
+    ]
+  },
+  {
     path: '/visual',
     component: Layout,
-    redirect: '/visual/table',
+    redirect: '/visual/graph',
     name: 'Visual',
     meta: { title: '可视化大盘', icon: 'el-icon-s-help', roles: ['regulator'] },
     children: [
@@ -141,12 +164,6 @@ export const asyncRoutes = [
         name: 'Graph',
         component: () => import('@/views/graph/index'),
         meta: { title: '指标图谱', icon: 'tree-table' }
-      },
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: '交易记录', icon: 'table' }
       },
       {
         path: 'node',
