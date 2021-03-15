@@ -55,6 +55,10 @@
         <span style="margin-right:20px;">用户名: consumer</span>
         <span> 密码: any</span>
       </div>
+      <div class="tips">
+        <span style="margin-right:20px;">用户名: banker</span>
+        <span> 密码: any</span>
+      </div>
 
     </el-form>
   </div>

@@ -8,6 +8,9 @@ const tokens = {
   },
   consumer: {
     token: 'consumer-token'
+  },
+  banker: {
+    token: 'banker-token'
   }
 }
 
@@ -35,6 +38,14 @@ const users = {
     name: 'consumer-001',
     email: 'consumer@visual.com',
     address: '0x2701665e73e5196323a4224d062b0f6ff3384ab9'
+  },
+  'banker-token': {
+    roles: ['banker'],
+    introduction: 'I am an banker',
+    avatar: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20170922%2F8efd2dd78d7248f09944072ff0f72b83.gif&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1614147264&t=fc79d996b31d1df17bb8785df7d13731',
+    name: 'banker-001',
+    email: 'banker@visual.com',
+    address: '0x2701665e73e5348523adb1fe791b0f6ff08a7b3a'
   }
 }
 

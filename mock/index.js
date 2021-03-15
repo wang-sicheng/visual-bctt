@@ -6,6 +6,7 @@ const table = require('./table')
 const params = require('./params')
 const trade = require('./visualTrade')
 const address = require('./visualAddress')
+const mode = require('./visualMode')
 const block = require('./block')
 const node = require('./node')
 const chain = require('./chain')
@@ -18,7 +19,8 @@ const mocks = [
   ...address,
   ...block,
   ...node,
-  ...chain
+  ...chain,
+  ...mode
 ]
 
 // for front mock

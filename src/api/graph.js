@@ -39,3 +39,11 @@ export function getChain(params) {
     params
   })
 }
+// 获取链可视化，以及链上信息可视化
+export function getMode(params) {
+  return request({
+    url: '/vue-admin-template/visual/mode',
+    method: 'get',
+    params
+  })
+}

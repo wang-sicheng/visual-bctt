@@ -6,7 +6,7 @@
 
 <script>
 import G6 from '@antv/g6'
-import { getChain } from '@/api/graph'
+import { getMode } from '@/api/graph'
 
 export default {
   data() {
@@ -60,7 +60,7 @@ export default {
         'line' // extend the built-in edge 'cubic'
       )
 
-      getChain().then((res) => res.data.items)
+      getMode().then((res) => res.data.items)
         .then((data) => {
           const container = document.getElementById('mountNode')
           const minimap = new G6.Minimap({
@@ -71,39 +71,57 @@ export default {
           const grid = new G6.Grid()
           const graph = new G6.Graph({
             container: 'mountNode',
-            width: container.scrollWidth, // 图的宽度
-            height: container.scrollHeight || 700,
-            // groupByTypes: false,
-            // linkCenter: true,
-            // fitView: true,
-            fitViewPadding: 20,
-            minZoom: 0.2,
-            layout: {
-              type: 'comboForce',
-              nodeSpacing: (d) => 10
+            width: 1500, // 图的宽度
+            height: 750,
+            fitView: true,
+            fitCenter: true,
+            modes: {
+              default: [
+                {
+                  type: 'tooltip', // 提示框
+                  formatText(model) {
+                    // 提示框文本内容
+                    const text = model.description
+                    return text
+                  }
+                },
+                'drag-canvas', 'drag-node', 'zoom-canvas']
             },
+            // layout: {
+            //   type: 'dagre',
+            //   rankdir: 'LR',
+            //   align: 'UL',
+            //   controlPoints: true,
+            //   nodesepFunc: () => 1,
+            //   ranksepFunc: () => 1
+            // },
             defaultNode: {
-              size: 10,
-              color: '#5B8FF9',
-              style: {
-                lineWidth: 2,
-                fill: '#C6E5FF'
-              }
+              // size: [90, 60],
+              // style: {
+              //   lineWidth: 2,
+              //   stroke: '#5B8FF9',
+              //   fill: '#C6E5FF'
+              // }
             },
             defaultEdge: {
+            //   type: 'cubic',
               type: 'circle-running',
-              size: 2,
-              color: '#e2e2e2'
-            },
-            modes: {
-              default: ['drag-combo', 'drag-node', 'drag-canvas', 'zoom-canvas']
+              // size: 1,
+              color: '#F6BD16'
             },
             plugins: [minimap, grid]
           })
-
           graph.data(data)
           graph.render()
+          graph.fitView()
 
+          if (typeof window !== 'undefined') {
+            window.onresize = () => {
+              if (!graph || graph.get('destroyed')) return
+              if (!container || !container.scrollWidth || !container.scrollHeight) return
+              graph.changeSize(container.scrollWidth, container.scrollHeight)
+            }
+          }
         })
     }
   }

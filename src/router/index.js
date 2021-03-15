@@ -141,6 +141,21 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: '/mode',
+    component: Layout,
+    redirect: '/mode',
+    name: 'Mode',
+    meta: { title: '征信模型', icon: 'el-icon-s-help', roles: ['regulator', 'banker'] },
+    children: [
+      {
+        path: 'mode',
+        name: 'Mode',
+        component: () => import('@/views/mode/index'),
+        meta: { title: '征信模型', icon: 'tree-table' }
+      }
+    ]
+  },
+  {
     path: '/chain',
     component: Layout,
     children: [
