@@ -29,8 +29,8 @@ export default {
           const grid = new G6.Grid()
           const graph = new G6.TreeGraph({
             container: 'mountNode',
-            width: 1320, // 图的宽度
-            height: 730,
+            width: container.scrollWidth, // 图的宽度
+            height: container.scrollHeight || 650,
             linkCenter: true,
             modes: {
               default: [

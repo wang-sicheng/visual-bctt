@@ -79,8 +79,8 @@ export default {
 
           const graph = new G6.Graph({
             container: 'mountNode',
-            width: 1230, // 图的宽度
-            height: 730,
+            width: container.scrollWidth, // 图的宽度
+            height: container.scrollHeight || 650,
             layout: {
               type: 'force',
               edgeStrength: 0.7

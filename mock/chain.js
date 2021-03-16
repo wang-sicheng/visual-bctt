@@ -142,7 +142,7 @@ const data = {
       style: {
         stroke: 'green'
       }
-    },
+    }
     // {
     //   source: 'a',
     //   target: '31',
@@ -212,17 +212,17 @@ const data = {
   combos: [
     {
       id: 'a',
-      label: '交易链',
+      label: '交易链'
       // size: '10'
     },
     {
       id: 'b',
-      label: '账户链',
+      label: '账户链'
       // size: '10'
     },
     {
       id: 'c',
-      label: '征信链',
+      label: '征信链'
       // size: '10'
     }
   ]

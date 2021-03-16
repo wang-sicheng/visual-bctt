@@ -148,10 +148,16 @@ export const asyncRoutes = [
     meta: { title: '征信模型', icon: 'el-icon-s-help', roles: ['regulator', 'banker'] },
     children: [
       {
-        path: 'mode',
-        name: 'Mode',
-        component: () => import('@/views/mode/index'),
-        meta: { title: '征信模型', icon: 'tree-table' }
+        path: 'modeTz',
+        name: 'ModeTz',
+        component: () => import('@/views/modeTz/index'),
+        meta: { title: '征信模型——台州' }
+      },
+      {
+        path: 'modeSz',
+        name: 'ModeSz',
+        component: () => import('@/views/modeSz/index'),
+        meta: { title: '征信模型——苏州' }
       }
     ]
   },

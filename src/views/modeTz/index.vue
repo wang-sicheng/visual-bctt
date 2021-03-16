@@ -1,12 +1,28 @@
 <template>
   <div class="app-container">
-    <div id="mountNode" />
+    <el-row :gutter="0">
+      <el-col :span="22" :offset="1">
+        <el-alert
+          title="台州小微企业数字征信的模式特点："
+          type="info"
+          description="1、数据融合。多部门数据融合，为金融机构提供了大数据查询接口，节省了金融机构的信息搜寻成本，有效降低了金融机构与小微企业之间的信息不对称问题。
+                      2、数据真实性。该数据平台将多部门的信用信息数据进行了自动融合，确保了数据的真实性、可靠性，以及完整性，规避了传统手段获取数据的质量不佳现象。
+                      3、数据的功能性。建立小微企业信用信息立方体，构建小微企业信用信息库，包含各个小微企业的正负面信息、不良小微企业信息库、小微企业风险评价报告，以及政府针对某些行业小微企业的培育支持情况等信息。"
+          show-icon
+        />
+      </el-col>
+    </el-row>
+    <el-row :gutter="0">
+      <el-col :span="22" :offset="1">
+        <div id="mountNode" />
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
 import G6 from '@antv/g6'
-import { getMode } from '@/api/graph'
+import { getModeTz } from '@/api/graph'
 
 export default {
   data() {
@@ -60,7 +76,7 @@ export default {
         'line' // extend the built-in edge 'cubic'
       )
 
-      getMode().then((res) => res.data.items)
+      getModeTz().then((res) => res.data.items)
         .then((data) => {
           const container = document.getElementById('mountNode')
           const minimap = new G6.Minimap({
@@ -71,8 +87,8 @@ export default {
           const grid = new G6.Grid()
           const graph = new G6.Graph({
             container: 'mountNode',
-            width: 1500, // 图的宽度
-            height: 750,
+            width: container.scrollWidth, // 图的宽度
+            height: container.scrollHeight || 600,
             fitView: true,
             fitCenter: true,
             modes: {
@@ -87,26 +103,19 @@ export default {
                 },
                 'drag-canvas', 'drag-node', 'zoom-canvas']
             },
-            // layout: {
-            //   type: 'dagre',
-            //   rankdir: 'LR',
-            //   align: 'UL',
-            //   controlPoints: true,
-            //   nodesepFunc: () => 1,
-            //   ranksepFunc: () => 1
-            // },
             defaultNode: {
               // size: [90, 60],
-              // style: {
-              //   lineWidth: 2,
-              //   stroke: '#5B8FF9',
-              //   fill: '#C6E5FF'
-              // }
+              style: {
+                lineWidth: 1,
+                stroke: '#5B8FF9',
+                fill: '#EBEEF5',
+                radius: 5
+              }
             },
             defaultEdge: {
             //   type: 'cubic',
               type: 'circle-running',
-              // size: 1,
+              size: 2,
               color: '#F6BD16'
             },
             plugins: [minimap, grid]
@@ -115,13 +124,13 @@ export default {
           graph.render()
           graph.fitView()
 
-          if (typeof window !== 'undefined') {
-            window.onresize = () => {
-              if (!graph || graph.get('destroyed')) return
-              if (!container || !container.scrollWidth || !container.scrollHeight) return
-              graph.changeSize(container.scrollWidth, container.scrollHeight)
-            }
-          }
+          // if (typeof window !== 'undefined') {
+          //   window.onresize = () => {
+          //     if (!graph || graph.get('destroyed')) return
+          //     if (!container || !container.scrollWidth || !container.scrollHeight) return
+          //     graph.changeSize(container.scrollWidth, container.scrollHeight)
+          //   }
+          // }
         })
     }
   }

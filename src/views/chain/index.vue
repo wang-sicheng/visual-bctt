@@ -72,7 +72,7 @@ export default {
           const graph = new G6.Graph({
             container: 'mountNode',
             width: container.scrollWidth, // 图的宽度
-            height: container.scrollHeight || 700,
+            height: container.scrollHeight || 650,
             // groupByTypes: false,
             // linkCenter: true,
             // fitView: true,
@@ -103,7 +103,6 @@ export default {
 
           graph.data(data)
           graph.render()
-
         })
     }
   }

@@ -39,10 +39,18 @@ export function getChain(params) {
     params
   })
 }
-// 获取链可视化，以及链上信息可视化
-export function getMode(params) {
+// 获取台州征信模型可视化
+export function getModeTz(params) {
   return request({
-    url: '/vue-admin-template/visual/mode',
+    url: '/vue-admin-template/visual/taizhou',
+    method: 'get',
+    params
+  })
+}
+// 获取苏州征信模型可视化
+export function getModeSz(params) {
+  return request({
+    url: '/vue-admin-template/visual/suzhou',
     method: 'get',
     params
   })

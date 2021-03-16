@@ -12,7 +12,7 @@ const data = {
     },
     {
       id: '1',
-      label: '台州市人民政府\n金融工作\n办公室',
+      label: '台州市人民政府\n金融工作办公室',
       size: [120, 60],
       type: 'ellipse',
       x: 600,
@@ -21,7 +21,7 @@ const data = {
     },
     {
       id: '2',
-      label: '中国人民银行\n台州市\n中心支行',
+      label: '中国人民银行\n台州市中心支行',
       size: [120, 60],
       type: 'ellipse',
       x: 900,
@@ -39,11 +39,16 @@ const data = {
     {
       id: '4',
       label: '金融服务\n信用信息\n共享平台',
-      size: [80, 80],
+      size: [100, 60],
       type: 'ellipse',
       x: 600,
       y: 300,
-      description: '金融服务信用信息共享平台'
+      description: '金融服务信用信息共享平台',
+      style: {
+        fill: '#EBEEF5',
+        stroke: '#5B8FF9',
+        lineWidth: 1.5
+      }
     },
     {
       id: '5',
@@ -176,7 +181,7 @@ const data = {
 }
 module.exports = [
   {
-    url: '/vue-admin-template/visual/mode',
+    url: '/vue-admin-template/visual/taizhou',
     type: 'get',
     response: config => {
       const items = data
