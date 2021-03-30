@@ -11,10 +11,20 @@
                       4、依托征信数据创新专项金融产品，完善银企对接"
           show-icon
         />
+        <br>
+        <el-alert
+          title="发展方向："
+          type="info"
+          description="1、拓宽数据采集面，满足小微企业的融资需求，推动与小微企业融资相关的重要信息采集。
+                      2、提高数据的运用效率和数据挖掘技术的应用水平，优化模型，从更多层面刻画小微企业的信用资质情况，提高企业画像的精准度。
+                      3、深化与大数据技术公司的合作，发掘、量化更多层面的非政府部门公开信息，丰富平台数据库维度。"
+          show-icon
+        />
       </el-col>
     </el-row>
     <el-row :gutter="0">
       <el-col :span="22" :offset="1">
+        <br>
         <div id="mountNode" />
       </el-col>
     </el-row>
@@ -68,7 +78,7 @@ export default {
             )
           }
         },
-        'line'
+        'quadratic'
       )
 
       getModeSz().then((res) => res.data.items)
@@ -108,7 +118,7 @@ export default {
                     return text
                   }
                 },
-                'drag-canvas', 'drag-node', 'zoom-canvas']
+                'drag-canvas', 'drag-node', 'zoom-canvas', 'drag-combo']
             },
             defaultNode: {
               // size: [90, 60],
@@ -125,19 +135,38 @@ export default {
               size: 2,
               color: '#F6BD16'
             },
+            defaultCombo: {
+              type: 'rect',
+              /* style for the keyShape */
+              style: {
+                lineWidth: 1
+              },
+              labelCfg: {
+                /* label's offset to the keyShape */
+                // refY: 10,
+                /* label's position, options: center, top, bottom, left, right */
+                position: 'top'
+                /* label's style */
+                // style: {
+                //   fontSize: 18,
+                // },
+              }
+            },
             plugins: [minimap, grid]
           })
           graph.data(data)
           graph.render()
           graph.fitView()
 
-          // if (typeof window !== 'undefined') {
-          //   window.onresize = () => {
-          //     if (!graph || graph.get('destroyed')) return
-          //     if (!container || !container.scrollWidth || !container.scrollHeight) return
-          //     graph.changeSize(container.scrollWidth, container.scrollHeight)
-          //   }
-          // }
+          graph.on('combo:mouseenter', (evt) => {
+            const { item } = evt
+            graph.setItemState(item, 'active', true)
+          })
+
+          graph.on('combo:mouseleave', (evt) => {
+            const { item } = evt
+            graph.setItemState(item, 'active', false)
+          })
         })
     }
   }

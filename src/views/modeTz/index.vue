@@ -10,10 +10,18 @@
                       3、数据的功能性。建立小微企业信用信息立方体，构建小微企业信用信息库，包含各个小微企业的正负面信息、不良小微企业信息库、小微企业风险评价报告，以及政府针对某些行业小微企业的培育支持情况等信息。"
           show-icon
         />
+        <br>
+        <el-alert
+          title="流程："
+          type="info"
+          description="金融服务信用信息共享平台，征集信用信息数据。整合信息、自动评分、导入信用报告、建立信用立方，为金融机构提供查询接口"
+          show-icon
+        />
       </el-col>
     </el-row>
     <el-row :gutter="0">
       <el-col :span="22" :offset="1">
+        <br>
         <div id="mountNode" />
       </el-col>
     </el-row>
