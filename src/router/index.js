@@ -141,6 +141,18 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: '/getblockchain',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'getblockchain',
+        component: () => import('@/views/getblockchain/index'),
+        meta: { title: '集成后端信息', icon: 'table' }
+      }
+    ]
+  },
+  {
     path: '/mode',
     component: Layout,
     redirect: '/mode',
