@@ -10,25 +10,14 @@
     >
       <el-table-column width="80" align="center" label="区块高度">
         <template slot-scope="scope">
-          <!-- <router-link :to="{ path: '/trade/index', query: { id: scope.row.order_no }}">
-            <el-link type="primary"> -->
-          {{ scope.row.Height }}
-          <!-- </el-link>
-          </router-link> -->
+          <router-link :to="{ path: '/getfromchain/getOneBlock', query: { height: scope.row.Height }}">
+            <el-link type="primary">
+              {{ scope.row.Height }}
+            </el-link>
+          </router-link>
         </template>
       </el-table-column>
-      <el-table-column width="220" align="center" label="时间戳">
-        <template slot-scope="scope">
-          <!-- <el-tooltip class="item" effect="dark" placement="top">
-            <div slot="content">0x{{ scope.row.from }}</div>
-            <router-link :to="{ path: '/address/index', query: { id: scope.row.from }}">
-              <el-link type="primary"> -->
-          <span>{{ scope.row.Timestamp }}</span>
-          <!-- </el-link>
-            </router-link>
-          </el-tooltip> -->
-        </template>
-      </el-table-column>
+
       <el-table-column width="380" align="center" label="前一区块hash">
         <template slot-scope="scope">
           <!-- <el-tooltip class="item" effect="dark" placement="top">
@@ -56,6 +45,18 @@
           <span>{{ scope.row.Hash }}</span>
         </template>
       </el-table-column>
+      <el-table-column width="220" align="center" label="时间戳">
+        <template slot-scope="scope">
+          <!-- <el-tooltip class="item" effect="dark" placement="top">
+            <div slot="content">0x{{ scope.row.from }}</div>
+            <router-link :to="{ path: '/address/index', query: { id: scope.row.from }}">
+              <el-link type="primary"> -->
+          <span>{{ scope.row.Timestamp }}</span>
+          <!-- </el-link>
+            </router-link>
+          </el-tooltip> -->
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -63,16 +64,6 @@
 <script>
 
 export default {
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        成功: 'success',
-        进行中: 'gray',
-        失败: 'danger'
-      }
-      return statusMap[status]
-    }
-  },
   data() {
     return {
       list: null,
@@ -85,7 +76,7 @@ export default {
   methods: {
     async fetchData() {
       this.listLoading = true
-      fetch('http://localhost:3000', {
+      fetch('http://localhost:3000/getBlockChain', {
         method: 'get',
         headers: { 'Content-Type': 'application/json' }
         // body: JSON.stringify({
@@ -97,7 +88,7 @@ export default {
         })
         .then(response => {
           response.data.json().then((res) => {
-            console.log(999, res)
+            console.log('getBlockChain:', res)
             this.list = res.data
             this.listLoading = false
           })

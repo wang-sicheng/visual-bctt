@@ -7,10 +7,6 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 /**
- * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
- */
-
-/**
  * constantRoutes
  * a base page that does not have permission requirements
  * all roles can be accessed
@@ -141,14 +137,29 @@ export const asyncRoutes = [
     ]
   },
   {
-    path: '/getblockchain',
+    path: '/getfromchain',
     component: Layout,
+    redirect: '/getfromchain',
+    name: 'getfromchain',
+    meta: { title: '集成后端信息', icon: 'table' },
     children: [
       {
-        path: 'index',
-        name: 'getblockchain',
+        path: 'getBlockChain',
+        name: 'getBlockChain',
         component: () => import('@/views/getblockchain/index'),
-        meta: { title: '集成后端信息', icon: 'table' }
+        meta: { title: '区块列表' }
+      },
+      {
+        path: 'getAllTrans',
+        name: 'getAllTrans',
+        component: () => import('@/views/getalltrans/index'),
+        meta: { title: '交易列表' }
+      },
+      {
+        path: 'getOneBlock',
+        name: 'getOneBlock',
+        component: () => import('@/views/getoneblock/index'),
+        hidden: true
       }
     ]
   },
