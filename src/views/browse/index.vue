@@ -9,6 +9,7 @@
             <span>汉堡</span>
             <div class="bottom clearfix">
               <time class="time">生产日期：{{ currentDate }}</time>
+              <el-button type="text" class="button">加入购物车</el-button>
               <el-button type="text" class="button">购买</el-button>
             </div>
           </div>

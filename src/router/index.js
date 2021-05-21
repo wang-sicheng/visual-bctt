@@ -50,14 +50,26 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/codemirror',
+    path: '/contract',
     component: Layout,
     children: [
       {
         path: 'index',
-        name: 'Codemirror',
-        component: () => import('@/views/codemirror/index'),
+        name: 'Contract',
+        component: () => import('@/views/contract/index'),
         meta: { title: '智能合约', icon: 'tab' }
+      }
+    ]
+  },
+  {
+    path: '/postTran',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'postTran',
+        component: () => import('@/views/posttran/index'),
+        meta: { title: '发起交易', icon: 'tab' }
       }
     ]
   },
@@ -231,7 +243,7 @@ export const asyncRoutes = [
         path: 'index',
         name: 'Browse',
         component: () => import('@/views/browse/index'),
-        meta: { title: '浏览', icon: 'component', roles: ['consumer', 'provider'] }
+        meta: { title: '浏览商品', icon: 'component', roles: ['consumer', 'provider'] }
       }
     ]
   },

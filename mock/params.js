@@ -257,22 +257,7 @@ const data = {
       style: {
         'fill': '#67C23A',
         'stroke': 'rgba(0,0,0,0)'
-      },
-      'children': [
-        {
-          'id': '暂无',
-          'type': 'ellipse',
-          'size': [120, 25],
-          style: {
-            'fill': '#f9e264',
-            'stroke': 'rgba(0,0,0,0)'
-          },
-          'children': [
-            { 'id': '   ' },
-            { 'id': '     ' }
-          ]
-        }
-      ]
+      }
     }
   ]
 }

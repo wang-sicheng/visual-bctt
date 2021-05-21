@@ -32,7 +32,8 @@
 import dedent from 'dedent'
 import { codemirror } from 'vue-codemirror'
 // language
-import 'codemirror/mode/javascript/javascript.js'
+// import 'codemirror/mode/javascript/javascript.js'
+import 'codemirror/mode/go/go.js'
 // theme css
 import 'codemirror/theme/monokai.css'
 
@@ -44,21 +45,27 @@ export default {
     return {
       address: '',
       code: dedent`
-          contract SimpleDemo {
-            uint data;
-            function set(uint n) public {
-              data = n*3;
-            }
-            function get() public returns (uint) {
-              return data;
-            }
+        func sieve() {
+          ch := make(chan int)
+          go generate(ch)
+          for {
+            prime := <-ch
+            fmt.Print(prime, "")
+            ch1 := make(chan int)
+            go filter(ch, ch1, prime)
+            ch = ch1
           }
+        }
+
+        func main() {
+          sieve()
+        }
         `,
       cmOption: {
-        tabSize: 2,
+        tabSize: 4,
         lineNumbers: true,
         line: true,
-        mode: 'text/javascript',
+        mode: 'text/x-go',
         matchBrackets: true,
         theme: 'monokai'
       }
@@ -69,10 +76,26 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$message({
-        message: '上传成功',
-        type: 'success'
+      fetch(`http://localhost:3000/postContract`, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          address: this.address,
+          code: this.code
+        })
       })
+        .then((res) => {
+          return { data: res }
+        })
+        .then(response => {
+          response.data.json().then((res) => {
+            console.log('postContract:', res)
+          })
+          this.$message({
+            message: '上传成功',
+            type: 'success'
+          })
+        })
     }
   }
 }
