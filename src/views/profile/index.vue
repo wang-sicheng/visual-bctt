@@ -10,6 +10,9 @@
         <el-col :span="18" :xs="24">
           <el-card>
             <el-tabs v-model="activeTab">
+              <el-tab-pane label="Register" name="register">
+                <register :user="user" />
+              </el-tab-pane>
               <el-tab-pane label="Account" name="account">
                 <account :user="user" />
               </el-tab-pane>
@@ -26,16 +29,18 @@
 import { mapGetters } from 'vuex'
 import UserCard from './components/UserCard'
 import Account from './components/Account'
+import Register from './components/Register'
 export default {
   name: 'Profile',
   components: {
     UserCard,
-    Account
+    Account,
+    Register
   },
   data() {
     return {
       user: {},
-      activeTab: 'account'
+      activeTab: 'register'
     }
   },
   computed: {
@@ -44,7 +49,10 @@ export default {
       'avatar',
       'roles',
       'address',
-      'email'
+      'email',
+      'private_key',
+      'public_key',
+      'account_address'
     ])
   },
   created() {
@@ -57,7 +65,10 @@ export default {
         role: this.roles.join(' | '),
         email: this.email,
         avatar: this.avatar,
-        address: this.address
+        address: this.address,
+        private_key: this.private_key,
+        public_key: this.public_key,
+        account_address: this.account_address
       }
     }
   }

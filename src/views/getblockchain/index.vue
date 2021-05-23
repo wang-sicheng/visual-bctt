@@ -76,7 +76,7 @@ export default {
   methods: {
     async fetchData() {
       this.listLoading = true
-      fetch('http://localhost:3000/getBlockChain', {
+      fetch('http://localhost:9999/getBlockChain', {
         method: 'get',
         headers: { 'Content-Type': 'application/json' }
         // body: JSON.stringify({
@@ -89,7 +89,7 @@ export default {
         .then(response => {
           response.data.json().then((res) => {
             console.log('getBlockChain:', res)
-            this.list = res.data
+            this.list = res.Data
             this.listLoading = false
           })
         })

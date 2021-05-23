@@ -72,7 +72,7 @@ export default {
   methods: {
     async fetchData() {
       this.listLoading = true
-      fetch(`http://localhost:3000/getOneBlockTrans?height=${this.height}`, {
+      fetch(`http://localhost:9999/getOneBlockTrans?height=${this.height}`, {
         method: 'get',
         headers: { 'Content-Type': 'application/json' }
         // body: JSON.stringify({
@@ -85,7 +85,7 @@ export default {
         .then(response => {
           response.data.json().then((res) => {
             console.log('getOneBlockTrans:', res)
-            this.list = res.data
+            this.list = res.Data
             this.listLoading = false
           })
         })

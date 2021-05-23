@@ -3,49 +3,91 @@
 
     <el-row :gutter="0">
       <el-col :span="22" :offset="1" :xs="24">
-        <el-form label-width="80px">
+        <el-form :label-position="labelPosition" label-width="80px">
           <el-form-item label="发起地址">
-            <el-input v-model="from" />
+            <el-input v-model="user.account_address" />
           </el-form-item>
           <el-form-item label="接收地址">
             <el-input v-model="to" />
           </el-form-item>
+          <el-form-item label="私钥">
+            <el-input v-model="user.private_key" />
+          </el-form-item>
+          <el-form-item label="公钥">
+            <el-input v-model="user.public_key" />
+          </el-form-item>
           <el-form-item label="金额">
             <el-input v-model="value" />
           </el-form-item>
-          <el-form-item label="备注">
-            <el-input v-model="data" />
+          <el-form-item label="合约">
+            <el-input v-model="contract" />
           </el-form-item>
-          <el-button type="primary" @click="onSubmit">发起交易</el-button>
+          <el-form-item label="方法">
+            <el-input v-model="method" />
+          </el-form-item>
+          <el-form-item label="dest">
+            <el-input v-model="dest" />
+          </el-form-item>
         </el-form>
+        <el-form :inline="true" :model="args" class="demo-form-inline">
+          <el-form-item label="合约参数：" />
+          <el-form-item label="name">
+            <el-input v-model="args.name" />
+          </el-form-item>
+          <el-form-item label="year">
+            <el-input v-model="args.year" />
+          </el-form-item>
+        </el-form>
+        <el-button type="primary" @click="onSubmit">发起交易</el-button>
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
   data() {
     return {
-      from: '',
+      labelPosition: 'left',
+      user: {},
       to: '',
-      data: '',
-      value: ''
+      contract: '',
+      value: '',
+      method: '',
+      dest: '',
+      args: {
+        name: '',
+        year: ''
+      }
     }
   },
-  mounted() {
+  computed: {
+    ...mapGetters([
+      'private_key',
+      'public_key',
+      'account_address'
+    ])
+  },
+  created() {
+    this.getParams()
   },
   methods: {
     onSubmit() {
-      fetch(`http://localhost:3000/postTran`, {
+      fetch(`http://localhost:9999/postTran`, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          from: this.from,
+          from: this.user.account_address,
+          private_key: this.user.private_key,
+          public_key: this.user.public_key,
           to: this.to,
+          contract: this.contract,
           value: this.value,
-          data: this.data
+          method: this.method,
+          dest: this.dest,
+          args: this.args
         })
       })
         .then((res) => {
@@ -60,6 +102,13 @@ export default {
             type: 'success'
           })
         })
+    },
+    getParams() {
+      this.user = {
+        private_key: this.private_key,
+        public_key: this.public_key,
+        account_address: this.account_address
+      }
     }
   }
 }

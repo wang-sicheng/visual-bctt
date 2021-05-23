@@ -73,12 +73,9 @@ export default {
   methods: {
     async fetchData() {
       this.listLoading = true
-      fetch('http://localhost:3000/getAllTrans', {
+      fetch('http://localhost:9999/getAllTrans', {
         method: 'get',
         headers: { 'Content-Type': 'application/json' }
-        // body: JSON.stringify({
-        //   id: this.state.user.id
-        // })
       })
         .then((res) => {
           return { data: res }
@@ -86,7 +83,7 @@ export default {
         .then(response => {
           response.data.json().then((res) => {
             console.log('getAllTrans:', res)
-            this.list = res.data
+            this.list = res.Data
             this.listLoading = false
           })
         })

@@ -89,7 +89,7 @@ export default {
   methods: {
     async fetchData() {
       this.listLoading = true
-      fetch(`http://localhost:3000/getBlock?height=${this.height}`, {
+      fetch(`http://localhost:9999/getBlock?height=${this.height}`, {
         method: 'get',
         headers: { 'Content-Type': 'application/json' }
         // body: JSON.stringify({
@@ -102,7 +102,7 @@ export default {
         .then(response => {
           response.data.json().then((res) => {
             console.log('getBlock:', res)
-            this.info = res.data
+            this.info = res.Data
             this.listLoading = false
           })
         })

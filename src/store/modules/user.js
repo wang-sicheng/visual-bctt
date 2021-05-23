@@ -9,7 +9,10 @@ const getDefaultState = () => {
     avatar: '',
     roles: [],
     address: '',
-    email: ''
+    email: '',
+    private_key: '',
+    public_key: '',
+    account_address: ''
   }
 }
 
@@ -36,6 +39,15 @@ const mutations = {
   },
   SET_EMAIL: (state, email) => {
     state.email = email
+  },
+  SET_PRIVATE_KEY: (state, private_key) => {
+    state.private_key = private_key
+  },
+  SET_PUBILC_KEY: (state, public_key) => {
+    state.public_key = public_key
+  },
+  SET_ACCOUNT_ADDRESS: (state, account_address) => {
+    state.account_address = account_address
   }
 }
 
@@ -79,6 +91,20 @@ const actions = {
       }).catch(error => {
         reject(error)
       })
+    })
+  },
+
+  // 用户注册
+  register({ commit }, registerInfo) {
+    const { private_key, public_key, account_address } = registerInfo
+    // console.log('private_key', private_key)
+    // console.log('public_key', public_key)
+    // console.log('account_address', account_address)
+    return new Promise(resolve => {
+      commit('SET_PRIVATE_KEY', private_key)
+      commit('SET_PUBILC_KEY', public_key)
+      commit('SET_ACCOUNT_ADDRESS', account_address)
+      resolve()
     })
   },
 

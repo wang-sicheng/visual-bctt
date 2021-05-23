@@ -31,14 +31,14 @@ export const constantRoutes = [
     children: [{
       path: 'dashboard',
       name: '首页',
-      component: () => import('@/views/dashboard/index'),
+      component: () => import('@/views/profile/index'),
       meta: { title: '首页', icon: 'dashboard' }
     }]
   },
   {
     path: '/profile',
     component: Layout,
-    redirect: '/profile/index',
+    redirect: '/profile',
     hidden: true,
     children: [
       {
@@ -69,7 +69,7 @@ export const constantRoutes = [
         path: 'index',
         name: 'postTran',
         component: () => import('@/views/posttran/index'),
-        meta: { title: '发起交易', icon: 'tab' }
+        meta: { title: '发起交易', icon: 'guide' }
       }
     ]
   },
@@ -153,7 +153,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/getfromchain',
     name: 'getfromchain',
-    meta: { title: '集成后端信息', icon: 'table' },
+    meta: { title: '集成后端信息', icon: 'doc' },
     children: [
       {
         path: 'getBlockChain',
@@ -213,7 +213,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/visual/graph',
     name: 'Visual',
-    meta: { title: '可视化大盘', icon: 'el-icon-s-help', roles: ['regulator'] },
+    meta: { title: '可视化大盘', icon: 'chart', roles: ['regulator'] },
     children: [
       {
         path: 'graph',
