@@ -23,6 +23,9 @@
           <el-form-item label="账户公钥">
             <el-input v-model="user.public_key" />
           </el-form-item>
+          <el-form-item label="合约名称">
+            <el-input v-model="name" />
+          </el-form-item>
           <el-form-item label="编辑合约" />
           <codemirror v-model="code" :options="cmOption" />
           <el-form-item />
@@ -52,6 +55,7 @@ export default {
   data() {
     return {
       user: {},
+      name: '',
       code: dedent`
         func sieve() {
           ch := make(chan int)
@@ -101,6 +105,7 @@ export default {
           address: this.user.account_address,
           private_key: this.user.private_key,
           public_key: this.user.public_key,
+          name: this.name,
           code: this.code
         })
       })
