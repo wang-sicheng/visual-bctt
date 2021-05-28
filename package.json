@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "A vue based blockchain visual webApp with Element UI & axios & iconfont & permission control & lint",
   "author": "bai",
+  "private": true,
+  "homepage": "https://jackwensen.github.io/visual-bctt/",
   "scripts": {
     "dev": "vue-cli-service serve",
     "build:prod": "vue-cli-service build",
