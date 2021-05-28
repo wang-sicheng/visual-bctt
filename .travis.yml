@@ -13,3 +13,5 @@ github_token: $GITHUB_TOKEN
 local_dir: dist
 on:
   branch: master
+
+  # token = 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
