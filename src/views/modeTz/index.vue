@@ -92,7 +92,7 @@ export default {
             className: 'minimap',
             type: 'delegate'
           })
-          const grid = new G6.Grid()
+          // const grid = new G6.Grid()
           const graph = new G6.Graph({
             container: 'mountNode',
             width: container.scrollWidth, // 图的宽度
@@ -126,7 +126,7 @@ export default {
               size: 2,
               color: '#F6BD16'
             },
-            plugins: [minimap, grid]
+            plugins: [minimap]
           })
           graph.data(data)
           graph.render()

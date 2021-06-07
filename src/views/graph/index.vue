@@ -26,11 +26,11 @@ export default {
             className: 'minimap',
             type: 'delegate'
           })
-          const grid = new G6.Grid()
+          // const grid = new G6.Grid()
           const graph = new G6.TreeGraph({
             container: 'mountNode',
             width: container.scrollWidth, // 图的宽度
-            height: container.scrollHeight || 1000,
+            height: container.scrollHeight || 800,
             linkCenter: true,
             modes: {
               default: [
@@ -68,7 +68,7 @@ export default {
               rankSep: 160,
               radial: true
             },
-            plugins: [minimap, grid]
+            plugins: [minimap]
           })
 
           graph.node(function(node) {

@@ -49,7 +49,7 @@
           </div>
           <div class="progress-item">
             <span>登录、角色控制</span>
-            <el-progress :percentage="60" />
+            <el-progress :percentage="100" status="success" />
             <br>
           </div>
           <div class="progress-item">
@@ -59,17 +59,17 @@
           </div>
           <div class="progress-item">
             <span>交易记录表</span>
-            <el-progress :percentage="80" />
+            <el-progress :percentage="90" />
             <br>
           </div>
           <div class="progress-item">
             <span>交易、区块、地址信息展示</span>
-            <el-progress :percentage="30" />
+            <el-progress :percentage="90" />
             <br>
           </div>
           <div class="progress-item">
             <span>智能合约编辑</span>
-            <el-progress :percentage="80" />
+            <el-progress :percentage="100" status="success" />
             <br>
           </div>
         </div>
