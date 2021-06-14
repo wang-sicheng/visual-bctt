@@ -1,6 +1,6 @@
 {
   "name": "visual-bctt",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A vue based blockchain visual webApp with Element UI & axios & iconfont & permission control & lint",
   "author": "bai",
   "private": true,
