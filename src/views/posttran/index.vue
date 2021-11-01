@@ -117,10 +117,17 @@ export default {
           response.data.json().then((res) => {
             Cookies.set('ReceiverAddress', this.to)
             console.log('postContract:', res)
-          })
-          this.$message({
-            message: '发起成功',
-            type: 'success'
+            if (res.Data === '账户不存在') {
+              this.$message({
+                message: '账户不存在',
+                type: 'warning'
+              })
+            } else {
+              this.$message({
+                message: '成功提交',
+                type: 'success'
+              })
+            }
           })
         })
     }
