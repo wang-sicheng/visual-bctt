@@ -48,6 +48,7 @@
           💰{{ scope.row.price }}
         </template>
       </el-table-column>
+
       <el-table-column align="center" prop="created_at" label="交易时间" width="170">
         <template slot-scope="scope">
           <span>{{ scope.row.display_time }}</span>

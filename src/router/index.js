@@ -49,30 +49,30 @@ export const constantRoutes = [
       }
     ]
   },
-  {
-    path: '/contract',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Contract',
-        component: () => import('@/views/contract/index'),
-        meta: { title: '智能合约', icon: 'tab' }
-      }
-    ]
-  },
-  {
-    path: '/postTran',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'postTran',
-        component: () => import('@/views/posttran/index'),
-        meta: { title: '发起交易', icon: 'guide' }
-      }
-    ]
-  },
+  // {
+  //   path: '/contract',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Contract',
+  //       component: () => import('@/views/contract/index'),
+  //       meta: { title: '智能合约', icon: 'tab' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/postTran',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'postTran',
+  //       component: () => import('@/views/posttran/index'),
+  //       meta: { title: '发起交易', icon: 'guide' }
+  //     }
+  //   ]
+  // },
   {
     path: '/trade',
     component: Layout,
@@ -136,18 +136,18 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
-  {
-    path: '/table',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: '全部交易信息', icon: 'table' }
-      }
-    ]
-  },
+  // {
+  //   path: '/table',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Table',
+  //       component: () => import('@/views/table/index'),
+  //       meta: { title: '全部交易信息', icon: 'table' }
+  //     }
+  //   ]
+  // },
   {
     path: '/getfromchain',
     component: Layout,
@@ -155,6 +155,24 @@ export const asyncRoutes = [
     name: 'getfromchain',
     meta: { title: '集成后端信息', icon: 'doc' },
     children: [
+      {
+        path: 'register',
+        name: 'register',
+        component: () => import('@/views/register/index'),
+        meta: { title: '用户注册' }
+      },
+      {
+        path: 'postTran',
+        name: 'postTran',
+        component: () => import('@/views/posttran/index'),
+        meta: { title: '发起交易' }
+      },
+      {
+        path: 'Contract',
+        name: 'Contract',
+        component: () => import('@/views/contract/index'),
+        meta: { title: '智能合约' }
+      },
       {
         path: 'getBlockChain',
         name: 'getBlockChain',
@@ -166,6 +184,12 @@ export const asyncRoutes = [
         name: 'getAllTrans',
         component: () => import('@/views/getalltrans/index'),
         meta: { title: '交易列表' }
+      },
+      {
+        path: 'getAllAccounts',
+        name: 'getAllAccounts',
+        component: () => import('@/views/getallaccounts/index'),
+        meta: { title: '账户列表' }
       },
       {
         path: 'getOneBlock',

@@ -18,7 +18,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column width="380" align="center" label="前一区块hash">
+      <el-table-column width="400" align="center" label="前一区块hash">
         <template slot-scope="scope">
           <!-- <el-tooltip class="item" effect="dark" placement="top">
             <div slot="content">0x{{ scope.row.from }}</div>
@@ -30,19 +30,19 @@
           </el-tooltip> -->
         </template>
       </el-table-column>
-      <el-table-column width="210" align="center" label="Merkle根">
-        <template slot-scope="scope">
-          {{ scope.row.MerkleRoot }}
-        </template>
-      </el-table-column>
-      <el-table-column class-name="status-col" width="200" align="center" label="签名">
-        <template slot-scope="scope">
-          {{ scope.row.Signature }}
-        </template>
-      </el-table-column>
-      <el-table-column align="center" prop="created_at" label="区块hash">
+<!--      <el-table-column class-name="status-col" width="200" align="center" label="签名">-->
+<!--        <template slot-scope="scope">-->
+<!--          {{ scope.row.Signature }}-->
+<!--        </template>-->
+<!--      </el-table-column>-->
+      <el-table-column width="400" align="center" prop="created_at" label="区块hash">
         <template slot-scope="scope">
           <span>{{ scope.row.Hash }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column width="250" align="center" label="Merkle根">
+        <template slot-scope="scope">
+          {{ scope.row.MerkleRoot }}
         </template>
       </el-table-column>
       <el-table-column width="220" align="center" label="时间戳">
@@ -51,7 +51,7 @@
             <div slot="content">0x{{ scope.row.from }}</div>
             <router-link :to="{ path: '/address/index', query: { id: scope.row.from }}">
               <el-link type="primary"> -->
-          <span>{{ scope.row.Timestamp }}</span>
+          <span>{{ getTime(scope.row.Timestamp) }}</span>
           <!-- </el-link>
             </router-link>
           </el-tooltip> -->
@@ -74,6 +74,9 @@ export default {
     this.fetchData()
   },
   methods: {
+    getTime(str) {
+      return str.slice(0, 19)
+    },
     async fetchData() {
       this.listLoading = true
       fetch('http://localhost:9999/getBlockChain', {
@@ -97,14 +100,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.item {
-      margin: 4px;
-    }
-
-    .left .el-tooltip__popper,
-    .right .el-tooltip__popper {
-      padding: 8px 10px;
-    }
-</style>

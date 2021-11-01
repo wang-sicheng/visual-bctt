@@ -8,40 +8,30 @@
       highlight-current-row
       max-height="800"
     >
-      <el-table-column align="center" label="交易哈希">
-        <template slot-scope="scope">
-          {{ scope.row.id }}
-        </template>
-      </el-table-column>
-      <el-table-column label="从" width="295" align="center">
+<!--      <el-table-column align="center" width="400" label="交易哈希">-->
+<!--        <template slot-scope="scope">-->
+<!--          {{ scope.row.id }}-->
+<!--        </template>-->
+<!--      </el-table-column>-->
+      <el-table-column label="从" width="350" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.from }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="到" width="295" align="center">
+      <el-table-column label="到" width="350" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.to }}</span>
         </template>
       </el-table-column>
       <el-table-column label="交易额" width="90" align="center">
         <template slot-scope="scope">
-          💰{{ scope.row.value }}
+          <span>{{ scope.row.value }}</span>
         </template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="状态" width="100" align="center">
-        <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column align="center" prop="created_at" label="交易时间" width="170">
+      <el-table-column align="center" prop="created_at" label="交易时间" width="470">
         <template slot-scope="scope">
           <i class="el-icon-time" />
-          <span>{{ scope.row.timestamp }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="备注" width="295" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.data }}
+          <span>{{ getTime(scope.row.timestamp) }}</span>
         </template>
       </el-table-column>
     </el-table>
@@ -71,6 +61,9 @@ export default {
     this.fetchData()
   },
   methods: {
+    getTime(str) {
+      return str.slice(0, 19)
+    },
     async fetchData() {
       this.listLoading = true
       fetch('http://localhost:9999/getAllTrans', {
