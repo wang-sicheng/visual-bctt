@@ -28,16 +28,19 @@
           <el-form-item label="dest">
             <el-input v-model="dest" />
           </el-form-item>
-        </el-form>
-        <el-form :inline="true" :model="args" class="demo-form-inline">
-          <el-form-item label="合约参数：" />
-          <el-form-item label="name">
-            <el-input v-model="args.name" />
-          </el-form-item>
-          <el-form-item label="year">
-            <el-input v-model="args.year" />
+          <el-form-item label="参数(json格式)" label-width="10%">
+            <el-input v-model="args" />
           </el-form-item>
         </el-form>
+<!--        <el-form :inline="true" :model="args" class="demo-form-inline">-->
+<!--          <el-form-item label="合约参数：" />-->
+<!--          <el-form-item label="name">-->
+<!--            <el-input v-model="args.name" />-->
+<!--          </el-form-item>-->
+<!--          <el-form-item label="year">-->
+<!--            <el-input v-model="args.year" />-->
+<!--          </el-form-item>-->
+<!--        </el-form>-->
         <el-button type="primary" @click="onSubmit">发起交易</el-button>
       </el-col>
     </el-row>
@@ -75,10 +78,7 @@ export default {
       value: 100,
       method: 'method',
       dest: 'dest',
-      args: {
-        name: 'name',
-        year: 'year'
-      }
+      args: ''
     }
   },
   computed: {
