@@ -2,20 +2,43 @@
   <div class="app-container">
     <el-table
       v-loading="listLoading"
-      :data="list"
+      :data="user"
       element-loading-text="Loading"
       border
       highlight-current-row
       max-height="800"
     >
       <el-table-column align="center" width="400"  label="账户地址">
-        <template slot-scope="scope">
+        <template v-if="!scope.row.iscontract" slot-scope="scope">
           {{ scope.row.address }}
         </template>
       </el-table-column>
       <el-table-column label="账户余额" width="295" align="center">
-        <template slot-scope="scope">
+        <template v-if="!scope.row.iscontract" slot-scope="scope">
           <span>{{ scope.row.balance }}</span>
+        </template>
+      </el-table-column>
+    </el-table>
+    <br>
+    <br>
+    <br>
+
+    <el-table
+      v-loading="listLoading"
+      :data="contract"
+      element-loading-text="Loading"
+      border
+      highlight-current-row
+      max-height="800"
+    >
+      <el-table-column align="center" width="400"  label="智能合约地址">
+        <template slot-scope="scope">
+          {{ scope.row.address }}
+        </template>
+      </el-table-column>
+      <el-table-column label="名称" width="295" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.data.contractname }}</span>
         </template>
       </el-table-column>
     </el-table>
@@ -27,7 +50,8 @@
 export default {
   data() {
     return {
-      list: null,
+      user: null,
+      contract: null,
       listLoading: true
     }
   },
@@ -43,7 +67,19 @@ export default {
       }).then((res) => { return { data: res } })
         .then(response => {
           response.data.json().then((res) => {
-            this.list = res.Data
+            // 筛选出普通账户和智能合约账户
+            var user = []
+            var contract = []
+            var total = res.Data
+            total.forEach(function(r) {
+              if (!r.iscontract) {
+                user.push(r)
+              } else {
+                contract.push(r)
+              }
+            })
+            this.user = user
+            this.contract = contract
             this.listLoading = false
           })
         })
