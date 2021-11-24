@@ -102,7 +102,7 @@ export default {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          address: this.user.account_address,
+          account: this.user.account_address,
           private_key: this.user.private_key,
           public_key: this.user.public_key,
           name: this.name,
