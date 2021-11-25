@@ -5,17 +5,11 @@
       <el-col :span="22" :offset="1" :xs="24">
         <el-form :label-position="labelPosition" label-width="80px">
           <el-form-item label="发起地址">
-            <el-input v-model="account_address" />
+            <el-input v-model="account_address" :disabled="true" />
           </el-form-item>
           <el-form-item label="接收地址">
             <el-input v-model="to" />
           </el-form-item>
-<!--          <el-form-item label="私钥">-->
-<!--            <el-input v-model="private_key" />-->
-<!--          </el-form-item>-->
-<!--          <el-form-item label="公钥">-->
-<!--            <el-input v-model="public_key" />-->
-<!--          </el-form-item>-->
           <el-form-item label="金额">
             <el-input v-model.number="value" />
           </el-form-item>
@@ -32,15 +26,6 @@
             <el-input v-model="args" />
           </el-form-item>
         </el-form>
-<!--        <el-form :inline="true" :model="args" class="demo-form-inline">-->
-<!--          <el-form-item label="合约参数：" />-->
-<!--          <el-form-item label="name">-->
-<!--            <el-input v-model="args.name" />-->
-<!--          </el-form-item>-->
-<!--          <el-form-item label="year">-->
-<!--            <el-input v-model="args.year" />-->
-<!--          </el-form-item>-->
-<!--        </el-form>-->
         <el-button type="primary" @click="onSubmit">发起交易</el-button>
       </el-col>
     </el-row>

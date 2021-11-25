@@ -15,13 +15,7 @@
       <el-col :span="22" :offset="1" :xs="24">
         <el-form label-width="80px">
           <el-form-item label="账户地址">
-            <el-input v-model="user.account_address" />
-          </el-form-item>
-          <el-form-item label="账户私钥">
-            <el-input v-model="user.private_key" />
-          </el-form-item>
-          <el-form-item label="账户公钥">
-            <el-input v-model="user.public_key" />
+            <el-input v-model="account_address" :disabled="true"/>
           </el-form-item>
           <el-form-item label="合约名称">
             <el-input v-model="name" />
@@ -47,6 +41,7 @@ import 'codemirror/mode/go/go.js'
 import 'codemirror/theme/monokai.css'
 
 import { mapGetters } from 'vuex'
+import Cookies from 'js-cookie'
 
 export default {
   components: {
@@ -55,6 +50,9 @@ export default {
   data() {
     return {
       user: {},
+      account_address: '',
+      private_key: '',
+      public_key: '',
       name: '',
       code: dedent`
         func sieve() {
@@ -94,7 +92,9 @@ export default {
     console.log('the current CodeMirror instance object:', this.codemirror)
   },
   created() {
-    this.getParams()
+    this.account_address = Cookies.get('AccountAddress')
+    this.private_key = Cookies.get('PrivateKey')
+    this.public_key = Cookies.get('PublicKey')
   },
   methods: {
     onSubmit() {
@@ -102,8 +102,8 @@ export default {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          account: this.user.account_address,
-          private_key: this.user.private_key,
+          account: this.account_address,
+          private_key: this.private_key,
           public_key: this.user.public_key,
           name: this.name,
           code: this.code
@@ -121,13 +121,6 @@ export default {
             type: 'success'
           })
         })
-    },
-    getParams() {
-      this.user = {
-        private_key: this.private_key,
-        public_key: this.public_key,
-        account_address: this.account_address
-      }
     }
   }
 }
