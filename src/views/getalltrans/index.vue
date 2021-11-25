@@ -24,13 +24,27 @@
         </template>
       </el-table-column>
       <el-table-column label="交易额" width="90" align="center">
-        <template slot-scope="scope">
+        <template v-if="scope.row.value !== 0" slot-scope="scope">
           <span>{{ scope.row.value }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="交易时间" width="470">
+      <el-table-column align="center" label="智能合约" width="150">
         <template slot-scope="scope">
-          <i class="el-icon-time" />
+          <span>{{ scope.row.contract }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column align="center" label="方法" width="150">
+        <template v-if="scope.row.contract !== ''" slot-scope="scope">
+          <span>{{ scope.row.method }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column align="center" label="参数" width="200">
+        <template v-if="scope.row.contract !== ''" slot-scope="scope">
+          <span>{{ scope.row.args }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column align="center" prop="created_at" label="交易时间" width="200">
+        <template slot-scope="scope">
           <span>{{ getTime(scope.row.timestamp) }}</span>
         </template>
       </el-table-column>
