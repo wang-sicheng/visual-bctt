@@ -159,19 +159,25 @@ export const asyncRoutes = [
         path: 'register',
         name: 'register',
         component: () => import('@/views/register/index'),
-        meta: { title: '用户注册' }
+        meta: { title: '用户管理' }
       },
       {
         path: 'postTran',
         name: 'postTran',
         component: () => import('@/views/posttran/index'),
-        meta: { title: '发起交易' }
+        meta: { title: '发起转账' }
       },
       {
         path: 'Contract',
         name: 'Contract',
         component: () => import('@/views/contract/index'),
-        meta: { title: '智能合约' }
+        meta: { title: '发布合约' }
+      },
+      {
+        path: 'invokeSmartContract',
+        name: 'invokeSmartContract',
+        component: () => import('@/views/invokeSmartContract/index'),
+        meta: { title: '调用合约' }
       },
       {
         path: 'getBlockChain',

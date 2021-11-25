@@ -7,14 +7,17 @@
           <el-form-item label="发起地址">
             <el-input v-model="account_address" :disabled="true" />
           </el-form-item>
-          <el-form-item label="接收地址">
-            <el-input v-model="to" />
+          <el-form-item label="合约">
+            <el-input v-model="contract" />
           </el-form-item>
-          <el-form-item label="金额">
-            <el-input v-model.number="value" />
+          <el-form-item label="方法">
+            <el-input v-model="method" />
+          </el-form-item>
+          <el-form-item label="参数(json格式)" label-width="10%">
+            <el-input v-model="args" />
           </el-form-item>
         </el-form>
-        <el-button type="primary" @click="onSubmit">发起交易</el-button>
+        <el-button type="primary" @click="onSubmit">调用合约</el-button>
       </el-col>
     </el-row>
   </div>
@@ -48,7 +51,7 @@ export default {
       account_address: '',
       to: '',
       contract: '',
-      value: 100,
+      value: 0,
       method: '',
       dest: '',
       args: ''
