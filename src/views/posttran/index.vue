@@ -51,7 +51,7 @@ export default {
       value: 100,
       method: '',
       dest: '',
-      args: ''
+      args: '{}'
     }
   },
   computed: {
@@ -90,15 +90,15 @@ export default {
           response.data.json().then((res) => {
             Cookies.set('ReceiverAddress', this.to)
             console.log('postContract:', res)
-            if (res.Data === '账户不存在') {
-              this.$message({
-                message: '账户不存在',
-                type: 'warning'
-              })
-            } else {
+            if (res.Data === 'PostTranSuccess') {
               this.$message({
                 message: '成功提交',
                 type: 'success'
+              })
+            } else {
+              this.$message({
+                message: res.Data,
+                type: 'warning'
               })
             }
           })
