@@ -24,7 +24,7 @@
         </template>
       </el-table-column>
       <el-table-column label="交易额" width="90" align="center">
-        <template v-if="scope.row.value !== 0" slot-scope="scope">
+        <template v-if="scope.row.contract === ''" slot-scope="scope">
           <span>{{ scope.row.value }}</span>
         </template>
       </el-table-column>
