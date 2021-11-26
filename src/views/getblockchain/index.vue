@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import { getBlockChain } from '@/api/ssbc'
 
 export default {
   data() {
@@ -71,31 +72,18 @@ export default {
     }
   },
   created() {
-    this.fetchData()
+    this.getBlockChain()
   },
   methods: {
+    getBlockChain() {
+      getBlockChain().then(res => {
+        console.log('getBlockChain:', res)
+        this.list = res.Data
+        this.listLoading = false
+      })
+    },
     getTime(str) {
       return str.slice(0, 19)
-    },
-    async fetchData() {
-      this.listLoading = true
-      fetch('http://localhost:9999/getBlockChain', {
-        method: 'get',
-        headers: { 'Content-Type': 'application/json' }
-        // body: JSON.stringify({
-        //   id: this.state.user.id
-        // })
-      })
-        .then((res) => {
-          return { data: res }
-        })
-        .then(response => {
-          response.data.json().then((res) => {
-            console.log('getBlockChain:', res)
-            this.list = res.Data
-            this.listLoading = false
-          })
-        })
     }
   }
 }

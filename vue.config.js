@@ -38,7 +38,16 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    before: require('./mock/mock-server.js')
+    proxy: {
+      [process.env.VUE_APP_SSBC_API]: {
+        target: `http://localhost:9999`,
+        changeOrigin: true,
+        pathRewrite: {
+          ['^' + process.env.VUE_APP_SSBC_API]: ''
+        }
+      }
+    },
+    after: require('./mock/mock-server.js') // 登录使用mock数据
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that

@@ -53,18 +53,9 @@
 </template>
 
 <script>
+import { getAllTrans } from '@/api/ssbc'
 
 export default {
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        success: 'success',
-        pending: 'gray',
-        failed: 'danger'
-      }
-      return statusMap[status]
-    }
-  },
   data() {
     return {
       list: null,
@@ -72,40 +63,19 @@ export default {
     }
   },
   created() {
-    this.fetchData()
+    this.getAllTrans()
   },
   methods: {
+    getAllTrans() {
+      getAllTrans().then(res => {
+        console.log('getAllTrans:', res)
+        this.list = res.Data
+        this.listLoading = false
+      })
+    },
     getTime(str) {
       return str.slice(0, 19)
-    },
-    async fetchData() {
-      this.listLoading = true
-      fetch('http://localhost:9999/getAllTrans', {
-        method: 'get',
-        headers: { 'Content-Type': 'application/json' }
-      })
-        .then((res) => {
-          return { data: res }
-        })
-        .then(response => {
-          response.data.json().then((res) => {
-            console.log('getAllTrans:', res)
-            this.list = res.Data
-            this.listLoading = false
-          })
-        })
     }
   }
 }
 </script>
-
-<style>
-.item {
-      margin: 4px;
-    }
-
-    .left .el-tooltip__popper,
-    .right .el-tooltip__popper {
-      padding: 8px 10px;
-    }
-</style>

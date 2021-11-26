@@ -25,7 +25,7 @@
     <el-form-item>
       <el-row>
         <el-col :span="10" :offset="9">
-          <el-button type="primary" style="alignment: center; width:30% " @click="submit">注册新账户</el-button>
+          <el-button type="primary" style="alignment: center; width:30% " @click="registerAccount">注册新账户</el-button>
         </el-col>
       </el-row>
     </el-form-item>
@@ -35,20 +35,9 @@
 <script>
 import clip from '@/utils/clipboard'
 import Cookies from 'js-cookie'
+import { getAllAccounts, registerAccount } from '@/api/ssbc'
 
 export default {
-  props: {
-    user: {
-      type: Object,
-      default: () => {
-        return {
-          PrivateKey: '',
-          PublicKey: '',
-          AccountAddress: ''
-        }
-      }
-    }
-  },
   data() {
     return {
       userList: [],
@@ -56,36 +45,26 @@ export default {
         PrivateKey: '',
         PublicKey: '',
         AccountAddress: ''
-      },
-      resultSeen: true
+      }
     }
   },
   created() {
+    this.getAllAccounts()
     this.currentUserInfo.PrivateKey = Cookies.get('PrivateKey')
     this.currentUserInfo.PublicKey = Cookies.get('PublicKey')
     this.currentUserInfo.AccountAddress = Cookies.get('AccountAddress')
-    this.fetchData()
   },
   methods: {
     handleCopy(text, event) {
       clip(text, event)
     },
-    submit() {
-      fetch(`http://localhost:9999/registerAccount`, {
-        method: 'get',
-        headers: { 'Content-Type': 'application/json' }
-      })
-        .then((res) => {
-          return { data: res }
-        })
-        .then(response => {
-          response.data.json().then((res) => {
-            this.currentUserInfo = res.Data
-            Cookies.set('PublicKey', this.currentUserInfo.PublicKey)
-            Cookies.set('PrivateKey', this.currentUserInfo.PrivateKey)
-            Cookies.set('AccountAddress', this.currentUserInfo.AccountAddress)
-            this.$store.dispatch('user/register', this.currentUserInfo)
-          })
+    registerAccount() {
+      registerAccount()
+        .then(res => {
+          this.currentUserInfo = res.Data
+          Cookies.set('PublicKey', this.currentUserInfo.PublicKey)
+          Cookies.set('PrivateKey', this.currentUserInfo.PrivateKey)
+          Cookies.set('AccountAddress', this.currentUserInfo.AccountAddress)
           this.$message({
             message: '注册成功',
             type: 'success'
@@ -93,9 +72,25 @@ export default {
         })
         .then(() => {
           setTimeout(() => {
-            this.fetchData()
+            this.getAllAccounts()
           }, 500)
         })
+    },
+    getAllAccounts() {
+      getAllAccounts().then(res => {
+        // 筛选出普通账户和智能合约账户
+        const user = []
+        const contract = []
+        const total = res.Data
+        total.forEach(function(r) {
+          if (!r.iscontract) {
+            user.push(r)
+          } else {
+            contract.push(r)
+          }
+        })
+        this.userList = user
+      })
     },
     // 下拉框选择元素时触发
     choose(item) {
@@ -106,28 +101,6 @@ export default {
       Cookies.set('AccountAddress', item.address)
       Cookies.set('PublicKey', item.publickey)
       Cookies.set('PrivateKey', item.privatekey)
-    },
-    fetchData() {
-      fetch('http://localhost:9999/getAllAccounts', {
-        method: 'get',
-        headers: { 'Content-Type': 'application/json' }
-      }).then((res) => { return { data: res } })
-        .then(response => {
-          response.data.json().then((res) => {
-            // 筛选出普通账户和智能合约账户
-            var user = []
-            var contract = []
-            var total = res.Data
-            total.forEach(function(r) {
-              if (!r.iscontract) {
-                user.push(r)
-              } else {
-                contract.push(r)
-              }
-            })
-            this.userList = user
-          })
-        })
     }
   }
 }

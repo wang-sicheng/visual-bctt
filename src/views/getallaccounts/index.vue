@@ -47,6 +47,8 @@
 
 <script>
 
+import { getAllAccounts } from '@/api/ssbc'
+
 export default {
   data() {
     return {
@@ -56,33 +58,26 @@ export default {
     }
   },
   created() {
-    this.fetchData()
+    this.getAllAccounts()
   },
   methods: {
-    async fetchData() {
-      this.listLoading = true
-      fetch('http://localhost:9999/getAllAccounts', {
-        method: 'get',
-        headers: { 'Content-Type': 'application/json' }
-      }).then((res) => { return { data: res } })
-        .then(response => {
-          response.data.json().then((res) => {
-            // 筛选出普通账户和智能合约账户
-            var user = []
-            var contract = []
-            var total = res.Data
-            total.forEach(function(r) {
-              if (!r.iscontract) {
-                user.push(r)
-              } else {
-                contract.push(r)
-              }
-            })
-            this.user = user
-            this.contract = contract
-            this.listLoading = false
-          })
+    getAllAccounts() {
+      getAllAccounts().then(res => {
+        // 筛选出普通账户和智能合约账户
+        const user = []
+        const contract = []
+        const total = res.Data
+        total.forEach(function(r) {
+          if (!r.iscontract) {
+            user.push(r)
+          } else {
+            contract.push(r)
+          }
         })
+        this.user = user
+        this.contract = contract
+        this.listLoading = false
+      })
     }
   }
 }

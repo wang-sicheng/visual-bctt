@@ -10,21 +10,20 @@
         />
       </el-col>
     </el-row>
-
+    <br>
     <el-row :gutter="0">
       <el-col :span="22" :offset="1" :xs="24">
         <el-form label-width="80px">
           <el-form-item label="账户地址">
-            <el-input v-model="account_address" :disabled="true"/>
+            <el-input v-model="form.account" :disabled="true"/>
           </el-form-item>
           <el-form-item label="合约名称">
-            <el-input v-model="name" />
+            <el-input v-model="form.name" />
           </el-form-item>
           <el-form-item label="编辑合约" />
-          <codemirror v-model="code" :options="cmOption" />
+          <codemirror v-model="form.code" :options="cmOption" />
           <el-form-item />
-          <el-button type="primary" @click="onSubmit">立即创建</el-button>
-          <el-button>取消</el-button>
+          <el-button type="primary" @click="postContract">创建合约</el-button>
         </el-form>
       </el-col>
     </el-row>
@@ -40,8 +39,8 @@ import 'codemirror/mode/go/go.js'
 // theme css
 import 'codemirror/theme/monokai.css'
 
-import { mapGetters } from 'vuex'
 import Cookies from 'js-cookie'
+import { postContract } from '@/api/ssbc'
 
 export default {
   components: {
@@ -49,12 +48,12 @@ export default {
   },
   data() {
     return {
-      user: {},
-      account_address: '',
-      private_key: '',
-      public_key: '',
-      name: '',
-      code: dedent`
+      form: {
+        account: '',
+        private_key: '',
+        public_key: '',
+        name: '',
+        code: dedent`
         func sieve() {
           ch := make(chan int)
           go generate(ch)
@@ -70,7 +69,9 @@ export default {
         func main() {
           sieve()
         }
-        `,
+        `
+      },
+      user: {},
       cmOption: {
         tabSize: 4,
         lineNumbers: true,
@@ -81,71 +82,20 @@ export default {
       }
     }
   },
-  computed: {
-    ...mapGetters([
-      'private_key',
-      'public_key',
-      'account_address'
-    ])
-  },
-  mounted() {
-    console.log('the current CodeMirror instance object:', this.codemirror)
-  },
   created() {
-    this.account_address = Cookies.get('AccountAddress')
-    this.private_key = Cookies.get('PrivateKey')
-    this.public_key = Cookies.get('PublicKey')
+    this.form.account = Cookies.get('AccountAddress')
+    this.form.private_key = Cookies.get('PrivateKey')
+    this.form.public_key = Cookies.get('PublicKey')
   },
   methods: {
-    onSubmit() {
-      fetch(`http://localhost:9999/postContract`, {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          account: this.account_address,
-          private_key: this.private_key,
-          public_key: this.user.public_key,
-          name: this.name,
-          code: this.code
+    postContract() {
+      postContract(this.form).then(res => {
+        this.$message({
+          message: '上传成功',
+          type: 'success'
         })
       })
-        .then((res) => {
-          return { data: res }
-        })
-        .then(response => {
-          response.data.json().then((res) => {
-            console.log('postContract:', res)
-          })
-          this.$message({
-            message: '上传成功',
-            type: 'success'
-          })
-        })
     }
   }
 }
 </script>
-
-<style>
-  .el-row {
-    margin-bottom: 20px;
-  }
-  .el-col {
-    border-radius: 4px;
-  }
-  .editor-container{
-    padding: 5px;
-    position: static;
-    height: 400px;
-  }
-  .CodeMirror-focused .cm-matchhighlight {
-    background-position: bottom;
-    background-repeat: repeat-x;
-  }
-  .cm-matchhighlight {
-    background-color: lightgreen;
-  }
-  .CodeMirror-selection-highlight-scrollbar {
-    background-color: green;
-  }
-</style>
