@@ -14,6 +14,27 @@
       </el-col>
     </el-form-item>
 
+    <el-form-item label="私钥" label-width="25%">
+      <el-col :span="12">
+        <el-input v-model="currentUserInfo.PrivateKey" :disabled="true" />
+      </el-col>
+      <el-col :span="2" :offset="1">
+        <el-button type="primary" icon="el-icon-document" @click="handleCopy(currentUserInfo.PrivateKey,$event)">
+          复制
+        </el-button>
+      </el-col>
+    </el-form-item>
+    <el-form-item label="公钥" label-width="25%">
+      <el-col :span="12">
+        <el-input v-model="currentUserInfo.PublicKey" :disabled="true" />
+      </el-col>
+      <el-col :span="2" :offset="1">
+        <el-button type="primary" icon="el-icon-document" @click="handleCopy(currentUserInfo.PublicKey,$event)">
+          复制
+        </el-button>
+      </el-col>
+    </el-form-item>
+
     <el-form-item label="切换账户" label-width="25%">
       <el-col :span="12">
         <el-select v-model="currentUserInfo.AccountAddress" placeholder="address" style="width: 100%" class="filter-item">

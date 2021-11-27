@@ -7,6 +7,12 @@
           <el-form-item label="发起地址">
             <el-input v-model="form.from" :disabled="true" />
           </el-form-item>
+          <el-form-item label="私钥">
+            <el-input v-model="form.private_key" :disabled="true" />
+          </el-form-item>
+          <el-form-item label="公钥">
+            <el-input v-model="form.public_key" :disabled="true" />
+          </el-form-item>
           <el-form-item label="合约">
             <el-input v-model="form.contract" />
           </el-form-item>
@@ -60,6 +66,8 @@ export default {
   },
   created() {
     this.form.from = Cookies.get('AccountAddress')
+    this.form.private_key = Cookies.get('PrivateKey')
+    this.form.public_key = Cookies.get('PublicKey')
   },
   methods: {
     invokeContract() {

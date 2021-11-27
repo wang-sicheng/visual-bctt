@@ -17,6 +17,12 @@
           <el-form-item label="账户地址">
             <el-input v-model="form.account" :disabled="true"/>
           </el-form-item>
+          <el-form-item label="私钥">
+            <el-input v-model="form.private_key" :disabled="true" />
+          </el-form-item>
+          <el-form-item label="公钥">
+            <el-input v-model="form.public_key" :disabled="true" />
+          </el-form-item>
           <el-form-item label="合约名称">
             <el-input v-model="form.name" />
           </el-form-item>
