@@ -59,6 +59,7 @@ export default {
         private_key: '',
         public_key: '',
         name: '',
+        type: 2,
         code: dedent`
         func sieve() {
           ch := make(chan int)

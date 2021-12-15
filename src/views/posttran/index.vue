@@ -57,7 +57,8 @@ export default {
         value: 100,
         method: '',
         dest: '',
-        args: '{}'
+        args: '{}',
+        type: 0
       }
     }
   },
