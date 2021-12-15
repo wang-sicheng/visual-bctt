@@ -1,7 +1,33 @@
 <template>
   <div class="app-container">
     <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-      <el-tab-pane label="转账交易" name="first">
+      <el-tab-pane label="创建账户" name="first">
+        <el-table
+          v-loading="listLoading"
+          :data="registerTrans"
+          element-loading-text="Loading"
+          border
+          highlight-current-row
+          max-height="800"
+        >
+          <el-table-column label="账户地址" width="350" align="center">
+            <template slot-scope="scope">
+              <span>{{ scope.row.to }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="初始余额" width="90" align="center">
+            <template v-if="scope.row.contract === ''" slot-scope="scope">
+              <span>{{ scope.row.value }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column align="center" prop="created_at" label="创建时间" width="200">
+            <template slot-scope="scope">
+              <span>{{ getTime(scope.row.timestamp) }}</span>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-tab-pane>
+      <el-tab-pane label="转账交易" name="second">
         <el-table
           v-loading="listLoading"
           :data="transferTrans"
@@ -33,7 +59,7 @@
         </el-table>
       </el-tab-pane>
 
-      <el-tab-pane label="发布合约" name="second">
+      <el-tab-pane label="发布合约" name="third">
         <el-table
           v-loading="listLoading"
           :data="postTrans"
@@ -64,7 +90,7 @@
           </el-table-column>
         </el-table>
       </el-tab-pane>
-      <el-tab-pane label="调用合约" name="third">
+      <el-tab-pane label="调用合约" name="forth">
         <el-table
           v-loading="listLoading"
           :data="invokeTrans"
@@ -116,7 +142,8 @@ export default {
   data() {
     return {
       transferTrans: [],
-      postTrans: [],
+      registerTrans: [],
+      publishTrans: [],
       invokeTrans: [],
       listLoading: true,
       activeName: 'first'
@@ -130,20 +157,33 @@ export default {
       getAllTrans().then(res => {
         // 筛选出转账交易、发布合约和调用合约
         const transfer = []
-        const post = []
+        const register = []
+        const publish = []
         const invoke = []
+
         const total = res.Data
         total.forEach(function(r) {
-          if (r.contract === '') {
-            transfer.push(r)
-          } else if (r.method === '') {
-            post.push(r)
-          } else {
-            invoke.push(r)
+          // 根据交易类型区分，定义在 ssbcV2/meta/block.go
+          switch (r.type) {
+            case 0:
+              transfer.push(r)
+              break
+            case 1:
+              register.push(r)
+              break
+            case 2:
+              publish.push(r)
+              break
+            case 3:
+              invoke.push(r)
+              break
+            default:
+              break
           }
         })
         this.transferTrans = transfer
-        this.postTrans = post
+        this.registerTrans = register
+        this.publishTrans = publish
         this.invokeTrans = invoke
 
         this.listLoading = false
