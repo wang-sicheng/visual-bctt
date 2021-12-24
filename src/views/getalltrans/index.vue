@@ -62,7 +62,7 @@
       <el-tab-pane label="发布合约" name="third">
         <el-table
           v-loading="listLoading"
-          :data="postTrans"
+          :data="publishTrans"
           element-loading-text="Loading"
           border
           highlight-current-row
@@ -115,12 +115,12 @@
             </template>
           </el-table-column>
           <el-table-column align="center" label="方法" width="150">
-            <template v-if="scope.row.contract !== ''" slot-scope="scope">
+            <template slot-scope="scope">
               <span>{{ scope.row.method }}</span>
             </template>
           </el-table-column>
           <el-table-column align="center" label="参数" width="200">
-            <template v-if="scope.row.contract !== ''" slot-scope="scope">
+            <template slot-scope="scope">
               <span>{{ scope.row.args }}</span>
             </template>
           </el-table-column>
