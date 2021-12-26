@@ -61,21 +61,17 @@ export default {
         name: '',
         type: 2,
         code: dedent`
-        func sieve() {
-          ch := make(chan int)
-          go generate(ch)
-          for {
-            prime := <-ch
-            fmt.Print(prime, "")
-            ch1 := make(chan int)
-            go filter(ch, ch1, prime)
-            ch = ch1
-          }
-        }
+package main
 
-        func main() {
-          sieve()
-        }
+import (
+	"math/rand"
+	"time"
+)
+
+func random(args map[string]string) (interface{}, error) {
+	rand.Seed(time.Now().Unix())
+	return rand.Intn(100), nil
+}
         `
       },
       user: {},

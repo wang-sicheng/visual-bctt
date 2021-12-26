@@ -104,11 +104,11 @@
               <span>{{ scope.row.from }}</span>
             </template>
           </el-table-column>
-<!--          <el-table-column label="到" width="350" align="center">-->
-<!--            <template slot-scope="scope">-->
-<!--              <span>{{ scope.row.to }}</span>-->
-<!--            </template>-->
-<!--          </el-table-column>-->
+          <el-table-column label="到" width="350" align="center">
+            <template slot-scope="scope">
+              <span>{{ scope.row.to }}</span>
+            </template>
+          </el-table-column>
           <el-table-column align="center" label="智能合约" width="150">
             <template slot-scope="scope">
               <span>{{ scope.row.contract }}</span>
