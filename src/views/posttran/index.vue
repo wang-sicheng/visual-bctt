@@ -14,7 +14,9 @@
             <el-input v-model="form.public_key" :disabled="true" />
           </el-form-item>
           <el-form-item label="接收地址">
-            <el-input v-model="form.to" />
+            <el-select v-model="form.to" placeholder="address" style="width: 100%">
+              <el-option v-for="user in userList" :key="user" :label="user.address" :value="user.address" @click.native="choose(user)" />
+            </el-select>
           </el-form-item>
           <el-form-item label="金额">
             <el-input v-model.number="form.value" />
@@ -28,11 +30,12 @@
 
 <script>
 import Cookies from 'js-cookie'
-import { postTran } from '@/api/ssbc'
+import { getAllAccounts, postTran } from '@/api/ssbc'
 
 export default {
   data() {
     return {
+      userList: [],
       form: {
         private_key: 'MIICXQIBAAKBgQDimHHmdmFHmfqYIMV+xsvG6nFKd8PqU6ljlaV10eAdc8mTSsW9\n' +
           'keZ+uQFLYUlh45APPAiyRcInHhn2FzFtEO7XIxK+/0CqKEUzexGiXzeISVwuFLTo\n' +
@@ -66,6 +69,7 @@ export default {
     this.form.from = Cookies.get('AccountAddress')
     this.form.private_key = Cookies.get('PrivateKey')
     this.form.public_key = Cookies.get('PublicKey')
+    this.getAllAccounts()
   },
   methods: {
     postTran() {
@@ -84,6 +88,26 @@ export default {
           })
         }
       })
+    },
+    getAllAccounts() {
+      getAllAccounts().then(res => {
+        // 筛选出普通账户和智能合约账户
+        const user = []
+        const contract = []
+        const total = res.Data
+        total.forEach(function(r) {
+          if (!r.iscontract) {
+            user.push(r)
+          } else {
+            contract.push(r)
+          }
+        })
+        this.userList = user
+      })
+    },
+    // 下拉框选择元素时触发
+    choose(item) {
+      this.form.to = item.address
     }
   }
 }

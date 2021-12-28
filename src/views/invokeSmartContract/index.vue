@@ -17,12 +17,14 @@
             <el-input v-model.number="form.value" />
           </el-form-item>
           <el-form-item label="合约">
-            <el-input v-model="form.contract" />
+            <el-select v-model="form.contract" placeholder="合约名称" style="width: 100%">
+              <el-option v-for="contract in contractList" :key="contract.data.contractname" :label="contract.data.contractname" :value="contract.data.contractname" @click.native="choose(contract)" />
+            </el-select>
           </el-form-item>
           <el-form-item label="方法">
             <el-input v-model="form.method" />
           </el-form-item>
-          <el-form-item label="参数(json格式)" label-width="10%">
+          <el-form-item label="参数">
             <el-input v-model="form.args" />
           </el-form-item>
         </el-form>
@@ -34,11 +36,12 @@
 
 <script>
 import Cookies from 'js-cookie'
-import { postTran } from '@/api/ssbc'
+import { getAllAccounts, postTran } from '@/api/ssbc'
 
 export default {
   data() {
     return {
+      contractList: [],
       form: {
         private_key: 'MIICXQIBAAKBgQDimHHmdmFHmfqYIMV+xsvG6nFKd8PqU6ljlaV10eAdc8mTSsW9\n' +
           'keZ+uQFLYUlh45APPAiyRcInHhn2FzFtEO7XIxK+/0CqKEUzexGiXzeISVwuFLTo\n' +
@@ -72,6 +75,7 @@ export default {
     this.form.from = Cookies.get('AccountAddress')
     this.form.private_key = Cookies.get('PrivateKey')
     this.form.public_key = Cookies.get('PublicKey')
+    this.getAllAccounts()
   },
   methods: {
     invokeContract() {
@@ -88,6 +92,26 @@ export default {
           })
         }
       })
+    },
+    getAllAccounts() {
+      getAllAccounts().then(res => {
+        // 筛选出普通账户和智能合约账户
+        const user = []
+        const contract = []
+        const total = res.Data
+        total.forEach(function(r) {
+          if (!r.iscontract) {
+            user.push(r)
+          } else {
+            contract.push(r)
+          }
+        })
+        this.contractList = contract
+      })
+    },
+    // 下拉框选择元素时触发
+    choose(item) {
+      this.form.contract = item.data.contractname
     }
   }
 }

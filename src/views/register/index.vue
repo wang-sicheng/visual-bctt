@@ -71,9 +71,6 @@ export default {
   },
   created() {
     this.getAllAccounts()
-    this.currentUserInfo.PrivateKey = Cookies.get('PrivateKey')
-    this.currentUserInfo.PublicKey = Cookies.get('PublicKey')
-    this.currentUserInfo.AccountAddress = Cookies.get('AccountAddress')
   },
   methods: {
     handleCopy(text, event) {
@@ -111,6 +108,18 @@ export default {
           }
         })
         this.userList = user
+        if (user.length === 0) {
+          this.currentUserInfo.PrivateKey = ''
+          this.currentUserInfo.PublicKey = ''
+          this.currentUserInfo.AccountAddress = ''
+          Cookies.set('PublicKey', '')
+          Cookies.set('PrivateKey', '')
+          Cookies.set('AccountAddress', '')
+        } else {
+          this.currentUserInfo.PrivateKey = Cookies.get('PrivateKey')
+          this.currentUserInfo.PublicKey = Cookies.get('PublicKey')
+          this.currentUserInfo.AccountAddress = Cookies.get('AccountAddress')
+        }
       })
     },
     // 下拉框选择元素时触发
