@@ -13,6 +13,9 @@
           <el-form-item label="公钥">
             <el-input v-model="form.public_key" :disabled="true" />
           </el-form-item>
+          <el-form-item label="转账金额">
+            <el-input v-model.number="form.value" />
+          </el-form-item>
           <el-form-item label="合约">
             <el-input v-model="form.contract" />
           </el-form-item>
@@ -57,7 +60,7 @@ export default {
         from: '',
         to: '',
         contract: '',
-        value: 100,
+        value: 0,
         method: '',
         dest: '',
         args: '{}',

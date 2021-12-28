@@ -36,6 +36,11 @@
           {{ scope.row.address }}
         </template>
       </el-table-column>
+      <el-table-column label="账户余额" width="295" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.balance }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="名称" width="295" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.data.contractname }}</span>

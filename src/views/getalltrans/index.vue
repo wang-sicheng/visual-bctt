@@ -104,9 +104,14 @@
               <span>{{ scope.row.from }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="到" width="350" align="center">
+          <el-table-column label="合约地址" width="350" align="center">
             <template slot-scope="scope">
               <span>{{ scope.row.to }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column align="center" label="转账金额" width="150">
+            <template slot-scope="scope">
+              <span>{{ scope.row.value }}</span>
             </template>
           </el-table-column>
           <el-table-column align="center" label="智能合约" width="150">
