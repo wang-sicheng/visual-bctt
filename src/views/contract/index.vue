@@ -96,10 +96,17 @@ func random(args map[string]string) (interface{}, error) {
   methods: {
     postContract() {
       postContract(this.form).then(res => {
-        this.$message({
-          message: '上传成功',
-          type: 'success'
-        })
+        if (res.Data === 'Success') {
+          this.$message({
+            message: '成功提交',
+            type: 'success'
+          })
+        } else {
+          this.$message({
+            message: res.Data,
+            type: 'warning'
+          })
+        }
       })
     },
     getAllAccounts() {

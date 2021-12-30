@@ -62,7 +62,7 @@ export default {
       console.log('haha')
       console.log(this.form)
       postTran(this.form).then(res => {
-        if (res.Data === 'PostTranSuccess') {
+        if (res.Data === 'Success') {
           this.$message({
             message: '成功提交',
             type: 'success'
