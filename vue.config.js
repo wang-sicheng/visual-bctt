@@ -39,11 +39,18 @@ module.exports = {
       errors: true
     },
     proxy: {
-      [process.env.VUE_APP_SSBC_API]: {
-        target: `http://localhost:9999`,
+      '/ssbc1': {
+        target: `http://localhost:8009`,
         changeOrigin: true,
         pathRewrite: {
-          ['^' + process.env.VUE_APP_SSBC_API]: ''
+          '^/ssbc1': ''
+        }
+      },
+      '/ssbc2': {
+        target: `http://localhost:8011`,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/ssbc2': ''
         }
       }
     },

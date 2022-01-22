@@ -3,6 +3,15 @@
     <el-form-item></el-form-item>
     <el-form-item></el-form-item>
     <el-form-item></el-form-item>
+
+    <el-form-item label="当前链" label-width="25%">
+      <el-col :span="12">
+        <el-select v-model="sourceChain" style="width: 100%" class="filter-item">
+          <el-option v-for="chainId in chainList" :key="chainId" :label="chainId" :value="chainId" @click.native="chooseChain(chainId)" />
+        </el-select>
+      </el-col>
+    </el-form-item>
+
     <el-form-item label="当前账户" label-width="25%">
       <el-col :span="12">
         <el-select v-model="currentUserInfo.AccountAddress" style="width: 100%" class="filter-item">
@@ -54,6 +63,8 @@ import { getAllAccounts, registerAccount } from '@/api/ssbc'
 export default {
   data() {
     return {
+      sourceChain: 'ssbc1',
+      chainList: ['ssbc1', 'ssbc2'],
       userList: [],
       currentUserInfo: {
         PrivateKey: '',
@@ -63,6 +74,11 @@ export default {
     }
   },
   created() {
+    if (Cookies.get('SourceChain') === '') {
+      Cookies.set('SourceChain', this.sourceChain)
+    } else {
+      this.sourceChain = Cookies.get('SourceChain')
+    }
     this.getAllAccounts()
   },
   methods: {
@@ -113,6 +129,21 @@ export default {
           this.currentUserInfo.PublicKey = Cookies.get('PublicKey')
           this.currentUserInfo.AccountAddress = Cookies.get('AccountAddress')
         }
+
+        // 判断存的地址是不是当前链的
+        const addr = []
+        user.forEach(function(value, index, array) {
+          addr.push(array[index].address)
+        })
+        if (addr.indexOf(this.currentUserInfo.AccountAddress) === -1) {
+          this.currentUserInfo.PrivateKey = user[0].privatekey
+          this.currentUserInfo.PublicKey = user[0].publickey
+          this.currentUserInfo.AccountAddress = user[0].address
+
+          Cookies.set('AccountAddress', user[0].address)
+          Cookies.set('PublicKey', user[0].publickey)
+          Cookies.set('PrivateKey', user[0].privatekey)
+        }
       })
     },
     // 下拉框选择元素时触发
@@ -124,6 +155,11 @@ export default {
       Cookies.set('AccountAddress', item.address)
       Cookies.set('PublicKey', item.publickey)
       Cookies.set('PrivateKey', item.privatekey)
+    },
+
+    chooseChain(chain) {
+      Cookies.set('SourceChain', chain)
+      this.getAllAccounts()
     }
   }
 }

@@ -198,6 +198,12 @@ export const asyncRoutes = [
         meta: { title: '账户列表' }
       },
       {
+        path: 'crossTransfer',
+        name: 'crossTransfer',
+        component: () => import('@/views/crossTransfer/index'),
+        meta: { title: '跨链转账' }
+      },
+      {
         path: 'getOneBlock',
         name: 'getOneBlock',
         component: () => import('@/views/getoneblock/index'),

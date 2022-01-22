@@ -2,10 +2,11 @@ import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
+import Cookies from 'js-cookie'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: process.env.VUE_APP_SSBC_API, // url = base url + request url
+  baseURL: process.env.VUE_APP_SSBC1_API, // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
 })
@@ -20,6 +21,7 @@ service.interceptors.request.use(
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
       config.headers['X-Token'] = getToken()
+      config.baseURL = Cookies.get('SourceChain')
     }
     return config
   },

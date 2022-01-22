@@ -69,3 +69,11 @@ export function query() {
   })
 }
 
+export function postCrossTran(data) {
+  return request({
+    url: '/postCrossTran',
+    method: 'post',
+    data: data
+  })
+}
+
