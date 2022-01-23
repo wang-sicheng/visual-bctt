@@ -181,11 +181,15 @@
 </template>
 
 <script>
-import { getAllTrans } from '@/api/ssbc'
+import { query } from '@/api/ssbc'
 
 export default {
   data() {
     return {
+      q: {
+        type: 'getAllTxs',
+        parameters: []
+      },
       transferTrans: [],
       registerTrans: [],
       publishTrans: [],
@@ -200,7 +204,7 @@ export default {
   },
   methods: {
     getAllTrans() {
-      getAllTrans().then(res => {
+      query(this.q).then(res => {
         // 筛选出转账交易、发布合约和调用合约
         const transfer = []
         const register = []
@@ -208,7 +212,7 @@ export default {
         const invoke = []
         const crossTran = []
 
-        const total = res.Data
+        const total = res.data
         total.forEach(function(r) {
           // 根据交易类型区分，定义在 ssbcV2/meta/block.go
           switch (r.type) {

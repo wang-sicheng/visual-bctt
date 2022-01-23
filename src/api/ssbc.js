@@ -62,10 +62,11 @@ export function postContract(data) {
   })
 }
 
-export function query() {
+export function query(data) {
   return request({
     url: '/query',
-    method: 'get'
+    method: 'post',
+    data: data
   })
 }
 

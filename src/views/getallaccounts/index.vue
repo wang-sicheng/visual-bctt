@@ -52,11 +52,15 @@
 
 <script>
 
-import { getAllAccounts } from '@/api/ssbc'
+import { query } from '@/api/ssbc'
 
 export default {
   data() {
     return {
+      q: {
+        type: 'getAllAccounts',
+        parameters: []
+      },
       user: null,
       contract: null,
       listLoading: true
@@ -67,11 +71,11 @@ export default {
   },
   methods: {
     getAllAccounts() {
-      getAllAccounts().then(res => {
+      query(this.q).then(res => {
         // 筛选出普通账户和智能合约账户
         const user = []
         const contract = []
-        const total = res.Data
+        const total = res.data
         total.forEach(function(r) {
           if (!r.iscontract) {
             user.push(r)

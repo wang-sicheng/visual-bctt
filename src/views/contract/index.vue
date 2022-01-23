@@ -50,7 +50,7 @@ import 'codemirror/mode/go/go.js'
 import 'codemirror/theme/monokai.css'
 
 import Cookies from 'js-cookie'
-import { getAllAccounts, postContract } from '@/api/ssbc'
+import { query, postContract } from '@/api/ssbc'
 
 export default {
   components: {
@@ -58,6 +58,10 @@ export default {
   },
   data() {
     return {
+      q: {
+        type: 'getAllAccounts',
+        parameters: []
+      },
       userList: [],
       form: {
         account: '',
@@ -96,25 +100,25 @@ func random(args map[string]string) (interface{}, error) {
   methods: {
     postContract() {
       postContract(this.form).then(res => {
-        if (res.Data === 'Success') {
+        if (res.error === '') {
           this.$message({
             message: '成功提交',
             type: 'success'
           })
         } else {
           this.$message({
-            message: res.Data,
+            message: res.error,
             type: 'warning'
           })
         }
       })
     },
     getAllAccounts() {
-      getAllAccounts().then(res => {
+      query(this.q).then(res => {
         // 筛选出普通账户和智能合约账户
         const user = []
         const contract = []
-        const total = res.Data
+        const total = res.data
         total.forEach(function(r) {
           if (!r.iscontract) {
             user.push(r)

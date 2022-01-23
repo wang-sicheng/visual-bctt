@@ -85,7 +85,7 @@ export default {
         .then(response => {
           response.data.json().then((res) => {
             console.log('getOneBlockTrans:', res)
-            this.list = res.Data
+            this.list = res.data
             this.listLoading = false
           })
         })

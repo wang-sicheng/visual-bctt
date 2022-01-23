@@ -102,7 +102,7 @@ export default {
         .then(response => {
           response.data.json().then((res) => {
             console.log('getBlock:', res)
-            this.info = res.Data
+            this.info = res.data
             this.listLoading = false
           })
         })

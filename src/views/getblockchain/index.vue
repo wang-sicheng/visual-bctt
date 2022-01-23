@@ -62,11 +62,15 @@
 </template>
 
 <script>
-import { getBlockChain } from '@/api/ssbc'
+import { query } from '@/api/ssbc'
 
 export default {
   data() {
     return {
+      q: {
+        type: 'getBlockChain',
+        parameters: []
+      },
       list: null,
       listLoading: true
     }
@@ -76,9 +80,9 @@ export default {
   },
   methods: {
     getBlockChain() {
-      getBlockChain().then(res => {
+      query(this.q).then(res => {
         console.log('getBlockChain:', res)
-        this.list = res.Data
+        this.list = res.data
         this.listLoading = false
       })
     },

@@ -52,7 +52,7 @@ export default {
         })
         .then(response => {
           response.data.json().then((res) => {
-            this.registerInfo = res.Data
+            this.registerInfo = res.data
             // console.log('registerAccount2:', this.registerInfo)
             this.$store.dispatch('user/register', this.registerInfo)
           })

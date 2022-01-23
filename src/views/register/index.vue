@@ -58,11 +58,15 @@
 <script>
 import clip from '@/utils/clipboard'
 import Cookies from 'js-cookie'
-import { getAllAccounts, registerAccount } from '@/api/ssbc'
+import { query, registerAccount } from '@/api/ssbc'
 
 export default {
   data() {
     return {
+      q: {
+        type: 'getAllAccounts',
+        parameters: []
+      },
       sourceChain: 'ssbc1',
       chainList: ['ssbc1', 'ssbc2'],
       userList: [],
@@ -88,7 +92,7 @@ export default {
     registerAccount() {
       registerAccount()
         .then(res => {
-          this.currentUserInfo = res.Data
+          this.currentUserInfo = res.data
           Cookies.set('PublicKey', this.currentUserInfo.PublicKey)
           Cookies.set('PrivateKey', this.currentUserInfo.PrivateKey)
           Cookies.set('AccountAddress', this.currentUserInfo.AccountAddress)
@@ -104,11 +108,11 @@ export default {
         })
     },
     getAllAccounts() {
-      getAllAccounts().then(res => {
+      query(this.q).then(res => {
         // 筛选出普通账户和智能合约账户
         const user = []
         const contract = []
-        const total = res.Data
+        const total = res.data
         total.forEach(function(r) {
           if (!r.iscontract) {
             user.push(r)

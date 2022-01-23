@@ -39,11 +39,15 @@
 
 <script>
 import Cookies from 'js-cookie'
-import { getAllAccounts, postTran } from '@/api/ssbc'
+import { query, postTran } from '@/api/ssbc'
 
 export default {
   data() {
     return {
+      q: {
+        type: 'getAllAccounts',
+        parameters: []
+      },
       contractList: [],
       userList: [],
       form: {
@@ -66,25 +70,25 @@ export default {
   methods: {
     invokeContract() {
       postTran(this.form).then(res => {
-        if (res.Data === 'Success') {
+        if (res.error === '') {
           this.$message({
             message: '成功提交',
             type: 'success'
           })
         } else {
           this.$message({
-            message: res.Data,
+            message: res.error,
             type: 'warning'
           })
         }
       })
     },
     getAllAccounts() {
-      getAllAccounts().then(res => {
+      query(this.q).then(res => {
         // 筛选出普通账户和智能合约账户
         const user = []
         const contract = []
-        const total = res.Data
+        const total = res.data
         total.forEach(function(r) {
           if (!r.iscontract) {
             user.push(r)

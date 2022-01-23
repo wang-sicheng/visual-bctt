@@ -43,11 +43,15 @@
 
 <script>
 import Cookies from 'js-cookie'
-import { getAllAccounts, postCrossTran } from '@/api/ssbc'
+import { query, postCrossTran } from '@/api/ssbc'
 
 export default {
   data() {
     return {
+      q: {
+        type: 'getAllAccounts',
+        parameters: []
+      },
       userList1: [],
       userList2: [],
       form: {
@@ -85,23 +89,23 @@ export default {
       console.log('haha')
       console.log(this.form)
       postCrossTran(this.form).then(res => {
-        if (res.Data === 'Success') {
+        if (res.error === '') {
           this.$message({
             message: '成功提交',
             type: 'success'
           })
         } else {
           this.$message({
-            message: res.Data,
+            message: res.error,
             type: 'warning'
           })
         }
       })
     },
     getSourceAccounts() {
-      getAllAccounts().then(res => {
+      query(this.q).then(res => {
         const user = []
-        const total = res.Data
+        const total = res.data
         total.forEach(function(r) {
           if (!r.iscontract) {
             user.push(r)
@@ -123,9 +127,9 @@ export default {
       })
     },
     getDestAccounts() {
-      getAllAccounts().then(res => {
+      query(this.q).then(res => {
         const user = []
-        const total = res.Data
+        const total = res.data
         total.forEach(function(r) {
           if (!r.iscontract) {
             user.push(r)
