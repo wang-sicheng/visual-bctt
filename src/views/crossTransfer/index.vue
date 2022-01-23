@@ -35,7 +35,7 @@
             <el-input v-model.number="form.value" />
           </el-form-item>
         </el-form>
-        <el-button type="primary" @click="postCrossTran">发起交易</el-button>
+        <el-button type="primary" :disabled="disable" @click="postCrossTran">发起交易</el-button>
       </el-col>
     </el-row>
   </div>
@@ -66,7 +66,8 @@ export default {
         method: '',
         args: '{}',
         type: 4 // 跨链转账
-      }
+      },
+      disable: false
     }
   },
   created() {
@@ -86,8 +87,10 @@ export default {
       Cookies.set('SourceChain', this.form.source_chain)
     },
     postCrossTran() {
-      console.log('haha')
-      console.log(this.form)
+      this.disable = true
+      setTimeout(() => {
+        this.disable = false
+      }, 1000)
       postCrossTran(this.form).then(res => {
         if (res.error === '') {
           this.$message({

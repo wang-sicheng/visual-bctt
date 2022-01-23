@@ -33,7 +33,7 @@
           <el-form-item label="编辑合约" />
           <codemirror v-model="form.code" :options="cmOption" />
           <el-form-item />
-          <el-button type="primary" @click="postContract">创建合约</el-button>
+          <el-button type="primary" :disabled="disable" @click="postContract">创建合约</el-button>
         </el-form>
       </el-col>
     </el-row>
@@ -91,7 +91,8 @@ func random(args map[string]string) (interface{}, error) {
         mode: 'text/x-go',
         matchBrackets: true,
         theme: 'monokai'
-      }
+      },
+      disable: false
     }
   },
   created() {
@@ -99,6 +100,10 @@ func random(args map[string]string) (interface{}, error) {
   },
   methods: {
     postContract() {
+      this.disable = true
+      setTimeout(() => {
+        this.disable = false
+      }, 4000)
       postContract(this.form).then(res => {
         if (res.error === '') {
           this.$message({

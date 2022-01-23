@@ -31,7 +31,7 @@
             <el-input v-model="form.args" />
           </el-form-item>
         </el-form>
-        <el-button type="primary" @click="invokeContract">调用合约</el-button>
+        <el-button type="primary" :disabled="disable" @click="invokeContract">调用合约</el-button>
       </el-col>
     </el-row>
   </div>
@@ -61,7 +61,8 @@ export default {
         dest: '',
         args: '{}',
         type: 3
-      }
+      },
+      disable: false
     }
   },
   created() {
@@ -69,6 +70,10 @@ export default {
   },
   methods: {
     invokeContract() {
+      this.disable = true
+      setTimeout(() => {
+        this.disable = false
+      }, 1000)
       postTran(this.form).then(res => {
         if (res.error === '') {
           this.$message({

@@ -48,7 +48,7 @@
     <el-form-item>
       <el-row>
         <el-col :span="10" :offset="9">
-          <el-button type="primary" style="alignment: center; width:30% " @click="registerAccount">注册新账户</el-button>
+          <el-button type="primary" style="alignment: center; width:30% " @click="registerAccount" :disabled="disable">注册新账户</el-button>
         </el-col>
       </el-row>
     </el-form-item>
@@ -74,7 +74,8 @@ export default {
         PrivateKey: '',
         PublicKey: '',
         AccountAddress: ''
-      }
+      },
+      disable: false
     }
   },
   created() {
@@ -90,6 +91,10 @@ export default {
       clip(text, event)
     },
     registerAccount() {
+      this.disable = true
+      setTimeout(() => {
+        this.disable = false
+      }, 1000)
       registerAccount()
         .then(res => {
           this.currentUserInfo = res.data

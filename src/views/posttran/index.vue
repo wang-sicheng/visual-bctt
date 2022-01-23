@@ -26,7 +26,7 @@
             <el-input v-model.number="form.value" />
           </el-form-item>
         </el-form>
-        <el-button type="primary" @click="postTran">发起交易</el-button>
+        <el-button type="primary" :disabled="disable" @click="postTran">发起交易</el-button>
       </el-col>
     </el-row>
   </div>
@@ -55,7 +55,8 @@ export default {
         dest: '',
         args: '{}',
         type: 0
-      }
+      },
+      disable: false
     }
   },
   created() {
@@ -63,8 +64,10 @@ export default {
   },
   methods: {
     postTran() {
-      console.log('haha')
-      console.log(this.form)
+      this.disable = true
+      setTimeout(() => {
+        this.disable = false
+      }, 1000)
       postTran(this.form).then(res => {
         if (res.error === '') {
           this.$message({
