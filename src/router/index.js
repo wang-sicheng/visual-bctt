@@ -50,13 +50,13 @@ export const constantRoutes = [
     ]
   },
   // {
-  //   path: '/contract',
+  //   path: '/postContract',
   //   component: Layout,
   //   children: [
   //     {
   //       path: 'index',
   //       name: 'Contract',
-  //       component: () => import('@/views/contract/index'),
+  //       component: () => import('@/views/postContract/index'),
   //       meta: { title: '智能合约', icon: 'tab' }
   //     }
   //   ]
@@ -68,7 +68,7 @@ export const constantRoutes = [
   //     {
   //       path: 'index',
   //       name: 'postTran',
-  //       component: () => import('@/views/posttran/index'),
+  //       component: () => import('@/views/postTx/index'),
   //       meta: { title: '发起交易', icon: 'guide' }
   //     }
   //   ]
@@ -136,18 +136,6 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
-  // {
-  //   path: '/table',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'Table',
-  //       component: () => import('@/views/table/index'),
-  //       meta: { title: '全部交易信息', icon: 'table' }
-  //     }
-  //   ]
-  // },
   {
     path: '/getfromchain',
     component: Layout,
@@ -158,56 +146,50 @@ export const asyncRoutes = [
       {
         path: 'register',
         name: 'register',
-        component: () => import('@/views/register/index'),
+        component: () => import('@/views/ssbc/register/index'),
         meta: { title: '用户管理' }
       },
       {
         path: 'postTran',
         name: 'postTran',
-        component: () => import('@/views/posttran/index'),
+        component: () => import('@/views/ssbc/postTx/index'),
         meta: { title: '发起转账' }
       },
       {
         path: 'Contract',
         name: 'Contract',
-        component: () => import('@/views/contract/index'),
+        component: () => import('@/views/ssbc/postContract/index'),
         meta: { title: '发布合约' }
       },
       {
         path: 'invokeSmartContract',
         name: 'invokeSmartContract',
-        component: () => import('@/views/invokeSmartContract/index'),
+        component: () => import('@/views/ssbc/invokeSmartContract/index'),
         meta: { title: '调用合约' }
       },
       {
         path: 'getBlockChain',
         name: 'getBlockChain',
-        component: () => import('@/views/getblockchain/index'),
+        component: () => import('@/views/ssbc/getBlockChain/index'),
         meta: { title: '区块列表' }
       },
       {
         path: 'getAllTrans',
         name: 'getAllTrans',
-        component: () => import('@/views/getalltrans/index'),
+        component: () => import('@/views/ssbc/getAllTxs/index'),
         meta: { title: '交易列表' }
       },
       {
         path: 'getAllAccounts',
         name: 'getAllAccounts',
-        component: () => import('@/views/getallaccounts/index'),
+        component: () => import('@/views/ssbc/getAllAccounts/index'),
         meta: { title: '账户列表' }
       },
       {
         path: 'crossTransfer',
         name: 'crossTransfer',
-        component: () => import('@/views/crossTransfer/index'),
+        component: () => import('@/views/ssbc/crossTransfer/index'),
         meta: { title: '跨链转账' }
-      },
-      {
-        path: 'getOneBlock',
-        name: 'getOneBlock',
-        component: () => import('@/views/getoneblock/index'),
-        hidden: true
       }
     ]
   },
