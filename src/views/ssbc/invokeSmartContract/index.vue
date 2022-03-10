@@ -21,7 +21,7 @@
           </el-form-item>
           <el-form-item label="合约名称">
             <el-select v-model="form.contract" style="width: 100%">
-              <el-option v-for="contract in contractList" :key="contract.data.contractname" :label="contract.data.contractname" :value="contract.data.contractname" @click.native="choose(contract)" />
+              <el-option v-for="contract in contractList" :key="contract.data.contractname" :label="contract.data.contractname + ' ( ' + contract.address + ' )'" :value="contract.data.contractname" @click.native="choose(contract)" />
             </el-select>
           </el-form-item>
           <el-form-item label="方法">
@@ -121,6 +121,7 @@ export default {
     // 下拉框选择元素时触发
     choose(item) {
       this.form.contract = item.data.contractname
+      this.form.to = item.address
     },
     chooseSender(item) {
       this.form.from = item.address
