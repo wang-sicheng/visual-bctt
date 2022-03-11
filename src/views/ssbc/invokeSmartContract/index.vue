@@ -21,11 +21,13 @@
           </el-form-item>
           <el-form-item label="合约名称">
             <el-select v-model="form.contract" style="width: 100%">
-              <el-option v-for="contract in contractList" :key="contract.data.contractname" :label="contract.data.contractname + ' ( ' + contract.address + ' )'" :value="contract.data.contractname" @click.native="choose(contract)" />
+              <el-option v-for="contract in contractList" :key="contract.data.contractname" :label="contract.data.contractname + ' ( ' + contract.address + ' )'" :value="contract.data.contractname" @click.native="chooseContract(contract)" />
             </el-select>
           </el-form-item>
           <el-form-item label="方法">
-            <el-input v-model="form.method" />
+            <el-select v-model="form.method" style="width: 100%">
+              <el-option v-for="method in methodList" :key="method" :label="method" :value="method" @click.native="chooseMethod(method)" />
+            </el-select>
           </el-form-item>
           <el-form-item label="参数">
             <el-input v-model="form.args" />
@@ -49,6 +51,7 @@ export default {
         parameters: []
       },
       contractList: [],
+      methodList: [],
       userList: [],
       form: {
         private_key: '',
@@ -119,9 +122,17 @@ export default {
       })
     },
     // 下拉框选择元素时触发
-    choose(item) {
+    chooseContract(item) {
       this.form.contract = item.data.contractname
       this.form.to = item.address
+      this.methodList = item.data.methods
+      if (this.methodList.length > 0) {
+        this.form.method = this.methodList[0]
+      }
+    },
+    // 下拉框选择元素时触发
+    chooseMethod(item) {
+      this.form.method = item
     },
     chooseSender(item) {
       this.form.from = item.address
