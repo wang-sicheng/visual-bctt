@@ -125,7 +125,13 @@ export default {
     chooseContract(item) {
       this.form.contract = item.data.contractname
       this.form.to = item.address
-      this.methodList = item.data.methods
+      this.methodList = []
+      var allMethods = item.data.methods
+      for (let i = 0; i < allMethods.length; i++) {
+        if (allMethods[i][0] <= 'Z' && allMethods[i][0] >= 'A') {
+          this.methodList.push(allMethods[i])
+        }
+      }
       if (this.methodList.length > 0) {
         this.form.method = this.methodList[0]
       }
