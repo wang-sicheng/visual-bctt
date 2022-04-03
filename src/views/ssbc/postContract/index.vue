@@ -17,7 +17,7 @@
 
           <el-form-item label="发起地址">
             <el-select v-model="form.account" style="width: 100%" class="filter-item">
-              <el-option v-for="user in userList" :key="user" :label="user.address" :value="user.address" @click.native="chooseSender(user)" />
+              <el-option v-for="user in userList" :key="user.address" :label="user.address" :value="user.address" @click.native="chooseSender(user)" />
             </el-select>
           </el-form-item>
 
@@ -41,7 +41,6 @@
       title="错误信息"
       :visible.sync="dialogVisible"
       width="60%"
-      :before-close="handleClose"
     >
       <span style="white-space: pre-wrap;" v-html="this.errMsg">{{ errMsg }}</span>
       <span slot="footer" class="dialog-footer">

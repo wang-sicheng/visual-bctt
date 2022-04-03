@@ -3,11 +3,11 @@
 
     <el-row :gutter="0">
       <el-col :span="22" :offset="1" :xs="24">
-        <el-form :label-position="left" label-width="80px">
+        <el-form label-width="80px">
 
           <el-form-item label="发起地址">
             <el-select v-model="form.from" style="width: 100%" class="filter-item">
-              <el-option v-for="user in userList" :key="user" :label="user.address" :value="user.address" @click.native="chooseSender(user)" />
+              <el-option v-for="user in userList" :key="user.address" :label="user.address" :value="user.address" @click.native="chooseSender(user)" />
             </el-select>
           </el-form-item>
 
@@ -19,7 +19,7 @@
           </el-form-item>
           <el-form-item label="接收地址">
             <el-select v-model="form.to" style="width: 100%">
-              <el-option v-for="user in userList" :key="user" :label="user.address" :value="user.address" @click.native="chooseReceiver(user)" />
+              <el-option v-for="user in userList" :key="user.address" :label="user.address" :value="user.address" @click.native="chooseReceiver(user)" />
             </el-select>
           </el-form-item>
           <el-form-item label="金额">

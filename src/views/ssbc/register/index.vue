@@ -15,7 +15,7 @@
     <el-form-item label="当前账户" label-width="25%">
       <el-col :span="12">
         <el-select v-model="currentUserInfo.AccountAddress" style="width: 100%" class="filter-item">
-          <el-option v-for="user in userList" :key="user" :label="user.address" :value="user.address" @click.native="choose(user)" />
+          <el-option v-for="user in userList" :key="user.address" :label="user.address" :value="user.address" @click.native="choose(user)" />
         </el-select>
       </el-col>
       <el-col :span="2" :offset="1">
