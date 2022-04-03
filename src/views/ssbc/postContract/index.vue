@@ -43,7 +43,7 @@
       width="60%"
       :before-close="handleClose"
     >
-      <span style="white-space: pre-wrap;">{{ errMsg }}</span>
+      <span style="white-space: pre-wrap;" v-html="this.errMsg">{{ errMsg }}</span>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
       </span>
@@ -58,7 +58,7 @@ import { codemirror } from 'vue-codemirror'
 // language
 // import 'codemirror/mode/javascript/javascript.js'
 import 'codemirror/mode/go/go.js'
-// import AnsiUp from 'ansi_up'
+import AnsiUp from 'ansi_up'
 // theme css
 import 'codemirror/theme/monokai.css'
 
@@ -126,9 +126,9 @@ func random(args map[string]string) (interface{}, error) {
             type: 'success'
           })
         } else {
-          this.errMsg = res.error.replace(/\n/g, '\r\n')
-          // var ansi_up = new AnsiUp()
-          // this.errMsg = ansi_up.ansi_to_html(msg)
+          var msg = res.error.replace(/\n/g, '\r\n')
+          var ansi_up = new AnsiUp()
+          this.errMsg = ansi_up.ansi_to_html(msg)
           console.log(this.errMsg)
           this.dialogVisible = true
         }
