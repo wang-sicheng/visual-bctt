@@ -161,6 +161,12 @@ export const asyncRoutes = [
         component: () => import('@/views/ssbc/postContract/index'),
         meta: { title: '发布合约' }
       },
+      // {
+      //   path: 'updateContract',
+      //   name: 'updateContract',
+      //   component: () => import('@/views/ssbc/updateContract/index'),
+      //   meta: { title: '升级合约' }
+      // },
       {
         path: 'invokeSmartContract',
         name: 'invokeSmartContract',
@@ -184,13 +190,13 @@ export const asyncRoutes = [
         name: 'getAllAccounts',
         component: () => import('@/views/ssbc/getAllAccounts/index'),
         meta: { title: '账户列表' }
-      },
-      {
-        path: 'crossTransfer',
-        name: 'crossTransfer',
-        component: () => import('@/views/ssbc/crossTransfer/index'),
-        meta: { title: '跨链转账' }
       }
+      // {
+      //   path: 'crossTransfer',
+      //   name: 'crossTransfer',
+      //   component: () => import('@/views/ssbc/crossTransfer/index'),
+      //   meta: { title: '跨链转账' }
+      // }
     ]
   },
   {

@@ -37,18 +37,6 @@
         </el-form>
       </el-col>
     </el-row>
-    <el-dialog
-      title="错误信息"
-      :visible.sync="dialogVisible"
-      width="60%"
-      :before-close="handleClose"
-    >
-      <span style="white-space: pre-wrap;">{{ errMsg }}</span>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-      </span>
-    </el-dialog>
-
   </div>
 </template>
 
@@ -58,7 +46,6 @@ import { codemirror } from 'vue-codemirror'
 // language
 // import 'codemirror/mode/javascript/javascript.js'
 import 'codemirror/mode/go/go.js'
-// import AnsiUp from 'ansi_up'
 // theme css
 import 'codemirror/theme/monokai.css'
 
@@ -71,8 +58,6 @@ export default {
   },
   data() {
     return {
-      errMsg: '',
-      dialogVisible: false,
       q: {
         type: 'getAllAccounts',
         parameters: []
@@ -126,11 +111,10 @@ func random(args map[string]string) (interface{}, error) {
             type: 'success'
           })
         } else {
-          this.errMsg = res.error.replace(/\n/g, '\r\n')
-          // var ansi_up = new AnsiUp()
-          // this.errMsg = ansi_up.ansi_to_html(msg)
-          console.log(this.errMsg)
-          this.dialogVisible = true
+          this.$message({
+            message: res.error,
+            type: 'warning'
+          })
         }
       })
     },
