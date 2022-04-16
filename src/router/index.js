@@ -174,6 +174,12 @@ export const asyncRoutes = [
         meta: { title: '调用合约' }
       },
       {
+        path: 'contractInfo',
+        name: 'contractInfo',
+        component: () => import('@/views/ssbc/contractInfo/index'),
+        meta: { title: '合约数据' }
+      },
+      {
         path: 'getBlockChain',
         name: 'getBlockChain',
         component: () => import('@/views/ssbc/getBlockChain/index'),

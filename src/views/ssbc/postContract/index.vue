@@ -86,14 +86,24 @@ export default {
         code: dedent`
 package main
 
-import (
-	"math/rand"
-	"time"
-)
+var A int
+var B string
 
-func Random(args map[string]string) (interface{}, error) {
-	rand.Seed(time.Now().Unix())
-	return rand.Intn(100), nil
+func init() {
+	A = 0
+	B = "init"
+}
+
+func Add(args map[string]string) (interface{}, error) {
+	A += 1
+	B = "Add"
+	return nil, nil
+}
+
+func Subtract(args map[string]string) (interface{}, error) {
+	A -= 1
+	B = "Subtract"
+	return nil, nil
 }
         `
       },
