@@ -180,6 +180,12 @@ export const asyncRoutes = [
         meta: { title: '合约数据' }
       },
       {
+        path: 'getAllEvents',
+        name: 'getAllEvents',
+        component: () => import('@/views/ssbc/getAllEvents/index'),
+        meta: { title: '事件数据' }
+      },
+      {
         path: 'getBlockChain',
         name: 'getBlockChain',
         component: () => import('@/views/ssbc/getBlockChain/index'),

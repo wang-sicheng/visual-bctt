@@ -88,21 +88,25 @@ package main
 
 var A int
 var B string
+var invisible string
 
 func init() {
 	A = 0
 	B = "init"
+	invisible = "init"
 }
 
 func Add(args map[string]string) (interface{}, error) {
 	A += 1
 	B = "Add"
+	invisible = "Add"
 	return nil, nil
 }
 
 func Subtract(args map[string]string) (interface{}, error) {
 	A -= 1
 	B = "Subtract"
+	invisible = "Subtract"
 	return nil, nil
 }
         `
