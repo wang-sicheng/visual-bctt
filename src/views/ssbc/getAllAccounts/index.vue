@@ -8,7 +8,7 @@
       highlight-current-row
       max-height="800"
     >
-      <el-table-column align="center" width="400"  label="账户地址">
+      <el-table-column align="center" width="400" label="外部账户地址">
         <template v-if="!scope.row.iscontract" slot-scope="scope">
           {{ scope.row.address }}
         </template>
@@ -31,7 +31,7 @@
       highlight-current-row
       max-height="800"
     >
-      <el-table-column align="center" width="400"  label="智能合约地址">
+      <el-table-column align="center" width="400" label="合约账户地址">
         <template slot-scope="scope">
           {{ scope.row.address }}
         </template>

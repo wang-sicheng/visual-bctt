@@ -27,28 +27,28 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
-    children: [{
-      path: 'dashboard',
-      name: '首页',
-      component: () => import('@/views/profile/index'),
-      meta: { title: '首页', icon: 'dashboard' }
-    }]
-  },
-  {
-    path: '/profile',
-    component: Layout,
-    redirect: '/profile',
-    hidden: true,
-    children: [
-      {
-        path: 'index',
-        name: '个人中心',
-        component: () => import('@/views/profile/index'),
-        meta: { title: '个人主页' }
-      }
-    ]
-  },
+    redirect: '/getfromchain/register'
+    // children: [{
+    //   path: 'dashboard',
+    //   name: '首页',
+    //   component: () => import('@/views/profile/index'),
+    //   meta: { title: '首页', icon: 'dashboard' }
+    // }]
+  }
+  // {
+  //   path: '/profile',
+  //   component: Layout,
+  //   redirect: '/profile',
+  //   hidden: true,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: '个人中心',
+  //       component: () => import('@/views/profile/index'),
+  //       meta: { title: '个人主页' }
+  //     }
+  //   ]
+  // }
   // {
   //   path: '/postContract',
   //   component: Layout,
@@ -73,62 +73,62 @@ export const constantRoutes = [
   //     }
   //   ]
   // },
-  {
-    path: '/trade',
-    component: Layout,
-    redirect: '/trade/index',
-    hidden: true,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/trade/index'),
-        name: 'trade',
-        meta: { title: '交易信息', noCache: true }
-      }
-    ]
-  },
-  {
-    path: '/address',
-    component: Layout,
-    redirect: '/address/index',
-    hidden: true,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/address/index'),
-        name: 'address',
-        meta: { title: '地址信息', noCache: true }
-      }
-    ]
-  },
-  {
-    path: '/block',
-    component: Layout,
-    redirect: '/block/index',
-    hidden: true,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/block/index'),
-        name: 'block',
-        meta: { title: '区块信息', noCache: true }
-      }
-    ]
-  },
-  {
-    path: '/docs',
-    component: Layout,
-    redirect: '/docs/index',
-    hidden: true,
-    children: [
-      {
-        path: 'index',
-        name: 'docs',
-        component: () => import('@/views/docs/index'),
-        meta: { title: '文档', noCache: true }
-      }
-    ]
-  }
+  // {
+  //   path: '/trade',
+  //   component: Layout,
+  //   redirect: '/trade/index',
+  //   hidden: true,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/trade/index'),
+  //       name: 'trade',
+  //       meta: { title: '交易信息', noCache: true }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/address',
+  //   component: Layout,
+  //   redirect: '/address/index',
+  //   hidden: true,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/address/index'),
+  //       name: 'address',
+  //       meta: { title: '地址信息', noCache: true }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/block',
+  //   component: Layout,
+  //   redirect: '/block/index',
+  //   hidden: true,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/block/index'),
+  //       name: 'block',
+  //       meta: { title: '区块信息', noCache: true }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/docs',
+  //   component: Layout,
+  //   redirect: '/docs/index',
+  //   hidden: true,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'docs',
+  //       component: () => import('@/views/docs/index'),
+  //       meta: { title: '文档', noCache: true }
+  //     }
+  //   ]
+  // }
 ]
 
 /**
@@ -141,7 +141,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/getfromchain',
     name: 'getfromchain',
-    meta: { title: '集成后端信息', icon: 'doc' },
+    meta: { title: 'SSBC', icon: 'doc' },
     children: [
       {
         path: 'register',
@@ -211,90 +211,90 @@ export const asyncRoutes = [
       // }
     ]
   },
-  {
-    path: '/mode',
-    component: Layout,
-    redirect: '/mode',
-    name: 'Mode',
-    meta: { title: '征信模型', icon: 'el-icon-s-help', roles: ['regulator', 'banker'] },
-    children: [
-      {
-        path: 'modeTz',
-        name: 'ModeTz',
-        component: () => import('@/views/modeTz/index'),
-        meta: { title: '征信模型——台州' }
-      },
-      {
-        path: 'modeSz',
-        name: 'ModeSz',
-        component: () => import('@/views/modeSz/index'),
-        meta: { title: '征信模型——苏州' }
-      }
-    ]
-  },
-  {
-    path: '/chain',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Chain',
-        component: () => import('@/views/chain/index'),
-        meta: { title: '链上信息可视化', icon: 'international' }
-      }
-    ]
-  },
-  {
-    path: '/visual',
-    component: Layout,
-    redirect: '/visual/graph',
-    name: 'Visual',
-    meta: { title: '可视化大盘', icon: 'chart', roles: ['regulator'] },
-    children: [
-      {
-        path: 'graph',
-        name: 'Graph',
-        component: () => import('@/views/graph/index'),
-        meta: { title: '指标图谱', icon: 'tree-table' }
-      },
-      {
-        path: 'node',
-        name: 'Node',
-        component: () => import('@/views/node/index'),
-        meta: { title: '节点可视化', icon: 'tree' }
-      }
-      // {
-      //   path: 'tree',
-      //   name: 'Tree',
-      //   component: () => import('@/views/tree/index'),
-      //   meta: { title: 'Tree', icon: 'tree' }
-      // }
-    ]
-  },
-  {
-    path: '/browse',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Browse',
-        component: () => import('@/views/browse/index'),
-        meta: { title: '浏览商品', icon: 'component', roles: ['consumer', 'provider'] }
-      }
-    ]
-  },
-  {
-    path: '/cart',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Cart',
-        component: () => import('@/views/cart/index'),
-        meta: { title: '购物车', icon: 'shopping', roles: ['consumer'] }
-      }
-    ]
-  },
+  // {
+  //   path: '/mode',
+  //   component: Layout,
+  //   redirect: '/mode',
+  //   name: 'Mode',
+  //   meta: { title: '征信模型', icon: 'el-icon-s-help', roles: ['regulator', 'banker'] },
+  //   children: [
+  //     {
+  //       path: 'modeTz',
+  //       name: 'ModeTz',
+  //       component: () => import('@/views/modeTz/index'),
+  //       meta: { title: '征信模型——台州' }
+  //     },
+  //     {
+  //       path: 'modeSz',
+  //       name: 'ModeSz',
+  //       component: () => import('@/views/modeSz/index'),
+  //       meta: { title: '征信模型——苏州' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/chain',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Chain',
+  //       component: () => import('@/views/chain/index'),
+  //       meta: { title: '链上信息可视化', icon: 'international' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/visual',
+  //   component: Layout,
+  //   redirect: '/visual/graph',
+  //   name: 'Visual',
+  //   meta: { title: '可视化大盘', icon: 'chart', roles: ['regulator'] },
+  //   children: [
+  //     {
+  //       path: 'graph',
+  //       name: 'Graph',
+  //       component: () => import('@/views/graph/index'),
+  //       meta: { title: '指标图谱', icon: 'tree-table' }
+  //     },
+  //     {
+  //       path: 'node',
+  //       name: 'Node',
+  //       component: () => import('@/views/node/index'),
+  //       meta: { title: '节点可视化', icon: 'tree' }
+  //     }
+  //     // {
+  //     //   path: 'tree',
+  //     //   name: 'Tree',
+  //     //   component: () => import('@/views/tree/index'),
+  //     //   meta: { title: 'Tree', icon: 'tree' }
+  //     // }
+  //   ]
+  // },
+  // {
+  //   path: '/browse',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Browse',
+  //       component: () => import('@/views/browse/index'),
+  //       meta: { title: '浏览商品', icon: 'component', roles: ['consumer', 'provider'] }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/cart',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Cart',
+  //       component: () => import('@/views/cart/index'),
+  //       meta: { title: '购物车', icon: 'shopping', roles: ['consumer'] }
+  //     }
+  //   ]
+  // },
   // {
   //   path: '/nested',
   //   component: Layout,
