@@ -6,10 +6,10 @@
 
     <div class="right-menu">
 
-      <el-link type="info" class="right-menu-item">{{ user.name }}</el-link>
-      <el-link type="info" class="right-menu-item">
-        <router-link to="/docs/index"> 文档 </router-link>
-      </el-link>
+<!--      <el-link type="info" class="right-menu-item">{{ user.name }}</el-link>-->
+<!--      <el-link type="info" class="right-menu-item">-->
+<!--        <router-link to="/docs/index"> 文档 </router-link>-->
+<!--      </el-link>-->
 
       <div class="right-menu-item" />
       <el-dropdown class="avatar-container" trigger="click">
@@ -22,13 +22,13 @@
             {{ user.name }}
           </el-dropdown-item>
 
-          <router-link to="/profile/index">
-            <el-dropdown-item>
-              个人主页
-            </el-dropdown-item>
-          </router-link>
+<!--          <router-link to="/profile/index">-->
+<!--            <el-dropdown-item>-->
+<!--              个人主页-->
+<!--            </el-dropdown-item>-->
+<!--          </router-link>-->
 
-          <a target="_blank" href="https://github.com/Jackwensen/visual-bctt">
+          <a target="_blank" href="https://github.com/wang-sicheng/visual-bctt">
             <el-dropdown-item>代码仓库</el-dropdown-item>
           </a>
           <el-dropdown-item divided @click.native="logout">
