@@ -96,14 +96,14 @@ func init() {
 	invisible = "init"
 }
 
-func Add(args map[string]string) (interface{}, error) {
+func Add(args map[string]interface{}) (interface{}, error) {
 	A += 1
 	B = "Add"
 	invisible = "Add"
 	return nil, nil
 }
 
-func Subtract(args map[string]string) (interface{}, error) {
+func Subtract(args map[string]interface{}) (interface{}, error) {
 	A -= 1
 	B = "Subtract"
 	invisible = "Subtract"
