@@ -73,6 +73,7 @@ export default {
   },
   methods: {
     invokeContract() {
+      this.initWebSocket() // 调用合约时建立Websocket连接
       this.disable = true
       setTimeout(() => {
         this.disable = false
@@ -148,6 +149,58 @@ export default {
       Cookies.set('AccountAddress', item.address)
       Cookies.set('PublicKey', item.publickey)
       Cookies.set('PrivateKey', item.privatekey)
+    },
+
+    // 初始化websocket
+    initWebSocket() {
+      if (typeof (WebSocket) === 'undefined') {
+        this.$notify({
+          title: '提示',
+          message: '当前浏览器无法接收实时报警信息，请使用谷歌浏览器！',
+          type: 'warning',
+          duration: 0
+        })
+      } else {
+        var sourceChain = Cookies.get('SourceChain')
+        var wsurl
+        if (sourceChain === 'ssbc1') {
+          wsurl = 'ws://localhost:8009/getLog'
+        } else if (sourceChain === 'ssbc2') {
+          wsurl = 'ws://localhost:8011/getLog'
+        }
+        // 实例化 WebSocket
+        this.websock = new WebSocket(wsurl)
+        // 监听 WebSocket 连接
+        this.websock.onopen = this.onopen
+        // 监听 WebSocket 错误信息
+        this.websock.onerror = this.onerror
+        // 监听 WebSocket 消息
+        this.websock.onmessage = this.onmessage
+
+        this.websock.onclose = this.onclose
+      }
+    },
+    // 连接建立之后执行send方法发送数据
+    onopen() {
+      console.log('socket连接成功')
+    },
+    // 连接建立失败重连
+    onerror() {
+      console.log('连接错误')
+      this.initWebSocket()
+    },
+    // 数据接收
+    onmessage(e) {
+      // const resdata = JSON.parse(e.data)
+      console.log(e.data)
+      this.$notify({
+        title: 'Info',
+        message: e.data
+      })
+    },
+    // 关闭
+    onclose(e) {
+      console.log('WebSocket 断开连接', e)
     }
   }
 }
