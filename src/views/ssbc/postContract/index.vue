@@ -20,7 +20,6 @@
               <el-option v-for="user in userList" :key="user.address" :label="user.address" :value="user.address" @click.native="chooseSender(user)" />
             </el-select>
           </el-form-item>
-
           <el-form-item label="私钥">
             <el-input v-model="form.private_key" :disabled="true" />
           </el-form-item>
@@ -29,6 +28,27 @@
           </el-form-item>
           <el-form-item label="合约名称">
             <el-input v-model="form.name" />
+          </el-form-item>
+          <el-form-item label="本体模型">
+            <el-collapse accordion>
+              <el-collapse-item>
+                <template slot="title">非必选项，上传本体模型，生成智能合约框架代码</template>
+                <el-upload
+                  class="upload-demo"
+                  action="https://jsonplaceholder.typicode.com/posts/"
+                  :on-preview="handlePreview"
+                  :on-remove="handleRemove"
+                  :before-remove="beforeRemove"
+                  multiple
+                  :limit="3"
+                  :on-exceed="handleExceed"
+                  :file-list="fileList"
+                >
+                  <el-button size="small" type="primary" >点击上传</el-button>
+                  <div slot="tip" class="el-upload__tip">*上传文件应为OWL和XML格式文件</div>
+                </el-upload>
+              </el-collapse-item>
+            </el-collapse>
           </el-form-item>
           <el-form-item label="编辑合约" />
           <codemirror v-model="form.code" :options="cmOption" />
@@ -120,7 +140,8 @@ func Subtract(args map[string]interface{}) (interface{}, error) {
         matchBrackets: true,
         theme: 'monokai'
       },
-      disable: false
+      disable: false,
+      fileList: []
     }
   },
   created() {
@@ -183,6 +204,18 @@ func Subtract(args map[string]interface{}) (interface{}, error) {
       Cookies.set('AccountAddress', item.address)
       Cookies.set('PublicKey', item.publickey)
       Cookies.set('PrivateKey', item.privatekey)
+    },
+    handleRemove(file, fileList) {
+      console.log(file, fileList)
+    },
+    handlePreview(file) {
+      console.log(file)
+    },
+    handleExceed(files, fileList) {
+      this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)
+    },
+    beforeRemove(file, fileList) {
+      return this.$confirm(`确定移除 ${file.name}?`)
     }
   }
 }
