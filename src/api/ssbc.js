@@ -43,3 +43,11 @@ export function postCrossTran(data) {
   })
 }
 
+export function upload(data) {
+  return request({
+    url: '/upload',
+    method: 'upload',
+    data: data
+  })
+}
+

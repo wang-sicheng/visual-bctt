@@ -17,42 +17,54 @@
 
           <el-form-item label="发起地址">
             <el-select v-model="form.account" style="width: 100%" class="filter-item">
-              <el-option v-for="user in userList" :key="user.address" :label="user.address" :value="user.address" @click.native="chooseSender(user)" />
+              <el-option
+v-for="user in userList"
+:key="user.address"
+:label="user.address"
+:value="user.address"
+                         @click.native="chooseSender(user)"/>
             </el-select>
           </el-form-item>
           <el-form-item label="私钥">
-            <el-input v-model="form.private_key" :disabled="true" />
+            <el-input v-model="form.private_key" :disabled="true"/>
           </el-form-item>
           <el-form-item label="公钥">
-            <el-input v-model="form.public_key" :disabled="true" />
+            <el-input v-model="form.public_key" :disabled="true"/>
           </el-form-item>
           <el-form-item label="合约名称">
-            <el-input v-model="form.name" />
+            <el-input v-model="form.name"/>
           </el-form-item>
           <el-form-item label="本体模型">
             <el-collapse accordion>
               <el-collapse-item>
                 <template slot="title">非必选项，上传本体模型，生成智能合约框架代码</template>
-                <el-upload
-                  class="upload-demo"
-                  action="https://jsonplaceholder.typicode.com/posts/"
-                  :on-preview="handlePreview"
-                  :on-remove="handleRemove"
-                  :before-remove="beforeRemove"
-                  multiple
-                  :limit="3"
-                  :on-exceed="handleExceed"
-                  :file-list="fileList"
-                >
-                  <el-button size="small" type="primary" >点击上传</el-button>
-                  <div slot="tip" class="el-upload__tip">*上传文件应为OWL和XML格式文件</div>
-                </el-upload>
+                <el-row>
+                  <el-col :span="4"><div>本体文件：</div></el-col>
+                  <el-col :span="44">
+                    <el-upload
+                      ref="upload"
+                      action="http://localhost:1234/modelUpload"
+                      multiple
+                      accept=".owl,.xml"
+                      :file-list="fileList"
+                      :auto-upload="false"
+                      :on-preview="handlePreview"
+                      :on-remove="handleRemove"
+                    >
+                      <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+                      <div slot="tip" class="el-upload__tip">*上传文件应为OWL格式</div>
+                      <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传</el-button>
+                    </el-upload>
+                  </el-col>
+
+                </el-row>
+
               </el-collapse-item>
             </el-collapse>
           </el-form-item>
-          <el-form-item label="编辑合约" />
-          <codemirror v-model="form.code" :options="cmOption" />
-          <el-form-item />
+          <el-form-item label="编辑合约"/>
+          <codemirror v-model="form.code" :options="cmOption"/>
+          <el-form-item/>
           <el-button type="primary" :disabled="disable" @click="postContract">创建合约</el-button>
         </el-form>
       </el-col>
@@ -64,7 +76,7 @@
     >
       <span style="white-space: pre-wrap;" v-html="this.errMsg">{{ errMsg }}</span>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        <el-button type="primary" @click.native="dialogVisible = false">确 定</el-button>
       </span>
     </el-dialog>
 
@@ -89,6 +101,8 @@ export default {
     codemirror
   },
   data() {
+    let contractCode;
+    contractCode = 'dafa'
     return {
       errMsg: '',
       dialogVisible: false,
@@ -103,33 +117,7 @@ export default {
         public_key: '',
         name: '',
         type: 2,
-        code: dedent`
-package main
-
-var A int
-var B string
-var invisible string
-
-func init() {
-	A = 0
-	B = "init"
-	invisible = "init"
-}
-
-func Add(args map[string]interface{}) (interface{}, error) {
-	A += 1
-	B = "Add"
-	invisible = "Add"
-	return nil, nil
-}
-
-func Subtract(args map[string]interface{}) (interface{}, error) {
-	A -= 1
-	B = "Subtract"
-	invisible = "Subtract"
-	return nil, nil
-}
-        `
+        code: dedent(contractCode)
       },
       user: {},
       cmOption: {
@@ -205,17 +193,15 @@ func Subtract(args map[string]interface{}) (interface{}, error) {
       Cookies.set('PublicKey', item.publickey)
       Cookies.set('PrivateKey', item.privatekey)
     },
+    submitUpload() {
+      this.$refs.upload.$data.uploadFiles['file']
+      this.$refs.upload.submit()
+    },
     handleRemove(file, fileList) {
       console.log(file, fileList)
     },
     handlePreview(file) {
       console.log(file)
-    },
-    handleExceed(files, fileList) {
-      this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)
-    },
-    beforeRemove(file, fileList) {
-      return this.$confirm(`确定移除 ${file.name}?`)
     }
   }
 }
