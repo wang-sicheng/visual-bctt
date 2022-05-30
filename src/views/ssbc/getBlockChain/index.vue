@@ -10,11 +10,7 @@
     >
       <el-table-column width="80" align="center" label="区块高度">
         <template slot-scope="scope">
-          <router-link :to="{ path: '/getfromchain/getOneBlock', query: { height: scope.row.Height }}">
-            <el-link type="primary">
-              {{ scope.row.Height }}
-            </el-link>
-          </router-link>
+          <span> {{ scope.row.Height }}</span>
         </template>
       </el-table-column>
 
