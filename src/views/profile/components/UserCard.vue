@@ -19,13 +19,13 @@
 
     <div class="user-bio">
       <div class="user-education user-bio-section">
-        <div class="user-bio-section-header"><svg-icon icon-class="education" /><span>token_address</span></div>
+<!--        <div class="user-bio-section-header"><svg-icon icon-class="education" /><span>token_address</span></div>-->
         <div class="user-bio-section-body">
           <el-tooltip class="item" effect="dark" placement="top">
             <div slot="content">{{ user.address }}</div>
-            <div class="text-addr">
-              {{ user.address }}
-            </div>
+<!--            <div class="text-addr">-->
+<!--              {{ user.address }}-->
+<!--            </div>-->
           </el-tooltip>
         </div>
       </div>

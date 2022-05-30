@@ -27,13 +27,13 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/getfromchain/register'
-    // children: [{
-    //   path: 'dashboard',
-    //   name: '首页',
-    //   component: () => import('@/views/profile/index'),
-    //   meta: { title: '首页', icon: 'dashboard' }
-    // }]
+    redirect: '/getfromchain/register',
+    children: [{
+      path: 'dashboard',
+      name: '首页',
+      component: () => import('@/views/profile/index'),
+      meta: { title: '首页', icon: 'dashboard' }
+    }]
   }
   // {
   //   path: '/profile',
