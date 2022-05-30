@@ -28,7 +28,7 @@
             <el-input v-model="form.public_key" :disabled="true" />
           </el-form-item>
           <el-form-item label="合约名称">
-            <el-input v-model="form.name" oninput="this.value=this.value.replace(/[^\w_]/g,'')" @input="lengthRestriction" />
+            <el-input v-model="form.name" oninput="this.value=this.value.replace(/[^[a-z0-9A-Z]/g,'')" @input="lengthRestriction" />
           </el-form-item>
           <el-form-item label="编辑合约" />
           <codemirror v-model="form.code" :options="cmOption" />
