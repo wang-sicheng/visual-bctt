@@ -28,7 +28,7 @@
             <el-input v-model="form.public_key" :disabled="true" />
           </el-form-item>
           <el-form-item label="合约名称">
-            <el-input v-model="form.name" />
+            <el-input v-model="form.name" oninput="this.value=this.value.replace(/[^\w_]/g,'')" @input="lengthRestriction" />
           </el-form-item>
           <el-form-item label="编辑合约" />
           <codemirror v-model="form.code" :options="cmOption" />
@@ -183,6 +183,12 @@ func Subtract(args map[string]interface{}) (interface{}, error) {
       Cookies.set('AccountAddress', item.address)
       Cookies.set('PublicKey', item.publickey)
       Cookies.set('PrivateKey', item.privatekey)
+    },
+    lengthRestriction() {
+      // 限制长度
+      if (this.form.name.length > 64) {
+        this.form.name = this.form.name.slice(0, 64)
+      }
     }
   }
 }
