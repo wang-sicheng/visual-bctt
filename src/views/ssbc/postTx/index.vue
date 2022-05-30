@@ -23,7 +23,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="金额">
-            <el-input v-model.number="form.value" />
+            <el-input v-model.number="form.value" maxlength="10"/>
           </el-form-item>
         </el-form>
         <el-button type="primary" :disabled="disable" @click="postTran">发起交易</el-button>

@@ -17,7 +17,7 @@
             <el-input v-model="form.public_key" :disabled="true" />
           </el-form-item>
           <el-form-item label="转账金额">
-            <el-input v-model.number="form.value" />
+            <el-input v-model.number="form.value" maxlength="10"/>
           </el-form-item>
           <el-form-item label="合约名称">
             <el-select v-model="form.contract" style="width: 100%">
