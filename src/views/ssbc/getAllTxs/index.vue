@@ -135,47 +135,6 @@
           </el-table-column>
         </el-table>
       </el-tab-pane>
-      <el-tab-pane label="跨链转账" name="fifth">
-        <el-table
-          v-loading="listLoading"
-          :data="crossTrans"
-          element-loading-text="Loading"
-          border
-          highlight-current-row
-          max-height="800"
-        >
-          <el-table-column label="源链" width="90" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.source_chain }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="发起地址" width="350" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.from }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="目标链" width="90" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.dest_chain }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="接收地址" width="350" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.to }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="交易额" width="90" align="center">
-            <template v-if="scope.row.contract === ''" slot-scope="scope">
-              <span>{{ scope.row.value }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column align="center" prop="created_at" label="交易时间" width="200">
-            <template slot-scope="scope">
-              <span>{{ getTime(scope.row.timestamp) }}</span>
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-tab-pane>
     </el-tabs>
   </div>
 </template>

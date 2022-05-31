@@ -203,12 +203,6 @@ export const asyncRoutes = [
         component: () => import('@/views/ssbc/getAllAccounts/index'),
         meta: { title: '账户列表' }
       }
-      // {
-      //   path: 'crossTransfer',
-      //   name: 'crossTransfer',
-      //   component: () => import('@/views/ssbc/crossTransfer/index'),
-      //   meta: { title: '跨链转账' }
-      // }
     ]
   },
   // {
