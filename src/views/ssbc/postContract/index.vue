@@ -122,7 +122,31 @@ export default {
         public_key: '',
         name: '',
         type: 2,
-        code: dedent('dafdsfa')
+        code: dedent('package main\n' +
+          '\n' +
+          'var A int\n' +
+          'var B string\n' +
+          'var invisible string\n' +
+          '\n' +
+          'func init() {\n' +
+          '\tA = 0\n' +
+          '\tB = "init"\n' +
+          '\tinvisible = "init"\n' +
+          '}\n' +
+          '\n' +
+          'func Add(args map[string]interface{}) (interface{}, error) {\n' +
+          '\tA += 1\n' +
+          '\tB = "Add"\n' +
+          '\tinvisible = "Add"\n' +
+          '\treturn nil, nil\n' +
+          '}\n' +
+          '\n' +
+          'func Subtract(args map[string]interface{}) (interface{}, error) {\n' +
+          '\tA -= 1\n' +
+          '\tB = "Subtract"\n' +
+          '\tinvisible = "Subtract"\n' +
+          '\treturn nil, nil\n' +
+          '}')
       },
       user: {},
       cmOption: {
