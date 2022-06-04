@@ -228,6 +228,7 @@ export default {
       // 限制长度
       if (this.form.name.length > 64) {
         this.form.name = this.form.name.slice(0, 64)
+      }
     },
     handleExceed(files, fileList) {
       this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)
