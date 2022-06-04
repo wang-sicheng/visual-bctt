@@ -17,10 +17,15 @@
 
           <el-form-item label="发起地址">
             <el-select v-model="form.account" style="width: 100%" class="filter-item">
-              <el-option v-for="user in userList" :key="user.address" :label="user.address" :value="user.address" @click.native="chooseSender(user)" />
+              <el-option
+                v-for="user in userList"
+                :key="user.address"
+                :label="user.address"
+                :value="user.address"
+                @click.native="chooseSender(user)"
+              />
             </el-select>
           </el-form-item>
-
           <el-form-item label="私钥">
             <el-input v-model="form.private_key" :disabled="true" />
           </el-form-item>
@@ -29,6 +34,43 @@
           </el-form-item>
           <el-form-item label="合约名称">
             <el-input v-model="form.name" oninput="this.value=this.value.replace(/[^[a-z0-9A-Z]/g,'')" @input="lengthRestriction" />
+          </el-form-item>
+          <el-form-item label="合约生成">
+            <el-collapse accordion>
+              <el-collapse-item>
+                <template slot="title">非必选项，上传模型，生成智能合约框架代码</template>
+                <el-form-item label="本体模型">
+                  <!--todo 上传地址应拼接-->
+                  <el-upload
+                    class="upload"
+                    name="ontology"
+                    action="http://localhost:8011/modelUpload"
+                    accept=".owl"
+                    :limit="1"
+                    :on-exeed="handleExceed"
+                    file-list="fileList"
+                  >
+                    <el-button type="primary" size="small">点击上传</el-button>
+                  </el-upload>
+                </el-form-item>
+                <el-form-item label="bpmn模型">
+                  <!--todo 上传地址应拼接-->
+                  <el-upload
+                    name="bpmn"
+                    action="http://127.0.0.1:8011/modelUpload"
+                    accept=".xml"
+                    :limit="1"
+                    :on-exeed="handleExceed"
+                    file-list="fileList"
+                  >
+                    <el-button type="primary" size="small">点击上传</el-button>
+                  </el-upload>
+                </el-form-item>
+                <el-form-item label=" ">
+                  <el-button type="primary" size="small" @click="codeGen">生成代码</el-button>
+                </el-form-item>
+              </el-collapse-item>
+            </el-collapse>
           </el-form-item>
           <el-form-item label="编辑合约" />
           <codemirror v-model="form.code" :options="cmOption" />
@@ -44,10 +86,9 @@
     >
       <span style="white-space: pre-wrap;" v-html="this.errMsg">{{ errMsg }}</span>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        <el-button type="primary" @click.native="dialogVisible = false">确 定</el-button>
       </span>
     </el-dialog>
-
   </div>
 </template>
 
@@ -62,7 +103,7 @@ import AnsiUp from 'ansi_up'
 import 'codemirror/theme/monokai.css'
 
 import Cookies from 'js-cookie'
-import { query, postContract } from '@/api/ssbc'
+import { query, postContract, genCode } from '@/api/ssbc'
 
 export default {
   components: {
@@ -83,33 +124,31 @@ export default {
         public_key: '',
         name: '',
         type: 2,
-        code: dedent`
-package main
-
-var A int
-var B string
-var invisible string
-
-func init() {
-	A = 0
-	B = "init"
-	invisible = "init"
-}
-
-func Add(args map[string]interface{}) (interface{}, error) {
-	A += 1
-	B = "Add"
-	invisible = "Add"
-	return nil, nil
-}
-
-func Subtract(args map[string]interface{}) (interface{}, error) {
-	A -= 1
-	B = "Subtract"
-	invisible = "Subtract"
-	return nil, nil
-}
-        `
+        code: dedent('package main\n' +
+          '\n' +
+          'var A int\n' +
+          'var B string\n' +
+          'var invisible string\n' +
+          '\n' +
+          'func init() {\n' +
+          '\tA = 0\n' +
+          '\tB = "init"\n' +
+          '\tinvisible = "init"\n' +
+          '}\n' +
+          '\n' +
+          'func Add(args map[string]interface{}) (interface{}, error) {\n' +
+          '\tA += 1\n' +
+          '\tB = "Add"\n' +
+          '\tinvisible = "Add"\n' +
+          '\treturn nil, nil\n' +
+          '}\n' +
+          '\n' +
+          'func Subtract(args map[string]interface{}) (interface{}, error) {\n' +
+          '\tA -= 1\n' +
+          '\tB = "Subtract"\n' +
+          '\tinvisible = "Subtract"\n' +
+          '\treturn nil, nil\n' +
+          '}')
       },
       user: {},
       cmOption: {
@@ -120,7 +159,8 @@ func Subtract(args map[string]interface{}) (interface{}, error) {
         matchBrackets: true,
         theme: 'monokai'
       },
-      disable: false
+      disable: false,
+      fileList: []
     }
   },
   created() {
@@ -188,7 +228,16 @@ func Subtract(args map[string]interface{}) (interface{}, error) {
       // 限制长度
       if (this.form.name.length > 64) {
         this.form.name = this.form.name.slice(0, 64)
-      }
+    },
+    handleExceed(files, fileList) {
+      this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)
+    },
+    codeGen() {
+      genCode().then(res => {
+        console.log(res)
+        this.form.code = dedent(res.data)
+      })
+      console.log('执行codeGen')
     }
   }
 }

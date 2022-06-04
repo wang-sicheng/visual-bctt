@@ -43,3 +43,10 @@ export function postCrossTran(data) {
   })
 }
 
+export function genCode() {
+  return request({
+    url: '/genCode',
+    method: 'get'
+  })
+}
+
