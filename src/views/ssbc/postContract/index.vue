@@ -40,6 +40,7 @@
               <el-collapse-item>
                 <template slot="title">非必选项，上传模型，生成智能合约框架代码</template>
                 <el-form-item label="本体模型">
+                  <!--todo 上传地址应拼接-->
                   <el-upload
                     class="upload"
                     name="ontology"
@@ -53,9 +54,10 @@
                   </el-upload>
                 </el-form-item>
                 <el-form-item label="bpmn模型">
+                  <!--todo 上传地址应拼接-->
                   <el-upload
                     name="bpmn"
-                    action="http://localhost:8011/modelUpload"
+                    action="http://127.0.0.1:8011/modelUpload"
                     accept=".xml"
                     :limit="1"
                     :on-exeed="handleExceed"
