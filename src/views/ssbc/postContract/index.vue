@@ -5,7 +5,7 @@
         <el-alert
           title="智能合约编辑与上传"
           type="info"
-          description="请使用Go语言编写"
+          description="请使用Go语言编写（推荐使用Go语言1.16.3以下版本编写）"
           show-icon
         />
       </el-col>
