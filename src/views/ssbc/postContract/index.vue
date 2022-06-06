@@ -48,7 +48,7 @@
                     accept=".owl"
                     :limit="1"
                     :on-exeed="handleExceed"
-                    file-list="fileList"
+                    :file-list="fileList"
                   >
                     <el-button type="primary" size="small">点击上传</el-button>
                   </el-upload>
@@ -61,7 +61,7 @@
                     accept=".xml"
                     :limit="1"
                     :on-exeed="handleExceed"
-                    file-list="fileList"
+                    :file-list="fileList"
                   >
                     <el-button type="primary" size="small">点击上传</el-button>
                   </el-upload>
