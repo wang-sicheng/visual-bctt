@@ -16,7 +16,7 @@
         <el-form label-width="80px">
 
           <el-form-item label="发起地址">
-            <el-select v-model="form.account" style="width: 100%" class="filter-item">
+            <el-select v-model="form.account" style="width: 100%" class="filter-item" filterable>
               <el-option
                 v-for="user in userList"
                 :key="user.address"

@@ -6,7 +6,7 @@
 
     <el-form-item label="当前链" label-width="25%">
       <el-col :span="12">
-        <el-select v-model="sourceChain" style="width: 100%" class="filter-item">
+        <el-select v-model="sourceChain" style="width: 100%" class="filter-item" filterable>
           <el-option v-for="chainId in chainList" :key="chainId" :label="chainId" :value="chainId" @click.native="chooseChain(chainId)" />
         </el-select>
       </el-col>
@@ -14,7 +14,7 @@
 
     <el-form-item label="当前账户" label-width="25%">
       <el-col :span="12">
-        <el-select v-model="currentUserInfo.AccountAddress" style="width: 100%" class="filter-item">
+        <el-select v-model="currentUserInfo.AccountAddress" style="width: 100%" class="filter-item" filterable>
           <el-option v-for="user in userList" :key="user.address" :label="user.address" :value="user.address" @click.native="choose(user)" />
         </el-select>
       </el-col>
