@@ -33,7 +33,8 @@
             <el-input v-model="form.public_key" :disabled="true" />
           </el-form-item>
           <el-form-item label="合约名称">
-            <el-input v-model="form.name" oninput="this.value=this.value.replace(/[^[a-z0-9A-Z]/g,'')" @input="lengthRestriction" />
+            <el-input v-model="form.name" maxlength="200" show-word-limit placeholder="请输入长度不超过200位的合约名称，仅限大小写字母和数字"  oninput="this.value=this.value.replace(/[^[a-z0-9A-Z]/g,'')" @input="lengthRestriction" />
+
           </el-form-item>
           <el-form-item label="合约生成">
             <el-collapse accordion>
