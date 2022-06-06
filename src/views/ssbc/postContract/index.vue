@@ -74,7 +74,7 @@
           </el-form-item>
           <codemirror v-model="form.code" :options="cmOption" />
           <el-form-item />
-          <el-button type="primary" :disabled="disable" @click="postContract">创建合约</el-button>
+          <el-button type="primary" :disabled="disable" @click="postContract">发布合约</el-button>
         </el-form>
       </el-col>
     </el-row>
