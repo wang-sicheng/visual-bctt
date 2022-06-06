@@ -24,6 +24,8 @@
               <el-option v-for="contract in contractList" :key="contract.data.contractname" :label="contract.data.contractname + ' ( ' + contract.address + ' )'" :value="contract.data.contractname" @click.native="chooseContract(contract)" />
             </el-select>
           </el-form-item>
+          <codemirror v-if="codeVisible" v-model="code" :options="cmOption" />
+          <el-form-item v-if="codeVisible"/>
           <el-form-item label="方法">
             <el-select v-model="form.method" style="width: 100%">
               <el-option v-for="method in methodList" :key="method" :label="method" :value="method" @click.native="chooseMethod(method)" />
@@ -65,7 +67,18 @@ export default {
         args: '{}',
         type: 3
       },
-      disable: false
+      disable: false,
+      cmOption: {
+        tabSize: 4,
+        lineNumbers: true,
+        line: true,
+        mode: 'text/x-go',
+        matchBrackets: true,
+        theme: 'monokai',
+        readOnly: true
+      },
+      code: '',
+      codeVisible: false
     }
   },
   created() {
@@ -125,6 +138,8 @@ export default {
     // 下拉框选择元素时触发
     chooseContract(item) {
       this.form.contract = item.data.contractname
+      this.code = item.data.code
+      this.codeVisible = true
       this.form.to = item.address
       this.methodList = []
       var allMethods = item.data.methods

@@ -72,7 +72,6 @@
               </el-collapse-item>
             </el-collapse>
           </el-form-item>
-          <el-form-item label="编辑合约" />
           <codemirror v-model="form.code" :options="cmOption" />
           <el-form-item />
           <el-button type="primary" :disabled="disable" @click="postContract">创建合约</el-button>
