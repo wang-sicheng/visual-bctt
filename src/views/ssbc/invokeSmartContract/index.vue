@@ -5,7 +5,7 @@
       <el-col :span="22" :offset="1" :xs="24">
         <el-form label-width="80px">
           <el-form-item label="发起地址">
-            <el-select v-model="form.from" style="width: 100%" class="filter-item">
+            <el-select v-model="form.from" style="width: 100%" class="filter-item" filterable>
               <el-option v-for="user in userList" :key="user.address" :label="user.address" :value="user.address" @click.native="chooseSender(user)" />
             </el-select>
           </el-form-item>
@@ -20,14 +20,14 @@
             <el-input v-model.number="form.value" maxlength="10"/>
           </el-form-item>
           <el-form-item label="合约名称">
-            <el-select v-model="form.contract" style="width: 100%">
+            <el-select v-model="form.contract" style="width: 100%" filterable>
               <el-option v-for="contract in contractList" :key="contract.data.contractname" :label="contract.data.contractname + ' ( ' + contract.address + ' )'" :value="contract.data.contractname" @click.native="chooseContract(contract)" />
             </el-select>
           </el-form-item>
           <codemirror v-if="codeVisible" v-model="code" :options="cmOption" />
           <el-form-item v-if="codeVisible"/>
           <el-form-item label="方法">
-            <el-select v-model="form.method" style="width: 100%">
+            <el-select v-model="form.method" style="width: 100%" filterable>
               <el-option v-for="method in methodList" :key="method" :label="method" :value="method" @click.native="chooseMethod(method)" />
             </el-select>
           </el-form-item>

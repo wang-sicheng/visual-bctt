@@ -5,7 +5,7 @@
         <el-alert
           title="智能合约编辑与上传"
           type="info"
-          description="请使用Go语言编写"
+          description="请使用Go语言编写（推荐使用Go语言1.16.3以下版本编写）"
           show-icon
         />
       </el-col>
@@ -16,7 +16,7 @@
         <el-form label-width="80px">
 
           <el-form-item label="发起地址">
-            <el-select v-model="form.account" style="width: 100%" class="filter-item">
+            <el-select v-model="form.account" style="width: 100%" class="filter-item" filterable>
               <el-option
                 v-for="user in userList"
                 :key="user.address"
@@ -33,7 +33,8 @@
             <el-input v-model="form.public_key" :disabled="true" />
           </el-form-item>
           <el-form-item label="合约名称">
-            <el-input v-model="form.name" oninput="this.value=this.value.replace(/[^[a-z0-9A-Z]/g,'')" @input="lengthRestriction" />
+            <el-input v-model="form.name" maxlength="200" show-word-limit placeholder="请输入长度不超过200位的合约名称，仅限大小写字母和数字"  oninput="this.value=this.value.replace(/[^[a-z0-9A-Z]/g,'')" @input="lengthRestriction" />
+
           </el-form-item>
           <el-form-item label="合约生成">
             <el-collapse accordion>
@@ -74,7 +75,7 @@
           </el-form-item>
           <codemirror v-model="form.code" :options="cmOption" />
           <el-form-item />
-          <el-button type="primary" :disabled="disable" @click="postContract">创建合约</el-button>
+          <el-button type="primary" :disabled="disable" @click="postContract">发布合约</el-button>
         </el-form>
       </el-col>
     </el-row>

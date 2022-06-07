@@ -6,7 +6,7 @@
         <el-form label-width="80px">
 
           <el-form-item label="发起地址">
-            <el-select v-model="form.from" style="width: 100%" class="filter-item">
+            <el-select v-model="form.from" style="width: 100%" class="filter-item" filterable>
               <el-option v-for="user in userList" :key="user.address" :label="user.address" :value="user.address" @click.native="chooseSender(user)" />
             </el-select>
           </el-form-item>
@@ -18,7 +18,7 @@
             <el-input v-model="form.public_key" :disabled="true" />
           </el-form-item>
           <el-form-item label="接收地址">
-            <el-select v-model="form.to" style="width: 100%">
+            <el-select v-model="form.to" style="width: 100%" filterable>
               <el-option v-for="user in userList" :key="user.address" :label="user.address" :value="user.address" @click.native="chooseReceiver(user)" />
             </el-select>
           </el-form-item>
@@ -26,7 +26,7 @@
             <el-input v-model.number="form.value" maxlength="10"/>
           </el-form-item>
         </el-form>
-        <el-button type="primary" :disabled="disable" @click="postTran">发起交易</el-button>
+        <el-button type="primary" :disabled="disable" @click="postTran">发起转账</el-button>
       </el-col>
     </el-row>
   </div>
