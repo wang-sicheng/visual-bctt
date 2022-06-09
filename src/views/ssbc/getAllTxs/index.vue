@@ -8,39 +8,39 @@
           element-loading-text="Loading"
           border
           highlight-current-row
-          max-height="800"
+          style="width: 100%"
         >
-          <el-table-column label="发起地址" width="350" align="center">
+          <el-table-column label="发起地址" min-width="25%" align="center">
             <template slot-scope="scope">
               <span>{{ scope.row.from }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="合约地址" width="350" align="center">
+          <el-table-column label="合约地址" min-width="25%" align="center">
             <template slot-scope="scope">
               <span>{{ scope.row.to }}</span>
             </template>
           </el-table-column>
-          <el-table-column align="center" label="转账金额" width="150">
+          <el-table-column align="center" label="转账金额" min-width="8%">
             <template slot-scope="scope">
               <span>{{ scope.row.value }}</span>
             </template>
           </el-table-column>
-          <el-table-column align="center" label="智能合约" width="150">
+          <el-table-column align="center" label="智能合约" min-width="10%">
             <template slot-scope="scope">
               <span>{{ scope.row.contract }}</span>
             </template>
           </el-table-column>
-          <el-table-column align="center" label="方法" width="150">
+          <el-table-column align="center" label="方法" min-width="10%">
             <template slot-scope="scope">
               <span>{{ scope.row.method }}</span>
             </template>
           </el-table-column>
-          <el-table-column align="center" label="参数" width="200">
+          <el-table-column align="center" label="参数" min-width="10%">
             <template slot-scope="scope">
               <span>{{ scope.row.args }}</span>
             </template>
           </el-table-column>
-          <el-table-column align="center" prop="created_at" label="交易时间" width="200">
+          <el-table-column align="center" prop="created_at" label="交易时间" min-width="12%">
             <template slot-scope="scope">
               <span>{{ getTime(scope.row.timestamp) }}</span>
             </template>
@@ -54,24 +54,25 @@
           element-loading-text="Loading"
           border
           highlight-current-row
-          max-height="800"
+          style="width: 100%"
+          stripe= "true"
         >
-          <el-table-column label="从" width="350" align="center">
+          <el-table-column label="发起地址"  min-width="30%" align="center">
             <template slot-scope="scope">
               <span>{{ scope.row.from }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="到" width="350" align="center">
+          <el-table-column label="合约地址"  align="center" min-width="30%">
             <template slot-scope="scope">
               <span>{{ scope.row.to }}</span>
             </template>
           </el-table-column>
-          <el-table-column align="center" label="智能合约" width="150">
+          <el-table-column align="center" label="智能合约"  min-width="15%">
             <template slot-scope="scope">
               <span>{{ scope.row.contract }}</span>
             </template>
           </el-table-column>
-          <el-table-column align="center" prop="created_at" label="交易时间" width="200">
+          <el-table-column align="center" prop="created_at" label="交易时间" min-width="25%">
             <template slot-scope="scope">
               <span>{{ getTime(scope.row.timestamp) }}</span>
             </template>
@@ -85,24 +86,24 @@
           element-loading-text="Loading"
           border
           highlight-current-row
-          max-height="800"
+          style="width: 100%"
         >
-          <el-table-column label="从" width="350" align="center">
+          <el-table-column label="发起地址" min-width="30%" align="center">
             <template slot-scope="scope">
               <span>{{ scope.row.from }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="到" width="350" align="center">
+          <el-table-column label="合约地址" min-width="30%" align="center">
             <template slot-scope="scope">
               <span>{{ scope.row.to }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="交易额" width="90" align="center">
+          <el-table-column label="交易额" min-width="15%" align="center">
             <template v-if="scope.row.contract === ''" slot-scope="scope">
               <span>{{ scope.row.value }}</span>
             </template>
           </el-table-column>
-          <el-table-column align="center" prop="created_at" label="交易时间" width="200">
+          <el-table-column align="center" prop="created_at" label="交易时间" min-width="25%">
             <template slot-scope="scope">
               <span>{{ getTime(scope.row.timestamp) }}</span>
             </template>
@@ -116,19 +117,19 @@
           element-loading-text="Loading"
           border
           highlight-current-row
-          max-height="800"
+          style="width: 100%"
         >
-          <el-table-column label="账户地址" width="350" align="center">
+          <el-table-column label="账户地址" min-width="50%" align="center">
             <template slot-scope="scope">
               <span>{{ scope.row.to }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="初始余额" width="90" align="center">
+          <el-table-column label="初始余额" min-width="20%" align="center">
             <template v-if="scope.row.contract === ''" slot-scope="scope">
               <span>{{ scope.row.value }}</span>
             </template>
           </el-table-column>
-          <el-table-column align="center" prop="created_at" label="创建时间" width="200">
+          <el-table-column align="center" prop="created_at" label="创建时间" min-width="30%">
             <template slot-scope="scope">
               <span>{{ getTime(scope.row.timestamp) }}</span>
             </template>
