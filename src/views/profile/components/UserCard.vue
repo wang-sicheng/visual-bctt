@@ -33,7 +33,7 @@
       <div class="user-education user-bio-section">
         <div class="user-bio-section-header"><svg-icon icon-class="education" /><span>简介</span></div>
         <div class="user-bio-section-body">
-          <div class="text-muted">
+          <div class="progress-item">
             现代服务可信交易平台
           </div>
         </div>
@@ -58,7 +58,7 @@
             <br>
           </div>
           <div class="progress-item">
-            <span>交易记录表</span>
+            <span>交易记录表展示</span>
             <el-progress :percentage="90" />
             <br>
           </div>
@@ -100,12 +100,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.progress-item {
+  margin-left: 10%;
+  margin-right:10%;
+}
 .box-center {
   margin: 0 auto;
   display: table;
 }
 .text-muted {
   color: #777;
+}
+.text-center {
+  text-align: center;
 }
 .text-addr {
   font-size: 12px;

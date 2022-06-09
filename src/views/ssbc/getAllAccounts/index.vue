@@ -6,14 +6,14 @@
       element-loading-text="Loading"
       border
       highlight-current-row
-      max-height="800"
+      style="width: 100%"
     >
-      <el-table-column align="center" width="400" label="外部账户地址">
+      <el-table-column align="center" min-width="50%" label="外部账户地址">
         <template v-if="!scope.row.iscontract" slot-scope="scope">
           {{ scope.row.address }}
         </template>
       </el-table-column>
-      <el-table-column label="账户余额" width="295" align="center">
+      <el-table-column label="账户余额" min-width="50%" align="center">
         <template v-if="!scope.row.iscontract" slot-scope="scope">
           <span>{{ scope.row.balance }}</span>
         </template>
@@ -29,19 +29,19 @@
       element-loading-text="Loading"
       border
       highlight-current-row
-      max-height="800"
+      style="width: 100%"
     >
-      <el-table-column align="center" width="400" label="合约账户地址">
+      <el-table-column align="center" min-width="50%" label="合约账户地址">
         <template slot-scope="scope">
           {{ scope.row.address }}
         </template>
       </el-table-column>
-      <el-table-column label="账户余额" width="295" align="center">
+      <el-table-column label="账户余额" min-width="25%" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.balance }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="名称" width="295" align="center">
+      <el-table-column label="名称" min-width="25%" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.data.contractname }}</span>
         </template>
